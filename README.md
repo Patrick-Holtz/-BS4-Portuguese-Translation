@@ -42,7 +42,7 @@ e vão ate o segundo título, sem traduzi-lo pois ai inicia a parte de outra pes
 Revisores
 
 Acompanhem o trabalho de suas secções correspondentes anotando termos comuns ao documento e as traduções utilizadas em cada parte
-para padronizarmos depois. Criem um documento com essas anotações. Caso possível observem as outras secções buscando o que pode ser padronizado.
+para padronizarmos depois. Criem um documento com essas anotações. Caso possível observem as outras secções buscando o que pode ser padronizado entre outras observações relevantes.
 
 - Caio Emidio 1)
 - Sarah Raquel 2)
