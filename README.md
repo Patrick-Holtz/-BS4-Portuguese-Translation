@@ -4,6 +4,15 @@ Olá!
 
 Bora traduzir essa documentação galera!
 
+O arquivo Tradução.rst contem o conteudo da documentação em um formato que facilita o upload para o mantenedor da Lib, então traduzam direto lá e apaguem a parte em inglês que traduziram. O arquivo Original.rst é igual ao Tradução.rst no momento, ele servirá futuramente para consulta quando Tradução.rst ja estiver modificado.
+
+Dicas de tradução: 
+- Usem o Google Translate e/ou o Bing (Um colega disse que é melhor ate) para facilitar o trabalho. Então vejam o resultado da tradução e corrijam os erros que o tradutor cometeu.
+
+- Cuidado com traduções literais e falsos cognatos. Busquem adaptar as expressões para o portugues o quanto for possível.
+
+- As partes que tem texto dentro do código, imagino que seria bom traduzir, mas não sei até que ponto, ou seria melhor deixar em inglês mesmo?
+
 Equipe (28/05/2018):
 
 Tradutores
