@@ -201,18 +201,18 @@ and use Beautiful Soup without installing it at all.
 I use Python 2.7 and Python 3.2 to develop Beautiful Soup, but it
 should work with other recent versions.
 
-Problems after installation
+Problemas depois da instalação
 ---------------------------
 
-Beautiful Soup is packaged as Python 2 code. When you install it for
-use with Python 3, it's automatically converted to Python 3 code. If
-you don't install the package, the code won't be converted. There have
-also been reports on Windows machines of the wrong version being
-installed.
+Beautiful Soup é um pacote para Python 2. Quando você instala para usar
+com Python 3, o pacote é automaticamente convertido para ser compatível com
+Python 3. Se você não instala o pacote, o código não será convertido. Existem
+também alguns relatos em máquinas Windows onde a versão incorreta foi instalada.
 
-If you get the ``ImportError`` "No module named HTMLParser", your
-problem is that you're running the Python 2 version of the code under
-Python 3.
+Se você tem um problema do tipo ``ImportError`` "No module named HTMLParser"
+(``Erro de importacao``, "Não há nenhum modulo chamado html.parser"), seu
+problema é que você está rodando a versão da biblioteca para Python 2 em uma
+versão de Python 3.
 
 If you get the ``ImportError`` "No module named html.parser", your
 problem is that you're running the Python 3 version of the code under
@@ -405,7 +405,7 @@ of a multi-valued attribute as a list::
  css_soup = BeautifulSoup('<p class="body"></p>')
  css_soup.p['class']
  # ["body"]
-  
+
  css_soup = BeautifulSoup('<p class="body strikeout"></p>')
  css_soup.p['class']
  # ["body", "strikeout"]
@@ -433,7 +433,7 @@ string, whether or not it's a multi-valued atribute
 
   id_soup.p.get_attribute_list('id')
   # ["my id"]
- 
+
 If you parse a document as XML, there are no multi-valued attributes::
 
  xml_soup = BeautifulSoup('<p class="body strikeout"></p>', 'xml')
