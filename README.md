@@ -4,7 +4,7 @@ Olá!
 
 Bora traduzir essa documentação galera!
 
-Equipe:
+Equipe (28/05/2018):
 
 - Patrick Holtz
 - Charnak Portizlarone
