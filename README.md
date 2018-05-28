@@ -7,8 +7,12 @@ Bora traduzir essa documentação galera!
 Equipe (28/05/2018):
 
 - Patrick Holtz (Beautiful Soup Documentation - Problems after installation)
-- Charnak Portizlarone (Problems after installation - Multi-valued attributes)
-- Pedro Santos Rivero Tavares da Costa (Multi-valued attributes - Going down)
+
+- Charnak Portizlarone 
+(Problems after installation - Multi-valued attributes)
+
+- Pedro Santos Rivero Tavares da Costa 
+(Multi-valued attributes - Going down)
 - Diego Gomes Corso (Going down - .parent)
 - Thyago Freitas (.parent - .next_elements and .previous_elements)
 - Carlos Henrique (.next_elements and .previous_elements - find_all() )
