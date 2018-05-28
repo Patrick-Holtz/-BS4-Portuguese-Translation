@@ -214,29 +214,32 @@ Se você tem um problema do tipo ``ImportError`` "No module named HTMLParser"
 problema é que você está rodando a versão da biblioteca para Python 2 em uma
 versão de Python 3.
 
-If you get the ``ImportError`` "No module named html.parser", your
-problem is that you're running the Python 3 version of the code under
-Python 2.
+Se você tem um problema do tipo ``ImportError`` "No module named HTMLParser"
+(``Erro de importacao``, "Não há nenhum modulo chamado html.parser"), seu
+problema é que você está rodando a versão da biblioteca para Python 3 em uma
+versão de Python 2.
 
-In both cases, your best bet is to completely remove the Beautiful
-Soup installation from your system (including any directory created
-when you unzipped the tarball) and try the installation again.
+Em ambos os casos, a melhor coisa fazer é remover completamente a instalação de
+Beautiful Soup do sistema (incluindo todos os diretórios criados quando o
+arquivo 'tarball' é descompactado) e tentar instalar novamente.
 
-If you get the ``SyntaxError`` "Invalid syntax" on the line
-``ROOT_TAG_NAME = u'[document]'``, you need to convert the Python 2
-code to Python 3. You can do this either by installing the package:
+Se você tem um erro do tipo ``SyntaxError`` "Invalid syntax" na linha
+``ROOT_TAG_NAME = u'[document]'``, você precisa converter o código de Python 2
+para Python 3. Você pode fazer isso de duas maneiras:
+
+instalando o pacode:
 
 :kbd:`$ python3 setup.py install`
 
-or by manually running Python's ``2to3`` conversion script on the
-``bs4`` directory:
+ou manualmente executando o script de conversão ``2to3``, que está no
+diretório ``bs4``:
 
 :kbd:`$ 2to3-3.2 -w bs4`
 
 .. _parser-installation:
 
 
-Installing a parser
+Instalando o 'parser' (interpretador / analisador sintático)
 -------------------
 
 Beautiful Soup supports the HTML parser included in Python's standard
