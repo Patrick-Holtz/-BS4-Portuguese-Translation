@@ -320,12 +320,12 @@ Então Beautiful Soup parses o documento usando melhor parser disponível.
 Ele irá usar um HTML parser a menos que você especifique um XML parser.
 (Ver em `Parsing XML`_.)
 
-Kinds of objects
+Tipos de objetos
 ================
 
-Beautiful Soup transforms a complex HTML document into a complex tree
-of Python objects. But you'll only ever have to deal with about four
-`kinds` of objects: ``Tag``, ``NavigableString``, ``BeautifulSoup``,
+Beautiful Soup transforma complexos documentos HTML em complexas árvores
+de objetos Python. No entanto, você sempre terá que lidar com (no máximo)
+ 4 (quatro) `tipos` de objectos: ``Tag``, ``NavigableString``, ``BeautifulSoup``,
 and ``Comment``.
 
 .. _Tag:
