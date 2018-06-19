@@ -201,48 +201,51 @@ and use Beautiful Soup without installing it at all.
 I use Python 2.7 and Python 3.2 to develop Beautiful Soup, but it
 should work with other recent versions.
 
-Problems after installation
+Problemas depois da instalação
 ---------------------------
 
-Beautiful Soup is packaged as Python 2 code. When you install it for
-use with Python 3, it's automatically converted to Python 3 code. If
-you don't install the package, the code won't be converted. There have
-also been reports on Windows machines of the wrong version being
-installed.
+Beautiful Soup é um pacote para Python 2. Quando você instala para usar
+com Python 3, o pacote é automaticamente convertido para ser compatível com
+Python 3. Se você não instala o pacote, o código não será convertido. Existem
+também alguns relatos em máquinas Windows onde a versão incorreta foi instalada.
 
-If you get the ``ImportError`` "No module named HTMLParser", your
-problem is that you're running the Python 2 version of the code under
-Python 3.
+Se você tem um problema do tipo ``ImportError`` "No module named HTMLParser"
+(``Erro de importacao``, "Não há nenhum modulo chamado html.parser"), seu
+problema é que você está rodando a versão da biblioteca para Python 2 em uma
+versão de Python 3.
 
-If you get the ``ImportError`` "No module named html.parser", your
-problem is that you're running the Python 3 version of the code under
-Python 2.
+Se você tem um problema do tipo ``ImportError`` "No module named HTMLParser"
+(``Erro de importacao``, "Não há nenhum modulo chamado html.parser"), seu
+problema é que você está rodando a versão da biblioteca para Python 3 em uma
+versão de Python 2.
 
-In both cases, your best bet is to completely remove the Beautiful
-Soup installation from your system (including any directory created
-when you unzipped the tarball) and try the installation again.
+Em ambos os casos, a melhor coisa fazer é remover completamente a instalação de
+Beautiful Soup do sistema (incluindo todos os diretórios criados quando o
+arquivo 'tarball' é descompactado) e tentar instalar novamente.
 
-If you get the ``SyntaxError`` "Invalid syntax" on the line
-``ROOT_TAG_NAME = u'[document]'``, you need to convert the Python 2
-code to Python 3. You can do this either by installing the package:
+Se você tem um erro do tipo ``SyntaxError`` "Invalid syntax" na linha
+``ROOT_TAG_NAME = u'[document]'``, você precisa converter o código de Python 2
+para Python 3. Você pode fazer isso de duas maneiras:
+
+instalando o pacode:
 
 :kbd:`$ python3 setup.py install`
 
-or by manually running Python's ``2to3`` conversion script on the
-``bs4`` directory:
+ou manualmente executando o script de conversão ``2to3``, que está no
+diretório ``bs4``:
 
 :kbd:`$ 2to3-3.2 -w bs4`
 
 .. _parser-installation:
 
 
-Installing a parser
+Instalando o 'parser' (interpretador / analisador sintático)
 -------------------
 
-Beautiful Soup supports the HTML parser included in Python's standard
-library, but it also supports a number of third-party Python parsers.
-One is the `lxml parser <http://lxml.de/>`_. Depending on your setup,
-you might install lxml with one of these commands:
+Beautiful Soup suporta o parser HTML que está incluido nas bibliotecas nativas
+do Python e também suporta um diverso numero de Python parsers de terceiros.
+Uma dessas bibliotecas é a `lxml parser <http://lxml.de/>`_. Dependendo da sua
+configuração, você pode instalar `lxml` com um desses comandos:
 
 :kbd:`$ apt-get install python-lxml`
 
@@ -250,10 +253,10 @@ you might install lxml with one of these commands:
 
 :kbd:`$ pip install lxml`
 
-Another alternative is the pure-Python `html5lib parser
-<http://code.google.com/p/html5lib/>`_, which parses HTML the way a
-web browser does. Depending on your setup, you might install html5lib
-with one of these commands:
+Outrs alternativa é a biblioteca `html5lib parser
+<http://code.google.com/p/html5lib/>`_, nativa do Python, na qual parses o HTML
+da mesma forma que o navegador (web browser) faz. Dependendo da sua configuração,
+você pode instalar `html5lib` com um desses comandos:
 
 :kbd:`$ apt-get install python-html5lib`
 
@@ -261,44 +264,44 @@ with one of these commands:
 
 :kbd:`$ pip install html5lib`
 
-This table summarizes the advantages and disadvantages of each parser library:
+A tabela a seguir resume as vantagens e desvantages the cada biblioteca parser:
 
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| Parser               | Typical usage                              | Advantages                     | Disadvantages            |
+| Parser               | Uso típico                                 | Vantagens                      | Desvantagens             |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| Python's html.parser | ``BeautifulSoup(markup, "html.parser")``   | * Batteries included           | * Not very lenient       |
-|                      |                                            | * Decent speed                 |   (before Python 2.7.3   |
-|                      |                                            | * Lenient (as of Python 2.7.3  |   or 3.2.2)              |
-|                      |                                            |   and 3.2.)                    |                          |
+| Python's html.parser | ``BeautifulSoup(markup, "html.parser")``   | * Baterias inclusas            | * Não tão forte quanto   |
+|                      |                                            | * Velocidade razoável          |   esperado nas versões   |
+|                      |                                            | * Suave (em Python 2.7.3       |   anteriores do Python   |
+|                      |                                            |   and 3.2.)                    |   (2.7.3 or 3.2.2)       |
+|                      |                                            |                                |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| lxml's HTML parser   | ``BeautifulSoup(markup, "lxml")``          | * Very fast                    | * External C dependency  |
-|                      |                                            | * Lenient                      |                          |
+| lxml's HTML parser   | ``BeautifulSoup(markup, "lxml")``          | * Muito rápido                 | * Dependência externa    |
+|                      |                                            | * Suave                        |   de C                   |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| lxml's XML parser    | ``BeautifulSoup(markup, "lxml-xml")``      | * Very fast                    | * External C dependency  |
-|                      | ``BeautifulSoup(markup, "xml")``           | * The only currently supported |                          |
+| lxml's XML parser    | ``BeautifulSoup(markup, "lxml-xml")``      | * Muito rápid                  | * Dependência externa    |
+|                      | ``BeautifulSoup(markup, "xml")``           | * Único atualmente que suporta |   de C                   |
 |                      |                                            |   XML parser                   |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| html5lib             | ``BeautifulSoup(markup, "html5lib")``      | * Extremely lenient            | * Very slow              |
-|                      |                                            | * Parses pages the same way a  | * External Python        |
-|                      |                                            |   web browser does             |   dependency             |
-|                      |                                            | * Creates valid HTML5          |                          |
+| html5lib             | ``BeautifulSoup(markup, "html5lib")``      | * Extremamente suave           | * Muito devagar          |
+|                      |                                            | * Parses páginas da mesma forma| * Dependência externa    |
+|                      |                                            |   que navegadores fazem        |   de C                   |
+|                      |                                            | * Cria válidos códigos HTML5   |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
 
-If you can, I recommend you install and use lxml for speed. If you're
-using a version of Python 2 earlier than 2.7.3, or a version of Python
-3 earlier than 3.2.2, it's `essential` that you install lxml or
-html5lib--Python's built-in HTML parser is just not very good in older
-versions.
+Se você pode, Eu recomendo que você instale e use `lxml`, por motivos de
+velocidade. Se voce está usando Python 2 anterior a versão 2.7.3, ou Python 3
+anterior a versão 3.2.2, é `essencial` que você instale `lxml` ou `html5lib`.
+HTML parser nativos do Python não são uma boa idéia nas versões antigas.
 
-Note that if a document is invalid, different parsers will generate
-different Beautiful Soup trees for it. See `Differences
-between parsers`_ for details.
+Note que se o documento é inválido, diferentes parses gerarão diferentes
+Beautiful Soup trees (Beautiful Sour árvores). Para mais detalhes, verifique
+`Diferenças entre parses`_.
 
-Making the soup
-===============
+Fazendo a 'soup' (sopa)
+=======================
 
-To parse a document, pass it into the ``BeautifulSoup``
-constructor. You can pass in a string or an open filehandle::
+Para executar o parse, envie o documento para o construtor do ``BeautifulSoup``.
+ Você pode passar em formato 'string' ou abrir o 'filehandle'::
 
  from bs4 import BeautifulSoup
 
@@ -307,22 +310,22 @@ constructor. You can pass in a string or an open filehandle::
 
  soup = BeautifulSoup("<html>data</html>")
 
-First, the document is converted to Unicode, and HTML entities are
-converted to Unicode characters::
+Primeiro, o documento é convertido para Unicode e as entidades HTML são
+convertidas em caracteres Unicode::
 
  BeautifulSoup("Sacr&eacute; bleu!")
  <html><head></head><body>Sacré bleu!</body></html>
 
-Beautiful Soup then parses the document using the best available
-parser. It will use an HTML parser unless you specifically tell it to
-use an XML parser. (See `Parsing XML`_.)
+Então Beautiful Soup parses o documento usando melhor parser disponível.
+Ele irá usar um HTML parser a menos que você especifique um XML parser.
+(Ver em `Parsing XML`_.)
 
-Kinds of objects
+Tipos de objetos
 ================
 
-Beautiful Soup transforms a complex HTML document into a complex tree
-of Python objects. But you'll only ever have to deal with about four
-`kinds` of objects: ``Tag``, ``NavigableString``, ``BeautifulSoup``,
+Beautiful Soup transforma complexos documentos HTML em complexas árvores
+de objetos Python. No entanto, você sempre terá que lidar com (no máximo)
+ 4 (quatro) `tipos` de objectos: ``Tag``, ``NavigableString``, ``BeautifulSoup``,
 and ``Comment``.
 
 .. _Tag:
@@ -405,7 +408,7 @@ of a multi-valued attribute as a list::
  css_soup = BeautifulSoup('<p class="body"></p>')
  css_soup.p['class']
  # ["body"]
-  
+
  css_soup = BeautifulSoup('<p class="body strikeout"></p>')
  css_soup.p['class']
  # ["body", "strikeout"]
@@ -433,7 +436,7 @@ string, whether or not it's a multi-valued atribute
 
   id_soup.p.get_attribute_list('id')
   # ["my id"]
- 
+
 If you parse a document as XML, there are no multi-valued attributes::
 
  xml_soup = BeautifulSoup('<p class="body strikeout"></p>', 'xml')
