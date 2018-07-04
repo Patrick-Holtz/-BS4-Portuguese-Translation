@@ -405,7 +405,7 @@ of a multi-valued attribute as a list::
  css_soup = BeautifulSoup('<p class="body"></p>')
  css_soup.p['class']
  # ["body"]
-  
+
  css_soup = BeautifulSoup('<p class="body strikeout"></p>')
  css_soup.p['class']
  # ["body", "strikeout"]
@@ -433,7 +433,7 @@ string, whether or not it's a multi-valued atribute
 
   id_soup.p.get_attribute_list('id')
   # ["my id"]
- 
+
 If you parse a document as XML, there are no multi-valued attributes::
 
  xml_soup = BeautifulSoup('<p class="body strikeout"></p>', 'xml')
@@ -2879,25 +2879,12 @@ document as XML, pass in "xml" as the second argument to the
 
 You'll need to :ref:`have lxml installed <parser-installation>`.
 
-Other parser problems
+Outros problemas de analisadores
 ---------------------
 
-* If your script works on one computer but not another, or in one
-  virtual environment but not another, or outside the virtual
-  environment but not inside, it's probably because the two
-  environments have different parser libraries available. For example,
-  you may have developed the script on a computer that has lxml
-  installed, and then tried to run it on a computer that only has
-  html5lib installed. See `Differences between parsers`_ for why this
-  matters, and fix the problem by mentioning a specific parser library
-  in the ``BeautifulSoup`` constructor.
+* Se seu script funciona em um computador mas não em outro, ou em um ambiente virtual mas não em outro, ou fora do ambiente virtual mas não dentro, é provável que a causa seja que os dois ambientes possuam diferentes bibliotecas analisadoras. Por exemplo, você pode ter desenvolvido o script em um computador que possuía lxml instalado, e então tentado executá-lo em um computador que possuía apenas o html5lib instalado. Veja `Diferenças entre analisadores <#differences-between-parsers>`_ para saber o porquê da importância disso, e corrija o problema mencionando uma biblioteca analisadora específica no construtor do ``BeautifulSoup``.
 
-* Because `HTML tags and attributes are case-insensitive
-  <http://www.w3.org/TR/html5/syntax.html#syntax>`_, all three HTML
-  parsers convert tag and attribute names to lowercase. That is, the
-  markup <TAG></TAG> is converted to <tag></tag>. If you want to
-  preserve mixed-case or uppercase tags and attributes, you'll need to
-  :ref:`parse the document as XML. <parsing-xml>`
+* Devido as `tags e atributos HTML não serem sensíveis a letra maiúsculas e minúsculas <http://www.w3.org/TR/html5/syntax.html#syntax>`_, todos os três analisadores HTML convertem os nomes de tags e atributos para letras minúsculas. Ou seja, a  marcação `<TAG></TAG>` é convertida para `<tag></tag>`. Caso você queira preservar tags e atributos escritos em maiúsculo ou de forma mista, você precisará `analisar o documento como XML <#parsing-xml>`_.
 
 .. _misc:
 
