@@ -2884,7 +2884,7 @@ Outros problemas de analisadores
 
 * Se seu script funciona em um computador mas não em outro, ou em um ambiente virtual mas não em outro, ou fora do ambiente virtual mas não dentro, é provável que a causa seja que os dois ambientes possuam diferentes bibliotecas analisadoras. Por exemplo, você pode ter desenvolvido o script em um computador que possuía lxml instalado, e então tentado executá-lo em um computador que possuía apenas o html5lib instalado. Veja `Diferenças entre analisadores <#differences-between-parsers>`_ para saber o porquê da importância disso, e corrija o problema mencionando uma biblioteca analisadora específica no construtor do ``BeautifulSoup``.
 
-* Devido as `tags e atributos HTML não serem sensíveis a letra maiúsculas e minúsculas <http://www.w3.org/TR/html5/syntax.html#syntax>`_, todos os três analisadores HTML convertem os nomes de tags e atributos para letras minúsculas. Ou seja, a  marcação `<TAG></TAG>` é convertida para `<tag></tag>`. Caso você queira preservar tags e atributos escritos em maiúsculo ou de forma mista, você precisará `analisar o documento como XML <#parsing-xml>`.
+* Devido as `tags e atributos HTML não serem sensíveis a letra maiúsculas e minúsculas <http://www.w3.org/TR/html5/syntax.html#syntax>`_, todos os três analisadores HTML convertem os nomes de tags e atributos para letras minúsculas. Ou seja, a  marcação `<TAG></TAG>` é convertida para `<tag></tag>`. Caso você queira preservar tags e atributos escritos em maiúsculo ou de forma mista, você precisará `analisar o documento como XML <#parsing-xml>`_.
 
 .. _misc:
 
