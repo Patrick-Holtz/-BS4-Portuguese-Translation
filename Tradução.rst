@@ -1936,7 +1936,7 @@ immediately follows something else in the parse tree::
 ``clear()``
 -----------
 
-``Tag.clear()`` removes the contents of a tag::
+``Tag.clear()`` remove o conteúdo de uma tag::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -1949,8 +1949,7 @@ immediately follows something else in the parse tree::
 ``extract()``
 -------------
 
-``PageElement.extract()`` removes a tag or string from the tree. It
-returns the tag or string that was extracted::
+``PageElement.extract()`` remove uma tag ou string da árvore. Retorna a tag ou string que foi removida::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -1967,10 +1966,10 @@ returns the tag or string that was extracted::
   print(i_tag.parent)
   None
 
-At this point you effectively have two parse trees: one rooted at the
-``BeautifulSoup`` object you used to parse the document, and one rooted
-at the tag that was extracted. You can go on to call ``extract`` on
-a child of the element you extracted::
+Nesta etapa na verdade temos duas árvores analisadas: uma com a raiz no objeto 
+``BeautifulSoup`` utilizado para analisar o documento, e outra com a raiz
+na tag que foi removida. Pode-se continuar e executar ``extract`` no
+nó filho do elemento removido::
 
   my_string = i_tag.string.extract()
   my_string
@@ -1985,8 +1984,8 @@ a child of the element you extracted::
 ``decompose()``
 ---------------
 
-``Tag.decompose()`` removes a tag from the tree, then `completely
-destroys it and its contents`::
+``Tag.decompose()`` remove uma tag da árvore, e em seguida, `o destrói
+completamente e também seus componentes`::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2003,8 +2002,8 @@ destroys it and its contents`::
 ``replace_with()``
 ------------------
 
-``PageElement.replace_with()`` removes a tag or string from the tree,
-and replaces it with the tag or string of your choice::
+``PageElement.replace_with()`` remove uma tag ou string da árvore,
+e o substitui com a tag ou string desejada::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2017,14 +2016,14 @@ and replaces it with the tag or string of your choice::
   a_tag
   # <a href="http://example.com/">I linked to <b>example.net</b></a>
 
-``replace_with()`` returns the tag or string that was replaced, so
-that you can examine it or add it back to another part of the tree.
+``replace_with()`` retorna a tag ou string substituída, podendo
+ser examinada ou adicionada a outra parte da árvore.
 
 ``wrap()``
 ----------
 
-``PageElement.wrap()`` wraps an element in the tag you specify. It
-returns the new wrapper::
+``PageElement.wrap()`` envelopa um elemento na tag especificada. 
+Retorna o novo envoltório::
 
  soup = BeautifulSoup("<p>I wish I was bold.</p>")
  soup.p.string.wrap(soup.new_tag("b"))
@@ -2033,13 +2032,13 @@ returns the new wrapper::
  soup.p.wrap(soup.new_tag("div")
  # <div><p><b>I wish I was bold.</b></p></div>
 
-This method is new in Beautiful Soup 4.0.5.
+Este método é novo na Beautiful Soup 4.0.5.
 
 ``unwrap()``
 ---------------------------
 
-``Tag.unwrap()`` is the opposite of ``wrap()``. It replaces a tag with
-whatever's inside that tag. It's good for stripping out markup::
+``Tag.unwrap()`` é o contrário de ``wrap()``. Substitui uma tag com
+qualquer que seja o seu conteúdo. É útil para eliminar marcações::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2049,8 +2048,8 @@ whatever's inside that tag. It's good for stripping out markup::
   a_tag
   # <a href="http://example.com/">I linked to example.com</a>
 
-Like ``replace_with()``, ``unwrap()`` returns the tag
-that was replaced.
+Tal como ``replace_with()``, ``unwrap()`` retorna a tag
+que foi substituída.
 
 Output
 ======
@@ -2060,8 +2059,8 @@ Output
 Pretty-printing
 ---------------
 
-The ``prettify()`` method will turn a Beautiful Soup parse tree into a
-nicely formatted Unicode string, with each HTML/XML tag on its own line::
+O método ``prettify()`` converterá uma árvore Beautiful Soup em uma
+string formatada em Unicode, com uma tag HTML/XML em sua própria linha::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2082,8 +2081,8 @@ nicely formatted Unicode string, with each HTML/XML tag on its own line::
   #  </body>
   # </html>
 
-You can call ``prettify()`` on the top-level ``BeautifulSoup`` object,
-or on any of its ``Tag`` objects::
+Você pode executar ``prettify()`` no nível mais alto de um objeto ``BeautifulSoup``,
+ou em qualquer de seus objetos do tipo ``Tag``::
 
   print(soup.a.prettify())
   # <a href="http://example.com/">
@@ -2096,9 +2095,9 @@ or on any of its ``Tag`` objects::
 Non-pretty printing
 -------------------
 
-If you just want a string, with no fancy formatting, you can call
-``unicode()`` or ``str()`` on a ``BeautifulSoup`` object, or a ``Tag``
-within it::
+Se apenas uma string, sem formatação, for suficiente, pode-se executar
+``unicode()`` ou ``str()`` em um objeto ``BeautifulSoup``, ou em uma
+``Tag`` pertencente a ele::
 
  str(soup)
  # '<html><head></head><body><a href="http://example.com/">I linked to <i>example.com</i></a></body></html>'
@@ -2106,11 +2105,11 @@ within it::
  unicode(soup.a)
  # u'<a href="http://example.com/">I linked to <i>example.com</i></a>'
 
-The ``str()`` function returns a string encoded in UTF-8. See
-`Encodings`_ for other options.
+A função ``str()`` retorna uma string codificada em UTF-8. Veja
+`Encodings`_ para demais opções.
 
-You can also call ``encode()`` to get a bytestring, and ``decode()``
-to get Unicode.
+Pode-se ainda executar ``encode()`` para obter uma bytestring, e ``decode()``
+para obter sua versão Unicode.
 
 .. _output_formatters:
 
