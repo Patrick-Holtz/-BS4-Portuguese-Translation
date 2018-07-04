@@ -294,11 +294,11 @@ Note that if a document is invalid, different parsers will generate
 different Beautiful Soup trees for it. See `Differences
 between parsers`_ for details.
 
-Making the soup
-===============
+Fazendo o soup
+==============
 
-To parse a document, pass it into the ``BeautifulSoup``
-constructor. You can pass in a string or an open filehandle::
+Para analisar um documento, passe-o para o construtor
+``BeautifulSoup``. Você pode passar uma string de texto ou um arquivo aberto::
 
  from bs4 import BeautifulSoup
 
@@ -307,15 +307,15 @@ constructor. You can pass in a string or an open filehandle::
 
  soup = BeautifulSoup("<html>data</html>")
 
-First, the document is converted to Unicode, and HTML entities are
-converted to Unicode characters::
+Primeiramente, o documento é convertido para Unicode e as entidades HTML são
+convertidas em caracteres Unicode::
 
  BeautifulSoup("Sacr&eacute; bleu!")
  <html><head></head><body>Sacré bleu!</body></html>
 
-Beautiful Soup then parses the document using the best available
-parser. It will use an HTML parser unless you specifically tell it to
-use an XML parser. (See `Parsing XML`_.)
+Beautiful Soup então analisa o documento usando o melhor analisador
+disponível. Um analisador HTML será utilizado por padrão a não ser que você especifique
+a utilização de um analisador XML. (Consulte `Analisando XML`_.)
 
 Kinds of objects
 ================
