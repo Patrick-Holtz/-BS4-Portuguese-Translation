@@ -1,47 +1,39 @@
-Beautiful Soup Documentation
+Documentação Beautiful Soup 
 ============================
 
 .. image:: 6.1.jpg
    :align: right
    :alt: "The Fish-Footman began by producing from under his arm a great letter, nearly as large as himself."
 
-`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ is a
-Python library for pulling data out of HTML and XML files. It works
-with your favorite parser to provide idiomatic ways of navigating,
-searching, and modifying the parse tree. It commonly saves programmers
-hours or days of work.
+`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ é uma biblioteca 
+Python para extrair dados de arquivos HTML e XML. Ela funcionará como seu analisador favorito 
+fornecendo maneiras idiomáticas de navegação, busca, e modificação da árvore de análise 
+sintática. Geralmente, salvando programadores em horas ou dias de trabalho.
 
-These instructions illustrate all major features of Beautiful Soup 4,
-with examples. I show you what the library is good for, how it works,
-how to use it, how to make it do what you want, and what to do when it
-violates your expectations.
+Essas instruções ilustram todos os principais recursos do Beautiful Soup 4,
+com exemplos. Mostrando para o quê a biblioteca é boa, como ela funciona, como utilizá-la, como
+prepará-la para fazer o que você quer, e o que fazer quando ela não corresponde suas expectativas.
+ 
 
-The examples in this documentation should work the same way in Python
-2.7 and Python 3.2.
+Os exemplos nessa documentação deverão funcionar da mesma maneira no Python
+2.7 e Python 3.2.
 
-You might be looking for the documentation for `Beautiful Soup 3
+Você talvez esteja procurando a documentação do `Beautiful Soup 3
 <http://www.crummy.com/software/BeautifulSoup/bs3/documentation.html>`_.
-If so, you should know that Beautiful Soup 3 is no longer being
-developed, and that Beautiful Soup 4 is recommended for all new
-projects. If you want to learn about the differences between Beautiful
-Soup 3 and Beautiful Soup 4, see `Porting code to BS4`_.
+Se sim, você deveria ter em mente que o Beautiful Soup 3 não está mais sendo
+desenvolvido, e que o Beautiful Soup 4 é recomendado para todos os novos
+projetos. Se você quiser entender as diferenças entre o Beautiful
+Soup 3 e o Beautiful Soup 4, veja em `Importando código para BS4`_.
 
-This documentation has been translated into other languages by
-Beautiful Soup users:
-
-* `这篇文档当然还有中文版. <http://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/>`_
-* このページは日本語で利用できます(`外部リンク <http://kondou.com/BS4/>`_)
-* 이 문서는 한국어 번역도 가능합니다. (`외부 링크 <http://coreapython.hosting.paran.com/etc/beautifulsoup4.html>`_)
-
-Getting help
+Obtendo ajuda
 ------------
 
-If you have questions about Beautiful Soup, or run into problems,
-`send mail to the discussion group
-<https://groups.google.com/forum/?fromgroups#!forum/beautifulsoup>`_. If
-your problem involves parsing an HTML document, be sure to mention
-:ref:`what the diagnose() function says <diagnose>` about
-that document.
+Se você tiver dúvidas sobre o Beautiful Soup, ou tiver problemas,
+`crie um tópico no grupo de discussão
+<https://groups.google.com/forum/?fromgroups#!forum/beautifulsoup>`_. Se
+seu problema envolve analisar um documento HTML, deixe claro mencionando
+:ref:`O que a função diagnose() diz <diagnose>` sobre
+esse documento.
 
 Quick Start
 ===========
