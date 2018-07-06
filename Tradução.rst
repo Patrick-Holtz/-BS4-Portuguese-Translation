@@ -1,19 +1,19 @@
-Documentação Beautiful Soup 
+Documentação Beautiful Soup
 ============================
 
 .. image:: 6.1.jpg
    :align: right
    :alt: "The Fish-Footman began by producing from under his arm a great letter, nearly as large as himself."
 
-`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ é uma biblioteca 
-Python para extrair dados de arquivos HTML e XML. Ela funcionará como seu analisador favorito 
-fornecendo maneiras idiomáticas de navegação, busca, e modificação da árvore de análise 
+`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ é uma biblioteca
+Python para extrair dados de arquivos HTML e XML. Ela funcionará como seu analisador favorito
+fornecendo maneiras idiomáticas de navegação, busca, e modificação da árvore de análise
 sintática. Geralmente, salvando programadores em horas ou dias de trabalho.
 
 Essas instruções ilustram todos os principais recursos do Beautiful Soup 4,
 com exemplos. Mostrando para o quê a biblioteca é boa, como ela funciona, como utilizá-la, como
 prepará-la para fazer o que você quer, e o que fazer quando ela não corresponde suas expectativas.
- 
+
 
 Os exemplos nessa documentação deverão funcionar da mesma maneira no Python
 2.7 e Python 3.2.
@@ -1958,7 +1958,7 @@ immediately follows something else in the parse tree::
   print(i_tag.parent)
   None
 
-Nesta etapa na verdade temos duas árvores analisadas: uma com a raiz no objeto 
+Nesta etapa na verdade temos duas árvores analisadas: uma com a raiz no objeto
 ``BeautifulSoup`` utilizado para analisar o documento, e outra com a raiz
 na tag que foi removida. Pode-se continuar e executar ``extract`` no
 nó filho do elemento removido::
@@ -2014,7 +2014,7 @@ ser examinada ou adicionada a outra parte da árvore.
 ``wrap()``
 ----------
 
-``PageElement.wrap()`` envelopa um elemento na tag especificada. 
+``PageElement.wrap()`` envelopa um elemento na tag especificada.
 Retorna o novo envoltório::
 
  soup = BeautifulSoup("<p>I wish I was bold.</p>")
@@ -2915,26 +2915,27 @@ Miscellaneous
   returning a tag or a string. You need to figure out why your
   ``find()`` call isn't returning anything.
 
-Improving Performance
----------------------
 
-Beautiful Soup will never be as fast as the parsers it sits on top
-of. If response time is critical, if you're paying for computer time
-by the hour, or if there's any other reason why computer time is more
-valuable than programmer time, you should forget about Beautiful Soup
-and work directly atop `lxml <http://lxml.de/>`_.
+Melhorando a Performance
+------------------------
 
-That said, there are things you can do to speed up Beautiful Soup. If
-you're not using lxml as the underlying parser, my advice is to
-:ref:`start <parser-installation>`. Beautiful Soup parses documents
-significantly faster using lxml than using html.parser or html5lib.
+O Beautiful Soup nunca será tão rápido quanto aos analisadores sintáticos que ele gerencia.
+Se o tempo de resposta for algo crítico, se você está pagando por hora por recursos
+computacionais ou se há alguma outra razão pela qual o tempo computacional é mais
+valioso que o tempo do programador, então você deveria esquecer do Beautiful Soup
+e trabalhar diretamente com `lxml <http://lxml.de/>`_.
 
-You can speed up encoding detection significantly by installing the
-`cchardet <http://pypi.python.org/pypi/cchardet/>`_ library.
+Dito isso, existem maneiras de melhorar a velocidade do Beautiful Soup. Se você ainda não
+começou a usar o lxml como um analisador implícito, meu conselho é `começar <parser-installation>`_.
+O Beautiful Soup analisa documentos de uma forma significativamente mais rápida usando
+lxml do que usando um html.parser ou html5lib.
 
-`Parsing only part of a document`_ won't save you much time parsing
-the document, but it can save a lot of memory, and it'll make
-`searching` the document much faster.
+Você pode acelerar a detecção de codificação de uma maneira significativa instalando
+a biblioteca `cchardet <http://pypi.python.org/pypi/cchardet/>`_.
+
+`Analisar apenas porções de um documento`_ não irá lhe poupar muito tempo ao analisar o
+documento, mas pode lhe economizar muita memória e tornar a `buscas` no documento muito mais rápidas.
+
 
 Beautiful Soup 3
 ================
