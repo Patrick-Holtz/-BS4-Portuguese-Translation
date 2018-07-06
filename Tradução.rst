@@ -2933,7 +2933,7 @@ lxml do que usando um html.parser ou html5lib.
 Você pode acelerar a detecção de codificação de uma maneira significativa instalando
 a biblioteca `cchardet <http://pypi.python.org/pypi/cchardet/>`_.
 
-`Analisar apenas porções de um documento`_ não irá lhe poupar muito tempo ao analisar o
+`Analisar apenas parte de um documento`_ não irá lhe poupar muito tempo ao analisar o
 documento, mas pode lhe economizar muita memória e tornar a `buscas` no documento muito mais rápidas.
 
 
