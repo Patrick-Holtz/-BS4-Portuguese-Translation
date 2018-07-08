@@ -2879,41 +2879,42 @@ Outros problemas de analisadores
 
 .. _misc:
 
-Miscellaneous
+Miscelânea
 -------------
+  
+* ``Codec UnicodeEncodeError: 'charmap' codec can't encode character
+  u'\xfoo' in position bar`` (ou apenas sobre qualquer outra
+  ``UnicodeEncodeError``) - Isto não é um problema com o Beautiful Soup.
+  Esse problema aparece em duas situações principais. Primeiro, quando você tenta
+  imprimir um caractere Unicode que seu console não sabe como
+  exibir. (Veja `esta página no wiki do Python
+  <http://wiki.python.org/moin/PrintFails>`_ para ajuda.) Segundo, quando
+  você está escrevendo em um arquivo e você passa um caractere Unicode
+  não suportado pela sua codificação padrão. Neste caso, a mais simples
+  solução é codificar explicitamente a string Unicode em UTF-8 com
+  ``u.encode ("utf8")``.
 
-* ``UnicodeEncodeError: 'charmap' codec can't encode character
-  u'\xfoo' in position bar`` (or just about any other
-  ``UnicodeEncodeError``) - This is not a problem with Beautiful Soup.
-  This problem shows up in two main situations. First, when you try to
-  print a Unicode character that your console doesn't know how to
-  display. (See `this page on the Python wiki
-  <http://wiki.python.org/moin/PrintFails>`_ for help.) Second, when
-  you're writing to a file and you pass in a Unicode character that's
-  not supported by your default encoding.  In this case, the simplest
-  solution is to explicitly encode the Unicode string into UTF-8 with
-  ``u.encode("utf8")``.
+* ``KeyError: [attr]``- Causado por acessar ``tag ['attr']`` quando a
+  tag em questão não define o atributo ``attr``. Os erros
+  mais comuns são ``KeyError: 'href'`` e ``KeyError:
+  'class'``. Use ``tag.get ('attr')`` se você não tiver certeza que ``attr`` está
+  definido, assim como você faria com um dicionário Python.
 
-* ``KeyError: [attr]`` - Caused by accessing ``tag['attr']`` when the
-  tag in question doesn't define the ``attr`` attribute. The most
-  common errors are ``KeyError: 'href'`` and ``KeyError:
-  'class'``. Use ``tag.get('attr')`` if you're not sure ``attr`` is
-  defined, just as you would with a Python dictionary.
+* ``AttributeError: 'ResultSet' object has no attribute 'foo'`` - Isto
+  geralmente acontece porque você espera que ``find_all ()`` retorne uma
+  tag ou string única. Mas ``find_all ()`` retorna uma lista de tags
+  e strings - um objeto ``ResultSet``. Você precisa iterar sobre a
+  lista e olhar o ``.foo`` de cada um. Ou, se você realmente só
+  quer um resultado, você precisa usar ``find ()`` em vez de
+  ``find_all ()``.
 
-* ``AttributeError: 'ResultSet' object has no attribute 'foo'`` - This
-  usually happens because you expected ``find_all()`` to return a
-  single tag or string. But ``find_all()`` returns a _list_ of tags
-  and strings--a ``ResultSet`` object. You need to iterate over the
-  list and look at the ``.foo`` of each one. Or, if you really only
-  want one result, you need to use ``find()`` instead of
-  ``find_all()``.
+* ``AttributeError: 'NoneType' object has no attribute 'foo'`` -
+  geralmente acontece porque você chamou ``find ()`` e então tentou
+  acessar o atributo `.foo`` do resultado. Mas no seu caso,
+  ``find ()`` não encontrou nada, então retornou ``None``, em vez de
+  retornar uma tag ou uma string. Você precisa descobrir porquê sua
+  chamada ``find ()`` não está retornando nada.
 
-* ``AttributeError: 'NoneType' object has no attribute 'foo'`` - This
-  usually happens because you called ``find()`` and then tried to
-  access the `.foo`` attribute of the result. But in your case,
-  ``find()`` didn't find anything, so it returned ``None``, instead of
-  returning a tag or a string. You need to figure out why your
-  ``find()`` call isn't returning anything.
 
 Improving Performance
 ---------------------
