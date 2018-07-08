@@ -2134,8 +2134,8 @@ HTML ou XML inválidos::
  soup.a
  # <a href="http://example.com/?foo=val1&amp;bar=val2">A link</a>
 
-Você pode alterar esse comportamento fornecendo um valor para o
-o argumento ``formatter`` para ``prettify()``, ``encode()``, ou
+Você pode alterar esse comportamento fornecendo um valor para o 
+argumento ``formatter`` para ``prettify()``, ``encode()``, ou
 ``decode()``. Beautiful Soup reconhece quatro valores possíveis para
 ``formatter``.
 
@@ -2208,8 +2208,8 @@ nada mais::
 Se você está escrevendo sua própria função, você deveria conhecer a
 classe ``EntitySubstitution`` do módulo ``bs4.dammit``. Esta classe
 implementa os formatadores padrões da Beautiful Soup como métodos de classe: o
-formatador "html" é ``EntitySubstitution.substitute_html`` e o
-O formatador "minimal" é ``EntitySubstitution.substitute_xml``. Você pode
+formatador "html" é ``EntitySubstitution.substitute_html`` e o 
+formatador "minimal" é ``EntitySubstitution.substitute_xml``. Você pode
 utilizar estas funções para simular ``formatter=html`` ou
 ``formatter=minimal``, e então fazer algo a mais.
 
