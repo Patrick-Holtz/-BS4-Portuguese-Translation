@@ -1456,39 +1456,39 @@ These two lines are also equivalent::
 ``find()``
 ----------
 
-Signature: find(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
+Assinatura de tipo: find(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
 <recursive>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-The ``find_all()`` method scans the entire document looking for
-results, but sometimes you only want to find one result. If you know a
-document only has one <body> tag, it's a waste of time to scan the
-entire document looking for more. Rather than passing in ``limit=1``
-every time you call ``find_all``, you can use the ``find()``
-method. These two lines of code are `nearly` equivalent::
-
+O método ``find_all ()`` varre todo o documento procurando
+resultados, mas às vezes você quer encontrar apenas um deles. Se você sabe que um
+documento só tem uma tag <body>, seria perda de tempo varrer o
+documento inteiro procurando por mais. Em vez de passar em ``limit = 1``
+toda vez que você chama ``find_all``, você pode usar o método ``find ()``. 
+Estas duas linhas de código são quase equivalentes::
+ 
  soup.find_all('title', limit=1)
- # [<title>The Dormouse's story</title>]
+ # [<title>A história do Arganaz</title>]
 
  soup.find('title')
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
-The only difference is that ``find_all()`` returns a list containing
-the single result, and ``find()`` just returns the result.
+A única diferença é que ``find_all()`` retorna uma lista contendo o
+resultado, e ``find()`` retorna apenas o resultado.
 
-If ``find_all()`` can't find anything, it returns an empty list. If
-``find()`` can't find anything, it returns ``None``::
+Caso ``find_all()`` não encontre nada, retorna uma lista vazia. Se
+``find()`` não encontra nada, retorna ``None``::
 
  print(soup.find("nosuchtag"))
  # None
 
-Remember the ``soup.head.title`` trick from `Navigating using tag
-names`_? That trick works by repeatedly calling ``find()``::
+Lembra do truque ``soup.head.title`` de `Navegando usando nomes de
+tags`? Esse truque funciona quando ``find()`` é chamado repetidamente::
 
  soup.head.title
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
  soup.find("head").find("title")
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
 ``find_parents()`` and ``find_parent()``
 ----------------------------------------
