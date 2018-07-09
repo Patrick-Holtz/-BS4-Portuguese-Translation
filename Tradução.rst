@@ -2684,32 +2684,34 @@ This is because two different ``Tag`` objects can't occupy the same
 space at the same time.
 
 
-Parsing only part of a document
-===============================
+Analisando apenas parte de um documento
+=======================================
 
-Let's say you want to use Beautiful Soup look at a document's <a>
-tags. It's a waste of time and memory to parse the entire document and
-then go over it again looking for <a> tags. It would be much faster to
-ignore everything that wasn't an <a> tag in the first place. The
-``SoupStrainer`` class allows you to choose which parts of an incoming
-document are parsed. You just create a ``SoupStrainer`` and pass it in
-to the ``BeautifulSoup`` constructor as the ``parse_only`` argument.
+Digamos que você queira usar o Beautiful Soup para ver as tags <a> do
+documento. É um desperdício de tempo e memória analisar o documento
+inteiro e, em seguida, passar por ele procurando pelas tags <a>. Seria
+muito mais rápido ignorar o que não era uma tag <a> desde o início. A
+classe ``SoupStrainer`` te permite escolher que partes do documento de
+entrada que serão analisadas. Você só precisa criar um
+``SoupStrainer``e o passa-lo pelo construtor ``BeautifulSoup`` como o
+argumento ``parse_only`` (analisar somente).
 
-(Note that *this feature won't work if you're using the html5lib parser*.
-If you use html5lib, the whole document will be parsed, no
-matter what. This is because html5lib constantly rearranges the parse
-tree as it works, and if some part of the document didn't actually
-make it into the parse tree, it'll crash. To avoid confusion, in the
-examples below I'll be forcing Beautiful Soup to use Python's
-built-in parser.)
+(Observe que *este recurso não funcionará se você estiver usando o
+analisado html5lib*. Se você usar o html5lib, o documento inteiro será
+analisado independentemete. Isso ocorre porque o html5lib reorganiza
+constantemente a árvore de análise conforme trabalha e se alguma parte
+do documento não encaixar na árvore de análise, a análise irá falhar.
+Para evitar confusão, nos exemplos abaixo eu vou forçar o Beautiful
+Soup a usar o analisador built-in do Python.)
+
 
 ``SoupStrainer``
 ----------------
 
-The ``SoupStrainer`` class takes the same arguments as a typical
-method from `Searching the tree`_: :ref:`name <name>`, :ref:`attrs
-<attrs>`, :ref:`string <string>`, and :ref:`**kwargs <kwargs>`. Here are
-three ``SoupStrainer`` objects::
+A classe ``SoupStrainer`` usa os mesmos argumentos de um método típico
+de `Busca em Árvore`_: :ref:`name <name>`_, :ref:`attrs <attrs>`,
+:ref:`string <string>`, e :ref:`**kwargs <kwargs>`. Abaixo trê
+ objetos ``SoupStrainer``::
 
  from bs4 import SoupStrainer
 
@@ -2722,9 +2724,9 @@ three ``SoupStrainer`` objects::
 
  only_short_strings = SoupStrainer(string=is_short_string)
 
-I'm going to bring back the "three sisters" document one more time,
-and we'll see what the document looks like when it's parsed with these
-three ``SoupStrainer`` objects::
+Eu vou retomar o documento "three sisters" mais uma vez, e nós veremos
+como documento  fica ao ser analisado com estes três objetos
+``SoupStrainer``:
 
  html_doc = """
  <html><head><title>The Dormouse's story</title></head>
@@ -2765,9 +2767,13 @@ three ``SoupStrainer`` objects::
  # ...
  #
 
+Você também pode passar um Objeto ``SoupStrainer`` como argumento de
+qualquer um dos métodos mencionados na seção `Busca em Àrvore`_.
+Isso provavelmente não é muito útil, mas eu pensei em mencioná-lo::
+
 You can also pass a ``SoupStrainer`` into any of the methods covered
-in `Searching the tree`_. This probably isn't terribly useful, but I
-thought I'd mention it::
+in `Searching the `_. Isso provavelmente não é muito útil, mas eu
+pensei em mencioná-lo::
 
  soup = BeautifulSoup(html_doc)
  soup.find_all(only_short_strings)
