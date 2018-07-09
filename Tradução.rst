@@ -2710,7 +2710,7 @@ Soup a usar o analisador built-in do Python.)
 
 A classe ``SoupStrainer`` usa os mesmos argumentos de um método típico
 de `Busca em Árvore`_: :ref:`name <name>`_, :ref:`attrs <attrs>`,
-:ref:`string <string>`, e :ref:`**kwargs <kwargs>`. Abaixo trê
+:ref:`string <string>`, e :ref:`**kwargs <kwargs>`. Abaixo três
  objetos ``SoupStrainer``::
 
  from bs4 import SoupStrainer
