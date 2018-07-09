@@ -2771,10 +2771,6 @@ Você também pode passar um Objeto ``SoupStrainer`` como argumento de
 qualquer um dos métodos mencionados na seção `Busca em Àrvore`_.
 Isso provavelmente não é muito útil, mas eu pensei em mencioná-lo::
 
-You can also pass a ``SoupStrainer`` into any of the methods covered
-in `Searching the `_. Isso provavelmente não é muito útil, mas eu
-pensei em mencioná-lo::
-
  soup = BeautifulSoup(html_doc)
  soup.find_all(only_short_strings)
  # [u'\n\n', u'\n\n', u'Elsie', u',\n', u'Lacie', u' and\n', u'Tillie',
