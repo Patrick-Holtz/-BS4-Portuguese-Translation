@@ -1493,23 +1493,23 @@ names`_? That trick works by repeatedly calling ``find()``::
 ``find_parents()`` and ``find_parent()``
 ----------------------------------------
 
-Signature: find_parents(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_parents(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_parent(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_parent(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-I spent a lot of time above covering ``find_all()`` and
-``find()``. The Beautiful Soup API defines ten other methods for
-searching the tree, but don't be afraid. Five of these methods are
-basically the same as ``find_all()``, and the other five are basically
-the same as ``find()``. The only differences are in what parts of the
-tree they search.
+Eu passei muito tempo falando sobre ``find_all()`` e
+``find()``. O Beautiful Soup API define dez outros métodos de
+busca em árvore, mas não se assuste. Cinco desses métodos são
+basicamente semelhantes ao ``find_all()``, e os outros cinco são basicamente
+semelhantes ao ``find()``. As únicas diferenças são em quais partes da
+árvore são feitas as buscas.
 
-First let's consider ``find_parents()`` and
-``find_parent()``. Remember that ``find_all()`` and ``find()`` work
-their way down the tree, looking at tag's descendants. These methods
-do the opposite: they work their way `up` the tree, looking at a tag's
-(or a string's) parents. Let's try them out, starting from a string
-buried deep in the "three daughters" document::
+Primeiro, consideraremos ``find_parents()`` e
+``find_parent()``. Lembre-se que ``find_all()`` e ``find()`` percorrem
+de forma decrescente a árvore, procurando pelos descendentes da `tag`(marca). Já esses métodos
+fazem o oposto: eles percorrem de forma crescente a árvore, procurando pelos pais da `tag`
+(ou da `string`). Vamos testá-los, começando da `string`
+mais interna no documento das "três irmãs"::
 
   a_string = soup.find(string="Lacie")
   a_string
@@ -1528,18 +1528,18 @@ buried deep in the "three daughters" document::
   a_string.find_parents("p", class="title")
   # []
 
-One of the three <a> tags is the direct parent of the string in
-question, so our search finds it. One of the three <p> tags is an
-indirect parent of the string, and our search finds that as
-well. There's a <p> tag with the CSS class "title" `somewhere` in the
-document, but it's not one of this string's parents, so we can't find
-it with ``find_parents()``.
+Uma das três `tags` <a> é pai direto da `string` em
+questão, logo nossa busca a encontra. Uma das três `tags` <p> é
+pai indireto da `string`, e nossa busca a encontra
+também. Existe uma `tag` <p> de classe CSS "title" `em algum lugar` no
+documento, mas não é nenhum dos pais da `string`, então não podemos encontrá-la
+com ``find_parents()``.
 
-You may have made the connection between ``find_parent()`` and
-``find_parents()``, and the `.parent`_ and `.parents`_ attributes
-mentioned earlier. The connection is very strong. These search methods
-actually use ``.parents`` to iterate over all the parents, and check
-each one against the provided filter to see if it matches.
+Talvez você tenha feito a conexão entre ``find_parent()`` e
+``find_parents()``, e os atributos `.parent`_ e `.parents`_ 
+mencionados anteriormente. A conexão é bastante forte. Esses métodos de busca
+atualmente usam ``.parents`` para iteragir sobre todos os pais, e checar
+cada um contra o filtro fornecido para verificar se combinam.
 
 ``find_next_siblings()`` and ``find_next_sibling()``
 ----------------------------------------------------
