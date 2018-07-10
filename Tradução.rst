@@ -2103,7 +2103,7 @@ A função ``str()`` retorna uma string codificada em UTF-8. Veja
 Pode-se ainda executar ``encode()`` para obter uma bytestring, e ``decode()``
 para obter sua versão Unicode.
 
-.. _output_formatters:
+.. _formatadores_de_saida:
 
 Formatadores de saída
 -----------------
@@ -3099,23 +3099,23 @@ que qualquer tag vazia é uma tag de elemento vazio. E se
 você adiciona um elemento filho a uma tag de elemento vazio, ele deixa de ser um
 tag de elemento vazio.
 
-Entities
-^^^^^^^^
+Entidades
+^^^^^^^^^
 
-An incoming HTML or XML entity is always converted into the
-corresponding Unicode character. Beautiful Soup 3 had a number of
-overlapping ways of dealing with entities, which have been
-removed. The ``BeautifulSoup`` constructor no longer recognizes the
-``smartQuotesTo`` or ``convertEntities`` arguments. (`Unicode,
-Dammit`_ still has ``smart_quotes_to``, but its default is now to turn
-smart quotes into Unicode.) The constants ``HTML_ENTITIES``,
-``XML_ENTITIES``, and ``XHTML_ENTITIES`` have been removed, since they
-configure a feature (transforming some but not all entities into
-Unicode characters) that no longer exists.
+Uma entidade HTML ou XML, em sua entrada, é sempre convertida no
+caractere unicode correspondente a ela. Beautiful Soup 3 teve um número de
+formas de lidar com entidades sobrepostas, que foram
+removidas. O construtor ``BeautifulSoup`` não reconhece mais os argumentos
+``smartQuotesTo`` ou ``convertEntities``. (`Unicode,
+Dammit`_ ainda tem ``smart_quotes_to``, mas seu padrão agora é transformar
+smart quotes em Unicode.) As constantes ``HTML_ENTITIES``,
+``XML_ENTITIES`` e ``XHTML_ENTITIES`` foram removidos, pois
+configuram um recurso (transformar algumas entidades, mas não todas em
+caracteres unicode) que não existe mais.
 
-If you want to turn Unicode characters back into HTML entities on
-output, rather than turning them into UTF-8 characters, you need to
-use an :ref:`output formatter <output_formatters>`.
+Se você quiser transformar caracteres Unicode novamente em entidades HTML
+na saída, ao invés de transformá-los em caracteres UTF-8, você precisa
+utilizar um formatador de saída :ref:`<formatadores_de_saida>`.
 
 Miscellaneous
 ^^^^^^^^^^^^^
