@@ -3117,32 +3117,32 @@ Se você quiser transformar caracteres Unicode novamente em entidades HTML
 na saída, ao invés de transformá-los em caracteres UTF-8, você precisa
 utilizar um formatador de saída :ref:`<formatadores_de_saida>`.
 
-Miscellaneous
-^^^^^^^^^^^^^
+Outras Informações
+^^^^^^^^^^^^^^^^^^
 
-:ref:`Tag.string <.string>` now operates recursively. If tag A
-contains a single tag B and nothing else, then A.string is the same as
-B.string. (Previously, it was None.)
+:ref:`Tag.string <.string>` agora opera recursivamente. Se a tag A
+contém uma única tag B e nada mais, então A.string é o mesmo que
+B.string. (Anteriormente, era None.)
 
-`Multi-valued attributes`_ like ``class`` have lists of strings as
-their values, not strings. This may affect the way you search by CSS
-class.
+`Atributos de valor múltiplo`_ como ``class`` possuem listas de strings como
+seus valores, não strings. Isso pode afetar a maneira como você pesquisa por classes 
+CSS.
 
-If you pass one of the ``find*`` methods both :ref:`string <string>` `and`
-a tag-specific argument like :ref:`name <name>`, Beautiful Soup will
-search for tags that match your tag-specific criteria and whose
-:ref:`Tag.string <.string>` matches your value for :ref:`string
-<string>`. It will `not` find the strings themselves. Previously,
-Beautiful Soup ignored the tag-specific arguments and looked for
-strings.
+Se você passar um dos métodos ``find*``, ambos :ref:`string <string>` e
+um atributo de tag como :ref:`name <name>`, Beautiful Soup vai
+buscar tags que correspondam aos seus critérios específicos e
+:ref:`Tag.string <.string>` correspondam ao seu valor para :ref:`string
+<string> `. Não "encontrará" as strings em si. Anteriormente,
+A Beautiful Soup ignorava os atributos da tag e procurava
+por strings.
 
-The ``BeautifulSoup`` constructor no longer recognizes the
-`markupMassage` argument. It's now the parser's responsibility to
-handle markup correctly.
+O construtor ``BeautifulSoup`` não reconhece mais o
+argumento `markupMassage`. Agora é responsabilidade do parser
+manipular a marcação corretamente.
 
-The rarely-used alternate parser classes like
-``ICantBelieveItsBeautifulSoup`` and ``BeautifulSOAP`` have been
-removed. It's now the parser's decision how to handle ambiguous
-markup.
+As classes de parsers alternativos raramente usadas, como
+``ICantBelieveItsBeautifulSoup`` e ``BeautifulSOAP`` foram
+removidas. Agora a decisão é do parser de como lidar com marcação 
+ambígua.
 
-The ``prettify()`` method now returns a Unicode string, not a bytestring.
+O método ``prettify()`` agora retorna uma string Unicode, e não mais uma bytestring.
