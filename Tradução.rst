@@ -2276,38 +2276,37 @@ generator, e processar o texto você mesmo::
  [text for text in soup.stripped_strings]
  # [u'I linked to', u'example.com']
 
-Specifying the parser to use
+Especificando o parser a ser utilizado
 ============================
 
-If you just need to parse some HTML, you can dump the markup into the
-``BeautifulSoup`` constructor, and it'll probably be fine. Beautiful
-Soup will pick a parser for you and parse the data. But there are a
-few additional arguments you can pass in to the constructor to change
-which parser is used.
+Se você só precisa parsear algum HTML, você pode jogar a marcação no 
+construtor ``BeautifulSoup``, e provavelmente dará certo. BeautifulSoup
+irá escolher o parser para você e parseará os dados enviados. Mas tem alguns
+argumentos adicionais que você passar no construtor para mudar qual parser
+é utilizado.
 
-The first argument to the ``BeautifulSoup`` constructor is a string or
-an open filehandle--the markup you want parsed. The second argument is
-`how` you'd like the markup parsed.
+O primeiro argumento no construtor ``BeautifulSoup`` é uma string 
+ou arquivos abertos--A marcação que você quer parsear. o segundo 
+argumento é `como` você gostaria da marcação parseada.
 
-If you don't specify anything, you'll get the best HTML parser that's
-installed. Beautiful Soup ranks lxml's parser as being the best, then
-html5lib's, then Python's built-in parser. You can override this by
-specifying one of the following:
+Se você não especificar nada, você vai obter o melhor parseador HTML
+que estiver instalado. Beautiful Soup rankeia o lxml's parser como o
+melhor, então html5lib's, então o parseador interno nativo do Python.
+Você pode sobrescrever isso especificando algum dos seguintes:
 
-* What type of markup you want to parse. Currently supported are
+* Que tipo de marcação você quer parsear. Atualmente suportados são
   "html", "xml", and "html5".
 
-* The name of the parser library you want to use. Currently supported
-  options are "lxml", "html5lib", and "html.parser" (Python's
-  built-in HTML parser).
+* O nome da biblioteca parser que você deseja utilizar.Atualmente suportados
+são "lxml", "html5lib", e "html.parser" (parseador interno nativo do Python).
 
-The section `Installing a parser`_ contrasts the supported parsers.
+A seção `Instalando um parser`_ contrasta com os parsers suportados.
 
-If you don't have an appropriate parser installed, Beautiful Soup will
-ignore your request and pick a different parser. Right now, the only
-supported XML parser is lxml. If you don't have lxml installed, asking
-for an XML parser won't give you one, and asking for "lxml" won't work
-either.
+Se você não possui um parser apropriado instalado, Beautiful Soup irá
+ignorar sua requisição e pegar um parser diferente. Atualmente, o unico
+parseador XML suportado é lxml. Se você não tem lxml instalado, solicitar
+por um parser XML não irá lhe entregar um, e solicitar por "lxml" não
+vai funcionar também.
 
 Differences between parsers
 ---------------------------
