@@ -2105,26 +2105,26 @@ para obter sua versão Unicode.
 
 .. _output_formatters:
 
-Output formatters
+Formatadores de saída
 -----------------
 
-If you give Beautiful Soup a document that contains HTML entities like
-"&lquot;", they'll be converted to Unicode characters::
+Se você der à Beautiful Soup um documento que contenha entidades HTML como
+"&lquot;", elas serão convertidas em caracteres Unicode::
 
  soup = BeautifulSoup("&ldquo;Dammit!&rdquo; he said.")
  unicode(soup)
  # u'<html><head></head><body>\u201cDammit!\u201d he said.</body></html>'
 
-If you then convert the document to a string, the Unicode characters
-will be encoded as UTF-8. You won't get the HTML entities back::
+Se você converter o documento em uma string, os caracteres Unicode 
+serão codificados como UTF-8. Você não terá as entidades HTML de volta:
 
  str(soup)
  # '<html><head></head><body>\xe2\x80\x9cDammit!\xe2\x80\x9d he said.</body></html>'
 
-By default, the only characters that are escaped upon output are bare
-ampersands and angle brackets. These get turned into "&amp;", "&lt;",
-and "&gt;", so that Beautiful Soup doesn't inadvertently generate
-invalid HTML or XML::
+Por padrão, os únicos caracteres que são escapados na saída são "E comercial"
+e símbolos de "maior" e "menor" nus. Estes são transformados em "&amp;", "&lt;"
+e "&gt;", para que a Beautiful Soup não gere inadvertidamente
+HTML ou XML inválidos::
 
  soup = BeautifulSoup("<p>The law firm of Dewey, Cheatem, & Howe</p>")
  soup.p
@@ -2134,13 +2134,13 @@ invalid HTML or XML::
  soup.a
  # <a href="http://example.com/?foo=val1&amp;bar=val2">A link</a>
 
-You can change this behavior by providing a value for the
-``formatter`` argument to ``prettify()``, ``encode()``, or
-``decode()``. Beautiful Soup recognizes four possible values for
+Você pode alterar esse comportamento fornecendo um valor para o 
+argumento ``formatter`` para ``prettify()``, ``encode()``, ou
+``decode()``. Beautiful Soup reconhece quatro valores possíveis para
 ``formatter``.
 
-The default is ``formatter="minimal"``. Strings will only be processed
-enough to ensure that Beautiful Soup generates valid HTML/XML::
+O padrão é ``formatter="minimal"``. As strings só serão processadas
+o suficiente para garantir que a Beautiful Soup gere HTML/XML válidos::
 
  french = "<p>Il a dit &lt;&lt;Sacr&eacute; bleu!&gt;&gt;</p>"
  soup = BeautifulSoup(french)
@@ -2153,8 +2153,8 @@ enough to ensure that Beautiful Soup generates valid HTML/XML::
  #  </body>
  # </html>
 
-If you pass in ``formatter="html"``, Beautiful Soup will convert
-Unicode characters to HTML entities whenever possible::
+Se você passar um ``formatter="html"``, Beautiful Soup converterá
+Caracteres Unicode para entidades HTML sempre que possível::
 
  print(soup.prettify(formatter="html"))
  # <html>
@@ -2165,9 +2165,9 @@ Unicode characters to HTML entities whenever possible::
  #  </body>
  # </html>
 
-If you pass in ``formatter=None``, Beautiful Soup will not modify
-strings at all on output. This is the fastest option, but it may lead
-to Beautiful Soup generating invalid HTML/XML, as in these examples::
+Se você passar em ``formatter=None``, Beautiful Soup não irá modificar
+strings nas saídas. Esta é a opção mais rápida, porém isso pode levar
+à geração de HTML/XML inválidos, como nesses exemplos::
 
  print(soup.prettify(formatter=None))
  # <html>
@@ -2182,11 +2182,11 @@ to Beautiful Soup generating invalid HTML/XML, as in these examples::
  print(link_soup.a.encode(formatter=None))
  # <a href="http://example.com/?foo=val1&bar=val2">A link</a>
 
-Finally, if you pass in a function for ``formatter``, Beautiful Soup
-will call that function once for every string and attribute value in
-the document. You can do whatever you want in this function. Here's a
-formatter that converts strings to uppercase and does absolutely
-nothing else::
+Finalmente, se você passar uma função para ``formatter``, Beautiful Soup
+irá chamar essa função uma vez para cada string e valor do atributo no 
+documento. Você pode fazer o que quiser nessa função. Aqui está um
+formatador que converte strings para maiúsculas e não faz absolutamente
+nada mais::
 
  def uppercase(str):
      return str.upper()
@@ -2205,16 +2205,16 @@ nothing else::
  #  A LINK
  # </a>
 
-If you're writing your own function, you should know about the
-``EntitySubstitution`` class in the ``bs4.dammit`` module. This class
-implements Beautiful Soup's standard formatters as class methods: the
-"html" formatter is ``EntitySubstitution.substitute_html``, and the
-"minimal" formatter is ``EntitySubstitution.substitute_xml``. You can
-use these functions to simulate ``formatter=html`` or
-``formatter==minimal``, but then do something extra.
+Se você está escrevendo sua própria função, você deveria conhecer a
+classe ``EntitySubstitution`` do módulo ``bs4.dammit``. Esta classe
+implementa os formatadores padrões da Beautiful Soup como métodos de classe: o
+formatador "html" é ``EntitySubstitution.substitute_html`` e o 
+formatador "minimal" é ``EntitySubstitution.substitute_xml``. Você pode
+utilizar estas funções para simular ``formatter=html`` ou
+``formatter=minimal``, e então fazer algo a mais.
 
-Here's an example that replaces Unicode characters with HTML entities
-whenever possible, but `also` converts all strings to uppercase::
+Aqui está um exemplo que substitui caracteres Unicode por entidades HTML
+sempre que possível, mas `também` converte todas as strings para maiúsculas::
 
  from bs4.dammit import EntitySubstitution
  def uppercase_and_substitute_html_entities(str):
@@ -2229,11 +2229,11 @@ whenever possible, but `also` converts all strings to uppercase::
  #  </body>
  # </html>
 
-One last caveat: if you create a ``CData`` object, the text inside
-that object is always presented `exactly as it appears, with no
-formatting`. Beautiful Soup will call the formatter method, just in
-case you've written a custom method that counts all the strings in the
-document or something, but it will ignore the return value::
+Uma última ressalva: se você criar um objeto ``CData``, o texto dentro
+desse objeto é sempre apresentado exatamente como aparece, sem
+formatação. Beautiful Soap vai chamar o método formatador, apenas no
+caso de você ter escrito um método personalizado que conta todas as strings no
+documento ou algo assim, mas vai ignorar o valor de retorno::
 
  from bs4.element import CData
  soup = BeautifulSoup("<a></a>")
@@ -2247,9 +2247,9 @@ document or something, but it will ignore the return value::
 ``get_text()``
 --------------
 
-If you only want the text part of a document or tag, you can use the
-``get_text()`` method. It returns all the text in a document or
-beneath a tag, as a single Unicode string::
+Se você quer apenas a parte de texto de um documento ou tag, você pode usar o
+método ``get_text()``. Ele retorna todo o texto em um documento ou
+abaixo de uma tag, como uma única string Unicode::
 
   markup = '<a href="http://example.com/">\nI linked to <i>example.com</i>\n</a>'
   soup = BeautifulSoup(markup)
@@ -2259,20 +2259,19 @@ beneath a tag, as a single Unicode string::
   soup.i.get_text()
   u'example.com'
 
-You can specify a string to be used to join the bits of text
-together::
+Você pode especificar uma string a ser usada para unir os pedaços do texto:
 
  # soup.get_text("|")
  u'\nI linked to |example.com|\n'
 
-You can tell Beautiful Soup to strip whitespace from the beginning and
-end of each bit of text::
+Você pode dizer à Beautiful Soup para retirar o espaço em branco do início e
+fim de cada pedaço de texto::
 
  # soup.get_text("|", strip=True)
  u'I linked to|example.com'
 
-But at that point you might want to use the :ref:`.stripped_strings <string-generators>`
-generator instead, and process the text yourself::
+Mas, ao invés, nesse ponto, você pode também usar o :ref:`.stripped_strings <string-generators>`
+generator, e processar o texto você mesmo::
 
  [text for text in soup.stripped_strings]
  # [u'I linked to', u'example.com']
