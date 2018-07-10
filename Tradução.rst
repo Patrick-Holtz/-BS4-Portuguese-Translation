@@ -3086,19 +3086,18 @@ Python que tiveram espaços em branco retirados.
 XML
 ^^^
 
-There is no longer a ``BeautifulStoneSoup`` class for parsing XML. To
-parse XML you pass in "xml" as the second argument to the
-``BeautifulSoup`` constructor. For the same reason, the
-``BeautifulSoup`` constructor no longer recognizes the ``isHTML``
-argument.
+Não existe mais a classe ``BeautifulStoneSoup`` para parsear XML. Para
+isso, é necessário que você passe "xml" como o segundo argumento do
+construtor ``BeautifulSoup``. Pela mesma razão, o construtor 
+``BeautifulSoup`` não reconhece mais o argumento ``isHTML``.
 
-Beautiful Soup's handling of empty-element XML tags has been
-improved. Previously when you parsed XML you had to explicitly say
-which tags were considered empty-element tags. The ``selfClosingTags``
-argument to the constructor is no longer recognized. Instead,
-Beautiful Soup considers any empty tag to be an empty-element tag. If
-you add a child to an empty-element tag, it stops being an
-empty-element tag.
+O tratamento da Beautiful Soup em tags de elementos XML vazios foi
+melhorado. Anteriormente, quando você parseava XML, tinha que dizer explicitamente
+quais tags eram consideradas tags de elementos vazios. O argumento ``selfClosingTags``
+não é mais reconhecido. Ao invés disso, a Beautiful Soup considera 
+que qualquer tag vazia é uma tag de elemento vazio. E se
+você adiciona um elemento filho a uma tag de elemento vazio, ele deixa de ser um
+tag de elemento vazio.
 
 Entities
 ^^^^^^^^
