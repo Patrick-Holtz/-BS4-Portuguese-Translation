@@ -2963,51 +2963,51 @@ Soup 3 by mistake. You need to run ``easy_install beautifulsoup4``.
 `The documentation for Beautiful Soup 3 is archived online
 <http://www.crummy.com/software/BeautifulSoup/bs3/documentation.html>`_.
 
-Porting code to BS4
--------------------
+Portando código para BS4
+------------------------
 
-Most code written against Beautiful Soup 3 will work against Beautiful
-Soup 4 with one simple change. All you should have to do is change the
-package name from ``BeautifulSoup`` to ``bs4``. So this::
+A maior parte do código escrito com Beautiful Soup 3 funcionará também com a 
+Beautiful Soup 4 com uma simples mudança. Tudo que você precisa fazer é mudar o
+nome do pacote de ``BeautifulSoup`` para ``bs4``. Então, isso::
 
   from BeautifulSoup import BeautifulSoup
 
-becomes this::
+fica assim::
 
   from bs4 import BeautifulSoup
 
-* If you get the ``ImportError`` "No module named BeautifulSoup", your
-  problem is that you're trying to run Beautiful Soup 3 code, but you
-  only have Beautiful Soup 4 installed.
+* Se você tiver um ``ImportError`` "No module named BeautifulSoup", seu
+  problema é que está tentando rodar código da Beautiful Soup 3, porém,
+  há somente a Beautiful Soup 4 instalada.
 
-* If you get the ``ImportError`` "No module named bs4", your problem
-  is that you're trying to run Beautiful Soup 4 code, but you only
-  have Beautiful Soup 3 installed.
+* Se você tiver um ``ImportError`` "No module named bs4", seu
+  problema é que está tentando rodar código da Beautiful Soup 4, porém,
+  há somente a Beautiful Soup 3 instalada.
 
-Although BS4 is mostly backwards-compatible with BS3, most of its
-methods have been deprecated and given new names for `PEP 8 compliance
-<http://www.python.org/dev/peps/pep-0008/>`_. There are numerous other
-renames and changes, and a few of them break backwards compatibility.
+Embora o BS4 seja na maior parte compatível com o BS3, a maioria de seus
+métodos foram descontinuados e receberam novos nomes de acordo com a `PEP 8
+<http://www.python.org/dev/peps/pep-0008/>`_. Existem inúmeras outras
+renomeações e mudanças, e algumas delas quebram a retrocompatibilidade.
 
-Here's what you'll need to know to convert your BS3 code and habits to BS4:
+Aqui está o que você precisa saber para converter seu código e hábitos BS3 para BS4:
 
-You need a parser
+Você precisa de um parser
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A Beautiful Soup 3 utilizava o ``SGMLParser`` do Python, um módulo que foi
+depreciado e removido no Python 3.0. Beautiful Soup 4 usa
+``html.parser`` por padrão, mas você pode usar lxml ou html5lib 
+ao invés. Veja `Instalando um parser`_ para comparação.
+
+Já que ``html.parser`` não é o mesmo ``SGMLParser``, podemos ver 
+que a Beautiful Soup 4 lhe dá uma árvore de parse diferente da 
+Beautiful Soup 3 para a mesma marcação. Se você trocar o ``html.parser``
+por lxml ou html5lib, pode-se ver que a árvore de parse muda
+novamente. Se isso acontecer, você precisará atualizar seu código de scraping para
+lidar com a nova árvore.
+
+Nomes dos métodos
 ^^^^^^^^^^^^^^^^^
-
-Beautiful Soup 3 used Python's ``SGMLParser``, a module that was
-deprecated and removed in Python 3.0. Beautiful Soup 4 uses
-``html.parser`` by default, but you can plug in lxml or html5lib and
-use that instead. See `Installing a parser`_ for a comparison.
-
-Since ``html.parser`` is not the same parser as ``SGMLParser``, you
-may find that Beautiful Soup 4 gives you a different parse tree than
-Beautiful Soup 3 for the same markup. If you swap out ``html.parser``
-for lxml or html5lib, you may find that the parse tree changes yet
-again. If this happens, you'll need to update your scraping code to
-deal with the new tree.
-
-Method names
-^^^^^^^^^^^^
 
 * ``renderContents`` -> ``encode_contents``
 * ``replaceWith`` -> ``replace_with``
@@ -3026,34 +3026,34 @@ Method names
 * ``nextSibling`` -> ``next_sibling``
 * ``previousSibling`` -> ``previous_sibling``
 
-Some arguments to the Beautiful Soup constructor were renamed for the
-same reasons:
+Alguns argumentos do construtor Beautiful Soup foram renomeados pelos
+mesmos motivos:
 
 * ``BeautifulSoup(parseOnlyThese=...)`` -> ``BeautifulSoup(parse_only=...)``
 * ``BeautifulSoup(fromEncoding=...)`` -> ``BeautifulSoup(from_encoding=...)``
 
-I renamed one method for compatibility with Python 3:
+Renomeei um método para compatibilidade com o Python 3:
 
 * ``Tag.has_key()`` -> ``Tag.has_attr()``
 
-I renamed one attribute to use more accurate terminology:
+Renomeei um atributo para usar uma terminologia mais precisa:
 
 * ``Tag.isSelfClosing`` -> ``Tag.is_empty_element``
 
-I renamed three attributes to avoid using words that have special
-meaning to Python. Unlike the others, these changes are *not backwards
-compatible.* If you used these attributes in BS3, your code will break
-on BS4 until you change them.
+Renomeei três atributos para evitar o uso de palavras reservadas
+no Python. Ao contrário das outras, essas mudanças não são *retrocompatíveis.* 
+Se você utilizou um desses atributos no BS3, seu código irá quebrar
+no BS4 até você alterá-los.
 
 * ``UnicodeDammit.unicode`` -> ``UnicodeDammit.unicode_markup``
 * ``Tag.next`` -> ``Tag.next_element``
 * ``Tag.previous`` -> ``Tag.previous_element``
 
-Generators
-^^^^^^^^^^
+Geradores
+^^^^^^^^^
 
-I gave the generators PEP 8-compliant names, and transformed them into
-properties:
+Eu dei aos geradores nomes compatíveis com a PEP 8 e os transformei em
+propriedades:
 
 * ``childGenerator()`` -> ``children``
 * ``nextGenerator()`` -> ``next_elements``
@@ -3063,25 +3063,25 @@ properties:
 * ``recursiveChildGenerator()`` -> ``descendants``
 * ``parentGenerator()`` -> ``parents``
 
-So instead of this::
+Então ao invés disso::
 
  for parent in tag.parentGenerator():
      ...
 
-You can write this::
+Você pode escrever isso::
 
  for parent in tag.parents:
      ...
 
-(But the old code will still work.)
+(Mas o código antigo ainda funciona.)
 
-Some of the generators used to yield ``None`` after they were done, and
-then stop. That was a bug. Now the generators just stop.
+Alguns dos geradores costumavam retornar ``None`` ao serem executados, e
+então paravam. Isso era um bug. Agora os geradores simplesmente param.
 
-There are two new generators, :ref:`.strings and
-.stripped_strings <string-generators>`. ``.strings`` yields
-NavigableString objects, and ``.stripped_strings`` yields Python
-strings that have had whitespace stripped.
+Existem dois novos geradores, :ref:`.strings and
+.stripped_strings <string-generators>`. ``.strings`` retorna
+objetos NavigableString e ``stripped_strings`` retornam strings
+Python que tiveram espaços em branco retirados.
 
 XML
 ^^^
