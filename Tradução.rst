@@ -970,11 +970,11 @@ immediately before this one::
  last_a_tag.previous_element.next_element
  # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>
 
-``.next_elements`` and ``.previous_elements``
+``.next_elements`` e ``.previous_elements``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You should get the idea by now. You can use these iterators to move
-forward or backward in the document as it was parsed::
+A essa altura, você deve ter pego a idéia. É possível usar esses iteradores para percorrer
+o documento a medida que ele é parseado.::
 
  for element in last_a_tag.next_elements:
      print(repr(element))
@@ -986,16 +986,16 @@ forward or backward in the document as it was parsed::
  # u'\n'
  # None
 
-Searching the tree
-==================
+Percorrendo a árvore
+====================
 
-Beautiful Soup defines a lot of methods for searching the parse tree,
-but they're all very similar. I'm going to spend a lot of time explaining
-the two most popular methods: ``find()`` and ``find_all()``. The other
-methods take almost exactly the same arguments, so I'll just cover
-them briefly.
+Beautiful Soup possui muitos métodos para percorrer a árvore de elementos,
+no entanto, eles são  muito parecidos. Eu vou focar a maior parte do tempo explicando
+os dois métodos mais populares: ``find()`` e ``find_all()``. Os outros
+métodos recebem praticamente os mesmos argumentos e eu vou
+abordá-los brevemente
 
-Once again, I'll be using the "three sisters" document as an example::
+Mais uma vez, eu vou usar o documento "three sisters" como exemplo::
 
  html_doc = """
  <html><head><title>The Dormouse's story</title></head>
@@ -1014,43 +1014,43 @@ Once again, I'll be using the "three sisters" document as an example::
  from bs4 import BeautifulSoup
  soup = BeautifulSoup(html_doc, 'html.parser')
 
-By passing in a filter to an argument like ``find_all()``, you can
-zoom in on the parts of the document you're interested in.
+Ao utilizar um filtro em um argumento como no ``find_all()``, você pode
+acessar partes do documento que você está interessado.
 
-Kinds of filters
+Tipos de Filtros
 ----------------
 
-Before talking in detail about ``find_all()`` and similar methods, I
-want to show examples of different filters you can pass into these
-methods. These filters show up again and again, throughout the
-search API. You can use them to filter based on a tag's name,
+Antes de entrar em detalhes sobre o ``find_all()`` e outros métodos parecidos, eu
+quero mostrar exemplos de diferentes filtros que você pode passar para esses
+métodos. Esse filtros aparecem constantemente em toda a API de busca.
+Você pode usá-los para filtrar baseado no nome de uma tag,
 on its attributes, on the text of a string, or on some combination of
-these.
+seus atributos, no texto de uma string, ou usar uma combinação desses tipos.
 
 .. _a string:
 
-A string
-^^^^^^^^
+Uma string
+^^^^^^^^^^
 
-The simplest filter is a string. Pass a string to a search method and
-Beautiful Soup will perform a match against that exact string. This
-code finds all the <b> tags in the document::
+O filtro mais simples é o de uma string. Passe uma string para um método de busca e
+Beautiful Soup vai procurar por uma parte de texto que corresponda exatamente aquela string. Esse
+trecho de código encontra todas as tags <b> no document::
 
  soup.find_all('b')
  # [<b>The Dormouse's story</b>]
 
-If you pass in a byte string, Beautiful Soup will assume the string is
-encoded as UTF-8. You can avoid this by passing in a Unicode string instead.
+Se você passar uma string de bytes, Beautiful Soup assume que a string está codificada
+como UTF-8. Você pode evitar isso passando uma string Unicode.
 
 .. _a regular expression:
 
-A regular expression
-^^^^^^^^^^^^^^^^^^^^
+Uma expressão regular
+^^^^^^^^^^^^^^^^^^^^^
 
-If you pass in a regular expression object, Beautiful Soup will filter
-against that regular expression using its ``search()`` method. This code
-finds all the tags whose names start with the letter "b"; in this
-case, the <body> tag and the <b> tag::
+Se você passar uma expressão regular, Beautiful Soup vai filtrar
+em relação a expressão regular usando o método ``search()``. Esse trecho de código
+encontrar todas as tags em que o nome comece com "b"; nesse
+caso, as tags <body> e <b>::
 
  import re
  for tag in soup.find_all(re.compile("^b")):
@@ -1058,7 +1058,7 @@ case, the <body> tag and the <b> tag::
  # body
  # b
 
-This code finds all the tags whose names contain the letter 't'::
+Esse trecho de código encontra todas as tags em que o nome contém a letra 't'::
 
  for tag in soup.find_all(re.compile("t")):
      print(tag.name)
@@ -1067,12 +1067,12 @@ This code finds all the tags whose names contain the letter 't'::
 
 .. _a list:
 
-A list
-^^^^^^
+Uma Lista
+^^^^^^^^^
 
-If you pass in a list, Beautiful Soup will allow a string match
-against `any` item in that list. This code finds all the <a> tags
-`and` all the <b> tags::
+Se você passar uma lista, Beautiful Soup executará uma busca por uma string que corresponda
+a `qualquer` item da lista. Esse trecho de código, por exemplo, encontra todas as tags <a>
+`e` todas as tags <b>::
 
  soup.find_all(["a", "b"])
  # [<b>The Dormouse's story</b>,
@@ -1085,8 +1085,8 @@ against `any` item in that list. This code finds all the <a> tags
 ``True``
 ^^^^^^^^
 
-The value ``True`` matches everything it can. This code finds `all`
-the tags in the document, but none of the text strings::
+O valor ``True`` permite encontrar tudo que for possível. Esse trecho de código encontra `todas`
+as tags em um documento, com exceção das strings de texto::
 
  for tag in soup.find_all(True):
      print(tag.name)
@@ -1104,36 +1104,35 @@ the tags in the document, but none of the text strings::
 
 .. a function:
 
-A function
+Uma função
 ^^^^^^^^^^
 
-If none of the other matches work for you, define a function that
-takes an element as its only argument. The function should return
-``True`` if the argument matches, and ``False`` otherwise.
+Se nenhuma das opções anteriores funcionar pra você, é possível definir uma função que
+recebe um element como único argumento. A função deve retornar
+``True`` se o argumento correspondeer e ``False`` caso contrário.
 
-Here's a function that returns ``True`` if a tag defines the "class"
-attribute but doesn't define the "id" attribute::
+A função abaixo retorna ``True`` se uma tag possui o attributo "class"
+e não possui o atributo "id"::
 
  def has_class_but_no_id(tag):
      return tag.has_attr('class') and not tag.has_attr('id')
 
-Pass this function into ``find_all()`` and you'll pick up all the <p>
-tags::
+Ao executar essa função como argumento em ``find_all()`` você terá acesso a todas as tags <p>::
 
  soup.find_all(has_class_but_no_id)
  # [<p class="title"><b>The Dormouse's story</b></p>,
  #  <p class="story">Once upon a time there were...</p>,
  #  <p class="story">...</p>]
 
-This function only picks up the <p> tags. It doesn't pick up the <a>
-tags, because those tags define both "class" and "id". It doesn't pick
-up tags like <html> and <title>, because those tags don't define
-"class".
+Essa função retorna somente as tags <p>. Não retorna as tags <a>,
+porque elas possuem os atributos "class" e "id" na sua definição. Não retorna
+as tags <html> e <title>, porque essas não possuem o atributo "class"
+na sua definição.
 
-If you pass in a function to filter on a specific attribute like
-``href``, the argument passed into the function will be the attribute
-value, not the whole tag. Here's a function that finds all ``a`` tags
-whose ``href`` attribute *does not* match a regular expression::
+Se você passar um atributo específico para uma função em um filtro, como
+``href`` por exemplo, o argumento passado para a função se torna um atributo,
+e não uma tag. No exemplo a seguir, a função retorna todas as tags ``a``
+em que o atributo ``href`` *não* corresponde a uma expressão regular::
 
  def not_lacie(href):
      return href and not re.compile("lacie").search(href)
@@ -1141,9 +1140,8 @@ whose ``href`` attribute *does not* match a regular expression::
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
  #  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 
-The function can be as complicated as you need it to be. Here's a
-function that returns ``True`` if a tag is surrounded by string
-objects::
+A função pode ser tão complicada quanto você precisar. Nesse outro exemplo,
+a função retorna ``True`` se uma tag está cercada de objetos string::
 
  from bs4 import NavigableString
  def surrounded_by_strings(tag):
@@ -1158,7 +1156,7 @@ objects::
  # a
  # p
 
-Now we're ready to look at the search methods in detail.
+Agora estamos preparados para discutir os métodos de busca em detalhes.
 
 ``find_all()``
 --------------
