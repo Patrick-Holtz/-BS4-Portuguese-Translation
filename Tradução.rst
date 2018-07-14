@@ -1440,7 +1440,7 @@ Chamar uma tag é como chamar ``find_all()``
 --------------------------------------------
 
 Devido ao ``find_all()`` ser o método mais popular na API de busca do Beautiful Soup, você pode utilizar um atalho pra ele. Se você tratar o objeto ``BeautifulSoup`` ou o objeto ``Tag`` como se fosse uma função, então seria como se você estivesse chamando ``find_all()`` nesse objeto. Essas duas linhas de código são equivalentes::
- 
+
   soup.find_all("a")
   soup("a")
 
