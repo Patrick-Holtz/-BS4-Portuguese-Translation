@@ -1,47 +1,39 @@
-Beautiful Soup Documentation
+Documentação Beautiful Soup
 ============================
 
 .. image:: 6.1.jpg
    :align: right
    :alt: "The Fish-Footman began by producing from under his arm a great letter, nearly as large as himself."
 
-`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ is a
-Python library for pulling data out of HTML and XML files. It works
-with your favorite parser to provide idiomatic ways of navigating,
-searching, and modifying the parse tree. It commonly saves programmers
-hours or days of work.
+`Beautiful Soup <http://www.crummy.com/software/BeautifulSoup/>`_ é uma biblioteca
+Python para extrair dados de arquivos HTML e XML. Ela funcionará como seu analisador favorito
+fornecendo maneiras idiomáticas de navegação, busca, e modificação da árvore de análise
+sintática. Geralmente, salvando programadores em horas ou dias de trabalho.
 
-These instructions illustrate all major features of Beautiful Soup 4,
-with examples. I show you what the library is good for, how it works,
-how to use it, how to make it do what you want, and what to do when it
-violates your expectations.
+Essas instruções ilustram todos os principais recursos do Beautiful Soup 4,
+com exemplos. Mostrando para o quê a biblioteca é boa, como ela funciona, como utilizá-la, como
+prepará-la para fazer o que você quer, e o que fazer quando ela não corresponde suas expectativas.
 
-The examples in this documentation should work the same way in Python
-2.7 and Python 3.2.
 
-You might be looking for the documentation for `Beautiful Soup 3
+Os exemplos nessa documentação deverão funcionar da mesma maneira no Python
+2.7 e Python 3.2.
+
+Você talvez esteja procurando a documentação do `Beautiful Soup 3
 <http://www.crummy.com/software/BeautifulSoup/bs3/documentation.html>`_.
-If so, you should know that Beautiful Soup 3 is no longer being
-developed, and that Beautiful Soup 4 is recommended for all new
-projects. If you want to learn about the differences between Beautiful
-Soup 3 and Beautiful Soup 4, see `Porting code to BS4`_.
+Se sim, você deveria ter em mente que o Beautiful Soup 3 não está mais sendo
+desenvolvido, e que o Beautiful Soup 4 é recomendado para todos os novos
+projetos. Se você quiser entender as diferenças entre o Beautiful
+Soup 3 e o Beautiful Soup 4, veja em `Importando código para BS4`_.
 
-This documentation has been translated into other languages by
-Beautiful Soup users:
-
-* `这篇文档当然还有中文版. <http://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/>`_
-* このページは日本語で利用できます(`外部リンク <http://kondou.com/BS4/>`_)
-* 이 문서는 한국어 번역도 가능합니다. (`외부 링크 <http://coreapython.hosting.paran.com/etc/beautifulsoup4.html>`_)
-
-Getting help
+Obtendo ajuda
 ------------
 
-If you have questions about Beautiful Soup, or run into problems,
-`send mail to the discussion group
-<https://groups.google.com/forum/?fromgroups#!forum/beautifulsoup>`_. If
-your problem involves parsing an HTML document, be sure to mention
-:ref:`what the diagnose() function says <diagnose>` about
-that document.
+Se você tiver dúvidas sobre o Beautiful Soup, ou tiver problemas,
+`crie um tópico no grupo de discussão
+<https://groups.google.com/forum/?fromgroups#!forum/beautifulsoup>`_. Se
+seu problema envolve analisar um documento HTML, deixe claro mencionando
+:ref:`O que a função diagnose() diz <diagnose>` sobre
+esse documento.
 
 Quick Start
 ===========
@@ -294,11 +286,11 @@ Note that if a document is invalid, different parsers will generate
 different Beautiful Soup trees for it. See `Differences
 between parsers`_ for details.
 
-Making the soup
-===============
+Fazendo o soup
+==============
 
-To parse a document, pass it into the ``BeautifulSoup``
-constructor. You can pass in a string or an open filehandle::
+Para analisar um documento, passe-o para o construtor
+``BeautifulSoup``. Você pode passar uma string de texto ou um arquivo aberto::
 
  from bs4 import BeautifulSoup
 
@@ -307,15 +299,15 @@ constructor. You can pass in a string or an open filehandle::
 
  soup = BeautifulSoup("<html>data</html>")
 
-First, the document is converted to Unicode, and HTML entities are
-converted to Unicode characters::
+Primeiramente, o documento é convertido para Unicode e as entidades HTML são
+convertidas em caracteres Unicode::
 
  BeautifulSoup("Sacr&eacute; bleu!")
  <html><head></head><body>Sacré bleu!</body></html>
 
-Beautiful Soup then parses the document using the best available
-parser. It will use an HTML parser unless you specifically tell it to
-use an XML parser. (See `Parsing XML`_.)
+Beautiful Soup então analisa o documento usando o melhor analisador
+disponível. Um analisador HTML será utilizado por padrão a não ser que você especifique
+a utilização de um analisador XML. (Consulte `Analisando XML`_.)
 
 Kinds of objects
 ================
@@ -1444,80 +1436,76 @@ and they mostly take the same arguments as ``find_all()``: ``name``,
 the only methods that support it. Passing ``recursive=False`` into a
 method like ``find_parents()`` wouldn't be very useful.
 
-Calling a tag is like calling ``find_all()``
+Chamar uma tag é como chamar ``find_all()``
 --------------------------------------------
 
-Because ``find_all()`` is the most popular method in the Beautiful
-Soup search API, you can use a shortcut for it. If you treat the
-``BeautifulSoup`` object or a ``Tag`` object as though it were a
-function, then it's the same as calling ``find_all()`` on that
-object. These two lines of code are equivalent::
+Devido ao ``find_all()`` ser o método mais popular na API de busca do Beautiful Soup, você pode utilizar um atalho pra ele. Se você tratar o objeto ``BeautifulSoup`` ou o objeto ``Tag`` como se fosse uma função, então seria como se você estivesse chamando ``find_all()`` nesse objeto. Essas duas linhas de código são equivalentes::
+ 
+  soup.find_all("a")
+  soup("a")
 
- soup.find_all("a")
- soup("a")
+Essas duas linhas também são equivalentes::
 
-These two lines are also equivalent::
-
- soup.title.find_all(string=True)
- soup.title(string=True)
+  soup.title.find_all(string=True)
+  soup.title(string=True)
 
 ``find()``
 ----------
 
-Signature: find(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
+Assinatura de tipo: find(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
 <recursive>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-The ``find_all()`` method scans the entire document looking for
-results, but sometimes you only want to find one result. If you know a
-document only has one <body> tag, it's a waste of time to scan the
-entire document looking for more. Rather than passing in ``limit=1``
-every time you call ``find_all``, you can use the ``find()``
-method. These two lines of code are `nearly` equivalent::
+O método ``find_all ()`` varre todo o documento procurando
+resultados, mas às vezes você quer encontrar apenas um deles. Se você sabe que um
+documento só tem uma tag <body>, seria perda de tempo varrer o
+documento inteiro procurando por mais. Em vez de passar em ``limit = 1``
+toda vez que você chama ``find_all``, você pode usar o método ``find ()``.
+Estas duas linhas de código são quase equivalentes::
 
  soup.find_all('title', limit=1)
- # [<title>The Dormouse's story</title>]
+ # [<title>A história do Arganaz</title>]
 
  soup.find('title')
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
-The only difference is that ``find_all()`` returns a list containing
-the single result, and ``find()`` just returns the result.
+A única diferença é que ``find_all()`` retorna uma lista contendo o
+resultado, e ``find()`` retorna apenas o resultado.
 
-If ``find_all()`` can't find anything, it returns an empty list. If
-``find()`` can't find anything, it returns ``None``::
+Caso ``find_all()`` não encontre nada, retorna uma lista vazia. Se
+``find()`` não encontra nada, retorna ``None``::
 
  print(soup.find("nosuchtag"))
  # None
 
-Remember the ``soup.head.title`` trick from `Navigating using tag
-names`_? That trick works by repeatedly calling ``find()``::
+Lembra do truque ``soup.head.title`` de `Navegando usando nomes de
+tags`? Esse truque funciona quando ``find()`` é chamado repetidamente::
 
  soup.head.title
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
  soup.find("head").find("title")
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
 ``find_parents()`` and ``find_parent()``
 ----------------------------------------
 
-Signature: find_parents(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_parents(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_parent(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_parent(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-I spent a lot of time above covering ``find_all()`` and
-``find()``. The Beautiful Soup API defines ten other methods for
-searching the tree, but don't be afraid. Five of these methods are
-basically the same as ``find_all()``, and the other five are basically
-the same as ``find()``. The only differences are in what parts of the
-tree they search.
+Eu passei muito tempo falando sobre ``find_all()`` e
+``find()``. O Beautiful Soup API define dez outros métodos de
+busca em árvore, mas não se assuste. Cinco desses métodos são
+basicamente semelhantes ao ``find_all()``, e os outros cinco são basicamente
+semelhantes ao ``find()``. As únicas diferenças são em quais partes da
+árvore são feitas as buscas.
 
-First let's consider ``find_parents()`` and
-``find_parent()``. Remember that ``find_all()`` and ``find()`` work
-their way down the tree, looking at tag's descendants. These methods
-do the opposite: they work their way `up` the tree, looking at a tag's
-(or a string's) parents. Let's try them out, starting from a string
-buried deep in the "three daughters" document::
+Primeiro, consideraremos ``find_parents()`` e
+``find_parent()``. Lembre-se que ``find_all()`` e ``find()`` percorrem
+de forma decrescente a árvore, procurando pelos descendentes da `tag`(marca). Já esses métodos
+fazem o oposto: eles percorrem de forma crescente a árvore, procurando pelos pais da `tag`
+(ou da `string`). Vamos testá-los, começando da `string`
+mais interna no documento das "três irmãs"::
 
   a_string = soup.find(string="Lacie")
   a_string
@@ -1536,18 +1524,18 @@ buried deep in the "three daughters" document::
   a_string.find_parents("p", class="title")
   # []
 
-One of the three <a> tags is the direct parent of the string in
-question, so our search finds it. One of the three <p> tags is an
-indirect parent of the string, and our search finds that as
-well. There's a <p> tag with the CSS class "title" `somewhere` in the
-document, but it's not one of this string's parents, so we can't find
-it with ``find_parents()``.
+Uma das três `tags` <a> é pai direto da `string` em
+questão, logo nossa busca a encontra. Uma das três `tags` <p> é
+pai indireto da `string`, e nossa busca a encontra
+também. Existe uma `tag` <p> de classe CSS "title" `em algum lugar` no
+documento, mas não é nenhum dos pais da `string`, então não podemos encontrá-la
+com ``find_parents()``.
 
-You may have made the connection between ``find_parent()`` and
-``find_parents()``, and the `.parent`_ and `.parents`_ attributes
-mentioned earlier. The connection is very strong. These search methods
-actually use ``.parents`` to iterate over all the parents, and check
-each one against the provided filter to see if it matches.
+Talvez você tenha feito a conexão entre ``find_parent()`` e
+``find_parents()``, e os atributos `.parent`_ e `.parents`_
+mencionados anteriormente. A conexão é bastante forte. Esses métodos de busca
+atualmente usam ``.parents`` para iteragir sobre todos os pais, e checar
+cada um contra o filtro fornecido para verificar se combinam.
 
 ``find_next_siblings()`` and ``find_next_sibling()``
 ----------------------------------------------------
@@ -1936,7 +1924,7 @@ immediately follows something else in the parse tree::
 ``clear()``
 -----------
 
-``Tag.clear()`` removes the contents of a tag::
+``Tag.clear()`` remove o conteúdo de uma tag::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -1949,8 +1937,7 @@ immediately follows something else in the parse tree::
 ``extract()``
 -------------
 
-``PageElement.extract()`` removes a tag or string from the tree. It
-returns the tag or string that was extracted::
+``PageElement.extract()`` remove uma tag ou string da árvore. Retorna a tag ou string que foi removida::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -1967,10 +1954,10 @@ returns the tag or string that was extracted::
   print(i_tag.parent)
   None
 
-At this point you effectively have two parse trees: one rooted at the
-``BeautifulSoup`` object you used to parse the document, and one rooted
-at the tag that was extracted. You can go on to call ``extract`` on
-a child of the element you extracted::
+Nesta etapa na verdade temos duas árvores analisadas: uma com a raiz no objeto
+``BeautifulSoup`` utilizado para analisar o documento, e outra com a raiz
+na tag que foi removida. Pode-se continuar e executar ``extract`` no
+nó filho do elemento removido::
 
   my_string = i_tag.string.extract()
   my_string
@@ -1985,8 +1972,8 @@ a child of the element you extracted::
 ``decompose()``
 ---------------
 
-``Tag.decompose()`` removes a tag from the tree, then `completely
-destroys it and its contents`::
+``Tag.decompose()`` remove uma tag da árvore, e em seguida, `o destrói
+completamente e também seus componentes`::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2003,8 +1990,8 @@ destroys it and its contents`::
 ``replace_with()``
 ------------------
 
-``PageElement.replace_with()`` removes a tag or string from the tree,
-and replaces it with the tag or string of your choice::
+``PageElement.replace_with()`` remove uma tag ou string da árvore,
+e o substitui com a tag ou string desejada::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2017,14 +2004,14 @@ and replaces it with the tag or string of your choice::
   a_tag
   # <a href="http://example.com/">I linked to <b>example.net</b></a>
 
-``replace_with()`` returns the tag or string that was replaced, so
-that you can examine it or add it back to another part of the tree.
+``replace_with()`` retorna a tag ou string substituída, podendo
+ser examinada ou adicionada a outra parte da árvore.
 
 ``wrap()``
 ----------
 
-``PageElement.wrap()`` wraps an element in the tag you specify. It
-returns the new wrapper::
+``PageElement.wrap()`` envelopa um elemento na tag especificada.
+Retorna o novo envoltório::
 
  soup = BeautifulSoup("<p>I wish I was bold.</p>")
  soup.p.string.wrap(soup.new_tag("b"))
@@ -2033,13 +2020,13 @@ returns the new wrapper::
  soup.p.wrap(soup.new_tag("div")
  # <div><p><b>I wish I was bold.</b></p></div>
 
-This method is new in Beautiful Soup 4.0.5.
+Este método é novo na Beautiful Soup 4.0.5.
 
 ``unwrap()``
 ---------------------------
 
-``Tag.unwrap()`` is the opposite of ``wrap()``. It replaces a tag with
-whatever's inside that tag. It's good for stripping out markup::
+``Tag.unwrap()`` é o contrário de ``wrap()``. Substitui uma tag com
+qualquer que seja o seu conteúdo. É útil para eliminar marcações::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2049,8 +2036,8 @@ whatever's inside that tag. It's good for stripping out markup::
   a_tag
   # <a href="http://example.com/">I linked to example.com</a>
 
-Like ``replace_with()``, ``unwrap()`` returns the tag
-that was replaced.
+Tal como ``replace_with()``, ``unwrap()`` retorna a tag
+que foi substituída.
 
 Output
 ======
@@ -2060,8 +2047,8 @@ Output
 Pretty-printing
 ---------------
 
-The ``prettify()`` method will turn a Beautiful Soup parse tree into a
-nicely formatted Unicode string, with each HTML/XML tag on its own line::
+O método ``prettify()`` converterá uma árvore Beautiful Soup em uma
+string formatada em Unicode, com uma tag HTML/XML em sua própria linha::
 
   markup = '<a href="http://example.com/">I linked to <i>example.com</i></a>'
   soup = BeautifulSoup(markup)
@@ -2082,8 +2069,8 @@ nicely formatted Unicode string, with each HTML/XML tag on its own line::
   #  </body>
   # </html>
 
-You can call ``prettify()`` on the top-level ``BeautifulSoup`` object,
-or on any of its ``Tag`` objects::
+Você pode executar ``prettify()`` no nível mais alto de um objeto ``BeautifulSoup``,
+ou em qualquer de seus objetos do tipo ``Tag``::
 
   print(soup.a.prettify())
   # <a href="http://example.com/">
@@ -2096,9 +2083,9 @@ or on any of its ``Tag`` objects::
 Non-pretty printing
 -------------------
 
-If you just want a string, with no fancy formatting, you can call
-``unicode()`` or ``str()`` on a ``BeautifulSoup`` object, or a ``Tag``
-within it::
+Se apenas uma string, sem formatação, for suficiente, pode-se executar
+``unicode()`` ou ``str()`` em um objeto ``BeautifulSoup``, ou em uma
+``Tag`` pertencente a ele::
 
  str(soup)
  # '<html><head></head><body><a href="http://example.com/">I linked to <i>example.com</i></a></body></html>'
@@ -2106,34 +2093,34 @@ within it::
  unicode(soup.a)
  # u'<a href="http://example.com/">I linked to <i>example.com</i></a>'
 
-The ``str()`` function returns a string encoded in UTF-8. See
-`Encodings`_ for other options.
+A função ``str()`` retorna uma string codificada em UTF-8. Veja
+`Encodings`_ para demais opções.
 
-You can also call ``encode()`` to get a bytestring, and ``decode()``
-to get Unicode.
+Pode-se ainda executar ``encode()`` para obter uma bytestring, e ``decode()``
+para obter sua versão Unicode.
 
 .. _output_formatters:
 
-Output formatters
+Formatadores de saída
 -----------------
 
-If you give Beautiful Soup a document that contains HTML entities like
-"&lquot;", they'll be converted to Unicode characters::
+Se você der à Beautiful Soup um documento que contenha entidades HTML como
+"&lquot;", elas serão convertidas em caracteres Unicode::
 
  soup = BeautifulSoup("&ldquo;Dammit!&rdquo; he said.")
  unicode(soup)
  # u'<html><head></head><body>\u201cDammit!\u201d he said.</body></html>'
 
-If you then convert the document to a string, the Unicode characters
-will be encoded as UTF-8. You won't get the HTML entities back::
+Se você converter o documento em uma string, os caracteres Unicode
+serão codificados como UTF-8. Você não terá as entidades HTML de volta:
 
  str(soup)
  # '<html><head></head><body>\xe2\x80\x9cDammit!\xe2\x80\x9d he said.</body></html>'
 
-By default, the only characters that are escaped upon output are bare
-ampersands and angle brackets. These get turned into "&amp;", "&lt;",
-and "&gt;", so that Beautiful Soup doesn't inadvertently generate
-invalid HTML or XML::
+Por padrão, os únicos caracteres que são escapados na saída são "E comercial"
+e símbolos de "maior" e "menor" nus. Estes são transformados em "&amp;", "&lt;"
+e "&gt;", para que a Beautiful Soup não gere inadvertidamente
+HTML ou XML inválidos::
 
  soup = BeautifulSoup("<p>The law firm of Dewey, Cheatem, & Howe</p>")
  soup.p
@@ -2143,13 +2130,13 @@ invalid HTML or XML::
  soup.a
  # <a href="http://example.com/?foo=val1&amp;bar=val2">A link</a>
 
-You can change this behavior by providing a value for the
-``formatter`` argument to ``prettify()``, ``encode()``, or
-``decode()``. Beautiful Soup recognizes four possible values for
+Você pode alterar esse comportamento fornecendo um valor para o
+argumento ``formatter`` para ``prettify()``, ``encode()``, ou
+``decode()``. Beautiful Soup reconhece quatro valores possíveis para
 ``formatter``.
 
-The default is ``formatter="minimal"``. Strings will only be processed
-enough to ensure that Beautiful Soup generates valid HTML/XML::
+O padrão é ``formatter="minimal"``. As strings só serão processadas
+o suficiente para garantir que a Beautiful Soup gere HTML/XML válidos::
 
  french = "<p>Il a dit &lt;&lt;Sacr&eacute; bleu!&gt;&gt;</p>"
  soup = BeautifulSoup(french)
@@ -2162,8 +2149,8 @@ enough to ensure that Beautiful Soup generates valid HTML/XML::
  #  </body>
  # </html>
 
-If you pass in ``formatter="html"``, Beautiful Soup will convert
-Unicode characters to HTML entities whenever possible::
+Se você passar um ``formatter="html"``, Beautiful Soup converterá
+Caracteres Unicode para entidades HTML sempre que possível::
 
  print(soup.prettify(formatter="html"))
  # <html>
@@ -2174,9 +2161,9 @@ Unicode characters to HTML entities whenever possible::
  #  </body>
  # </html>
 
-If you pass in ``formatter=None``, Beautiful Soup will not modify
-strings at all on output. This is the fastest option, but it may lead
-to Beautiful Soup generating invalid HTML/XML, as in these examples::
+Se você passar em ``formatter=None``, Beautiful Soup não irá modificar
+strings nas saídas. Esta é a opção mais rápida, porém isso pode levar
+à geração de HTML/XML inválidos, como nesses exemplos::
 
  print(soup.prettify(formatter=None))
  # <html>
@@ -2191,11 +2178,11 @@ to Beautiful Soup generating invalid HTML/XML, as in these examples::
  print(link_soup.a.encode(formatter=None))
  # <a href="http://example.com/?foo=val1&bar=val2">A link</a>
 
-Finally, if you pass in a function for ``formatter``, Beautiful Soup
-will call that function once for every string and attribute value in
-the document. You can do whatever you want in this function. Here's a
-formatter that converts strings to uppercase and does absolutely
-nothing else::
+Finalmente, se você passar uma função para ``formatter``, Beautiful Soup
+irá chamar essa função uma vez para cada string e valor do atributo no
+documento. Você pode fazer o que quiser nessa função. Aqui está um
+formatador que converte strings para maiúsculas e não faz absolutamente
+nada mais::
 
  def uppercase(str):
      return str.upper()
@@ -2214,16 +2201,16 @@ nothing else::
  #  A LINK
  # </a>
 
-If you're writing your own function, you should know about the
-``EntitySubstitution`` class in the ``bs4.dammit`` module. This class
-implements Beautiful Soup's standard formatters as class methods: the
-"html" formatter is ``EntitySubstitution.substitute_html``, and the
-"minimal" formatter is ``EntitySubstitution.substitute_xml``. You can
-use these functions to simulate ``formatter=html`` or
-``formatter==minimal``, but then do something extra.
+Se você está escrevendo sua própria função, você deveria conhecer a
+classe ``EntitySubstitution`` do módulo ``bs4.dammit``. Esta classe
+implementa os formatadores padrões da Beautiful Soup como métodos de classe: o
+formatador "html" é ``EntitySubstitution.substitute_html`` e o
+formatador "minimal" é ``EntitySubstitution.substitute_xml``. Você pode
+utilizar estas funções para simular ``formatter=html`` ou
+``formatter=minimal``, e então fazer algo a mais.
 
-Here's an example that replaces Unicode characters with HTML entities
-whenever possible, but `also` converts all strings to uppercase::
+Aqui está um exemplo que substitui caracteres Unicode por entidades HTML
+sempre que possível, mas `também` converte todas as strings para maiúsculas::
 
  from bs4.dammit import EntitySubstitution
  def uppercase_and_substitute_html_entities(str):
@@ -2238,11 +2225,11 @@ whenever possible, but `also` converts all strings to uppercase::
  #  </body>
  # </html>
 
-One last caveat: if you create a ``CData`` object, the text inside
-that object is always presented `exactly as it appears, with no
-formatting`. Beautiful Soup will call the formatter method, just in
-case you've written a custom method that counts all the strings in the
-document or something, but it will ignore the return value::
+Uma última ressalva: se você criar um objeto ``CData``, o texto dentro
+desse objeto é sempre apresentado exatamente como aparece, sem
+formatação. Beautiful Soap vai chamar o método formatador, apenas no
+caso de você ter escrito um método personalizado que conta todas as strings no
+documento ou algo assim, mas vai ignorar o valor de retorno::
 
  from bs4.element import CData
  soup = BeautifulSoup("<a></a>")
@@ -2256,9 +2243,9 @@ document or something, but it will ignore the return value::
 ``get_text()``
 --------------
 
-If you only want the text part of a document or tag, you can use the
-``get_text()`` method. It returns all the text in a document or
-beneath a tag, as a single Unicode string::
+Se você quer apenas a parte de texto de um documento ou tag, você pode usar o
+método ``get_text()``. Ele retorna todo o texto em um documento ou
+abaixo de uma tag, como uma única string Unicode::
 
   markup = '<a href="http://example.com/">\nI linked to <i>example.com</i>\n</a>'
   soup = BeautifulSoup(markup)
@@ -2268,56 +2255,54 @@ beneath a tag, as a single Unicode string::
   soup.i.get_text()
   u'example.com'
 
-You can specify a string to be used to join the bits of text
-together::
+Você pode especificar uma string a ser usada para unir os pedaços do texto:
 
  # soup.get_text("|")
  u'\nI linked to |example.com|\n'
 
-You can tell Beautiful Soup to strip whitespace from the beginning and
-end of each bit of text::
+Você pode dizer à Beautiful Soup para retirar o espaço em branco do início e
+fim de cada pedaço de texto::
 
  # soup.get_text("|", strip=True)
  u'I linked to|example.com'
 
-But at that point you might want to use the :ref:`.stripped_strings <string-generators>`
-generator instead, and process the text yourself::
+Mas, ao invés, nesse ponto, você pode também usar o :ref:`.stripped_strings <string-generators>`
+generator, e processar o texto você mesmo::
 
  [text for text in soup.stripped_strings]
  # [u'I linked to', u'example.com']
 
-Specifying the parser to use
+Especificando o parser a ser utilizado
 ============================
 
-If you just need to parse some HTML, you can dump the markup into the
-``BeautifulSoup`` constructor, and it'll probably be fine. Beautiful
-Soup will pick a parser for you and parse the data. But there are a
-few additional arguments you can pass in to the constructor to change
-which parser is used.
+Se você só precisa parsear algum HTML, você pode jogar a marcação no
+construtor ``BeautifulSoup``, e provavelmente dará certo. BeautifulSoup
+irá escolher o parser para você e parseará os dados enviados. Mas tem alguns
+argumentos adicionais que você passar no construtor para mudar qual parser
+é utilizado.
 
-The first argument to the ``BeautifulSoup`` constructor is a string or
-an open filehandle--the markup you want parsed. The second argument is
-`how` you'd like the markup parsed.
+O primeiro argumento no construtor ``BeautifulSoup`` é uma string
+ou arquivos abertos--A marcação que você quer parsear. o segundo
+argumento é `como` você gostaria da marcação parseada.
 
-If you don't specify anything, you'll get the best HTML parser that's
-installed. Beautiful Soup ranks lxml's parser as being the best, then
-html5lib's, then Python's built-in parser. You can override this by
-specifying one of the following:
+Se você não especificar nada, você vai obter o melhor parseador HTML
+que estiver instalado. Beautiful Soup rankeia o lxml's parser como o
+melhor, então html5lib's, então o parseador interno nativo do Python.
+Você pode sobrescrever isso especificando algum dos seguintes:
 
-* What type of markup you want to parse. Currently supported are
+* Que tipo de marcação você quer parsear. Atualmente suportados são
   "html", "xml", and "html5".
 
-* The name of the parser library you want to use. Currently supported
-  options are "lxml", "html5lib", and "html.parser" (Python's
-  built-in HTML parser).
+* O nome da biblioteca parser que você deseja utilizar.Atualmente suportados
+são "lxml", "html5lib", e "html.parser" (parseador interno nativo do Python).
 
-The section `Installing a parser`_ contrasts the supported parsers.
+A seção `Instalando um parser`_ contrasta com os parsers suportados.
 
-If you don't have an appropriate parser installed, Beautiful Soup will
-ignore your request and pick a different parser. Right now, the only
-supported XML parser is lxml. If you don't have lxml installed, asking
-for an XML parser won't give you one, and asking for "lxml" won't work
-either.
+Se você não possui um parser apropriado instalado, Beautiful Soup irá
+ignorar sua requisição e pegar um parser diferente. Atualmente, o unico
+parseador XML suportado é lxml. Se você não tem lxml instalado, solicitar
+por um parser XML não irá lhe entregar um, e solicitar por "lxml" não
+vai funcionar também.
 
 Differences between parsers
 ---------------------------
@@ -2693,32 +2678,34 @@ This is because two different ``Tag`` objects can't occupy the same
 space at the same time.
 
 
-Parsing only part of a document
-===============================
+Analisando apenas parte de um documento
+=======================================
 
-Let's say you want to use Beautiful Soup look at a document's <a>
-tags. It's a waste of time and memory to parse the entire document and
-then go over it again looking for <a> tags. It would be much faster to
-ignore everything that wasn't an <a> tag in the first place. The
-``SoupStrainer`` class allows you to choose which parts of an incoming
-document are parsed. You just create a ``SoupStrainer`` and pass it in
-to the ``BeautifulSoup`` constructor as the ``parse_only`` argument.
+Digamos que você queira usar o Beautiful Soup para ver as tags <a> do
+documento. É um desperdício de tempo e memória analisar o documento
+inteiro e, em seguida, passar por ele procurando pelas tags <a>. Seria
+muito mais rápido ignorar o que não era uma tag <a> desde o início. A
+classe ``SoupStrainer`` te permite escolher que partes do documento de
+entrada que serão analisadas. Você só precisa criar um
+``SoupStrainer``e o passa-lo pelo construtor ``BeautifulSoup`` como o
+argumento ``parse_only`` (analisar somente).
 
-(Note that *this feature won't work if you're using the html5lib parser*.
-If you use html5lib, the whole document will be parsed, no
-matter what. This is because html5lib constantly rearranges the parse
-tree as it works, and if some part of the document didn't actually
-make it into the parse tree, it'll crash. To avoid confusion, in the
-examples below I'll be forcing Beautiful Soup to use Python's
-built-in parser.)
+(Observe que *este recurso não funcionará se você estiver usando o
+analisado html5lib*. Se você usar o html5lib, o documento inteiro será
+analisado independentemete. Isso ocorre porque o html5lib reorganiza
+constantemente a árvore de análise conforme trabalha e se alguma parte
+do documento não encaixar na árvore de análise, a análise irá falhar.
+Para evitar confusão, nos exemplos abaixo eu vou forçar o Beautiful
+Soup a usar o analisador built-in do Python.)
+
 
 ``SoupStrainer``
 ----------------
 
-The ``SoupStrainer`` class takes the same arguments as a typical
-method from `Searching the tree`_: :ref:`name <name>`, :ref:`attrs
-<attrs>`, :ref:`string <string>`, and :ref:`**kwargs <kwargs>`. Here are
-three ``SoupStrainer`` objects::
+A classe ``SoupStrainer`` usa os mesmos argumentos de um método típico
+de `Busca em Árvore`_: :ref:`name <name>`, :ref:`attrs <attrs>`,
+:ref:`string <string>`, e :ref:`**kwargs <kwargs>`. Abaixo três
+ objetos ``SoupStrainer``::
 
  from bs4 import SoupStrainer
 
@@ -2731,9 +2718,9 @@ three ``SoupStrainer`` objects::
 
  only_short_strings = SoupStrainer(string=is_short_string)
 
-I'm going to bring back the "three sisters" document one more time,
-and we'll see what the document looks like when it's parsed with these
-three ``SoupStrainer`` objects::
+Eu vou retomar o documento "three sisters" mais uma vez, e nós veremos
+como documento  fica ao ser analisado com estes três objetos
+``SoupStrainer``:
 
  html_doc = """
  <html><head><title>The Dormouse's story</title></head>
@@ -2774,9 +2761,9 @@ three ``SoupStrainer`` objects::
  # ...
  #
 
-You can also pass a ``SoupStrainer`` into any of the methods covered
-in `Searching the tree`_. This probably isn't terribly useful, but I
-thought I'd mention it::
+Você também pode passar um Objeto ``SoupStrainer`` como argumento de
+qualquer um dos métodos mencionados na seção `Busca em Àrvore`_.
+Isso provavelmente não é muito útil, mas eu pensei em mencioná-lo::
 
  soup = BeautifulSoup(html_doc)
  soup.find_all(only_short_strings)
@@ -2888,62 +2875,64 @@ Outros problemas de analisadores
 
 .. _misc:
 
-Miscellaneous
+Miscelânea
 -------------
 
-* ``UnicodeEncodeError: 'charmap' codec can't encode character
-  u'\xfoo' in position bar`` (or just about any other
-  ``UnicodeEncodeError``) - This is not a problem with Beautiful Soup.
-  This problem shows up in two main situations. First, when you try to
-  print a Unicode character that your console doesn't know how to
-  display. (See `this page on the Python wiki
-  <http://wiki.python.org/moin/PrintFails>`_ for help.) Second, when
-  you're writing to a file and you pass in a Unicode character that's
-  not supported by your default encoding.  In this case, the simplest
-  solution is to explicitly encode the Unicode string into UTF-8 with
-  ``u.encode("utf8")``.
+* ``Codec UnicodeEncodeError: 'charmap' codec can't encode character
+  u'\xfoo' in position bar`` (ou apenas sobre qualquer outra
+  ``UnicodeEncodeError``) - Isto não é um problema com o Beautiful Soup.
+  Esse problema aparece em duas situações principais. Primeiro, quando você tenta
+  imprimir um caractere Unicode que seu console não sabe como
+  exibir. (Veja `esta página no wiki do Python
+  <http://wiki.python.org/moin/PrintFails>`_ para ajuda.) Segundo, quando
+  você está escrevendo em um arquivo e você passa um caractere Unicode
+  não suportado pela sua codificação padrão. Neste caso, a mais simples
+  solução é codificar explicitamente a string Unicode em UTF-8 com
+  ``u.encode ("utf8")``.
 
-* ``KeyError: [attr]`` - Caused by accessing ``tag['attr']`` when the
-  tag in question doesn't define the ``attr`` attribute. The most
-  common errors are ``KeyError: 'href'`` and ``KeyError:
-  'class'``. Use ``tag.get('attr')`` if you're not sure ``attr`` is
-  defined, just as you would with a Python dictionary.
+* ``KeyError: [attr]``- Causado por acessar ``tag ['attr']`` quando a
+  tag em questão não define o atributo ``attr``. Os erros
+  mais comuns são ``KeyError: 'href'`` e ``KeyError:
+  'class'``. Use ``tag.get ('attr')`` se você não tiver certeza que ``attr`` está
+  definido, assim como você faria com um dicionário Python.
 
-* ``AttributeError: 'ResultSet' object has no attribute 'foo'`` - This
-  usually happens because you expected ``find_all()`` to return a
-  single tag or string. But ``find_all()`` returns a _list_ of tags
-  and strings--a ``ResultSet`` object. You need to iterate over the
-  list and look at the ``.foo`` of each one. Or, if you really only
-  want one result, you need to use ``find()`` instead of
-  ``find_all()``.
+* ``AttributeError: 'ResultSet' object has no attribute 'foo'`` - Isto
+  geralmente acontece porque você espera que ``find_all ()`` retorne uma
+  tag ou string única. Mas ``find_all ()`` retorna uma lista de tags
+  e strings - um objeto ``ResultSet``. Você precisa iterar sobre a
+  lista e olhar o ``.foo`` de cada um. Ou, se você realmente só
+  quer um resultado, você precisa usar ``find ()`` em vez de
+  ``find_all ()``.
 
-* ``AttributeError: 'NoneType' object has no attribute 'foo'`` - This
-  usually happens because you called ``find()`` and then tried to
-  access the `.foo`` attribute of the result. But in your case,
-  ``find()`` didn't find anything, so it returned ``None``, instead of
-  returning a tag or a string. You need to figure out why your
-  ``find()`` call isn't returning anything.
+* ``AttributeError: 'NoneType' object has no attribute 'foo'`` -
+  geralmente acontece porque você chamou ``find ()`` e então tentou
+  acessar o atributo `.foo`` do resultado. Mas no seu caso,
+  ``find ()`` não encontrou nada, então retornou ``None``, em vez de
+  retornar uma tag ou uma string. Você precisa descobrir porquê sua
+  chamada ``find ()`` não está retornando nada.
 
-Improving Performance
----------------------
 
-Beautiful Soup will never be as fast as the parsers it sits on top
-of. If response time is critical, if you're paying for computer time
-by the hour, or if there's any other reason why computer time is more
-valuable than programmer time, you should forget about Beautiful Soup
-and work directly atop `lxml <http://lxml.de/>`_.
 
-That said, there are things you can do to speed up Beautiful Soup. If
-you're not using lxml as the underlying parser, my advice is to
-:ref:`start <parser-installation>`. Beautiful Soup parses documents
-significantly faster using lxml than using html.parser or html5lib.
+Melhorando a Performance
+------------------------
 
-You can speed up encoding detection significantly by installing the
-`cchardet <http://pypi.python.org/pypi/cchardet/>`_ library.
+O Beautiful Soup nunca será tão rápido quanto aos analisadores sintáticos que ele gerencia.
+Se o tempo de resposta for algo crítico, se você está pagando por hora por recursos
+computacionais ou se há alguma outra razão pela qual o tempo computacional é mais
+valioso que o tempo do programador, então você deveria esquecer do Beautiful Soup
+e trabalhar diretamente com `lxml <http://lxml.de/>`_.
 
-`Parsing only part of a document`_ won't save you much time parsing
-the document, but it can save a lot of memory, and it'll make
-`searching` the document much faster.
+Dito isso, existem maneiras de melhorar a velocidade do Beautiful Soup. Se você ainda não
+começou a usar o lxml como um analisador implícito, meu conselho é `começar <parser-installation>`_.
+O Beautiful Soup analisa documentos de uma forma significativamente mais rápida usando
+lxml do que usando um html.parser ou html5lib.
+
+Você pode acelerar a detecção de codificação de uma maneira significativa instalando
+a biblioteca `cchardet <http://pypi.python.org/pypi/cchardet/>`_.
+
+`Analisar apenas parte de um documento`_ não irá lhe poupar muito tempo ao analisar o
+documento, mas pode lhe economizar muita memória e tornar a `buscas` no documento muito mais rápidas.
+
 
 Beautiful Soup 3
 ================
