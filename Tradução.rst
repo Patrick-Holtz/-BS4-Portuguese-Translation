@@ -970,11 +970,11 @@ immediately before this one::
  last_a_tag.previous_element.next_element
  # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>
 
-``.next_elements`` and ``.previous_elements``
+``.next_elements`` e ``.previous_elements``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You should get the idea by now. You can use these iterators to move
-forward or backward in the document as it was parsed::
+A essa altura, você deve ter pego a idéia. É possível usar esses iteradores para percorrer
+o documento a medida que ele é parseado.::
 
  for element in last_a_tag.next_elements:
      print(repr(element))
@@ -986,16 +986,16 @@ forward or backward in the document as it was parsed::
  # u'\n'
  # None
 
-Searching the tree
-==================
+Percorrendo a árvore
+====================
 
-Beautiful Soup defines a lot of methods for searching the parse tree,
-but they're all very similar. I'm going to spend a lot of time explaining
-the two most popular methods: ``find()`` and ``find_all()``. The other
-methods take almost exactly the same arguments, so I'll just cover
-them briefly.
+Beautiful Soup possui muitos métodos para percorrer a árvore de elementos,
+no entanto, eles são  muito parecidos. Eu vou focar a maior parte do tempo explicando
+os dois métodos mais populares: ``find()`` e ``find_all()``. Os outros
+métodos recebem praticamente os mesmos argumentos e eu vou
+abordá-los brevemente
 
-Once again, I'll be using the "three sisters" document as an example::
+Mais uma vez, eu vou usar o documento "three sisters" como exemplo::
 
  html_doc = """
  <html><head><title>The Dormouse's story</title></head>
@@ -1014,43 +1014,43 @@ Once again, I'll be using the "three sisters" document as an example::
  from bs4 import BeautifulSoup
  soup = BeautifulSoup(html_doc, 'html.parser')
 
-By passing in a filter to an argument like ``find_all()``, you can
-zoom in on the parts of the document you're interested in.
+Ao utilizar um filtro em um argumento como no ``find_all()``, você pode
+acessar partes do documento que você está interessado.
 
-Kinds of filters
+Tipos de Filtros
 ----------------
 
-Before talking in detail about ``find_all()`` and similar methods, I
-want to show examples of different filters you can pass into these
-methods. These filters show up again and again, throughout the
-search API. You can use them to filter based on a tag's name,
+Antes de entrar em detalhes sobre o ``find_all()`` e outros métodos parecidos, eu
+quero mostrar exemplos de diferentes filtros que você pode passar para esses
+métodos. Esse filtros aparecem constantemente em toda a API de busca.
+Você pode usá-los para filtrar baseado no nome de uma tag,
 on its attributes, on the text of a string, or on some combination of
-these.
+seus atributos, no texto de uma string, ou usar uma combinação desses tipos.
 
 .. _a string:
 
-A string
-^^^^^^^^
+Uma string
+^^^^^^^^^^
 
-The simplest filter is a string. Pass a string to a search method and
-Beautiful Soup will perform a match against that exact string. This
-code finds all the <b> tags in the document::
+O filtro mais simples é o de uma string. Passe uma string para um método de busca e
+Beautiful Soup vai procurar por uma parte de texto que corresponda exatamente aquela string. Esse
+trecho de código encontra todas as tags <b> no document::
 
  soup.find_all('b')
  # [<b>The Dormouse's story</b>]
 
-If you pass in a byte string, Beautiful Soup will assume the string is
-encoded as UTF-8. You can avoid this by passing in a Unicode string instead.
+Se você passar uma string de bytes, Beautiful Soup assume que a string está codificada
+como UTF-8. Você pode evitar isso passando uma string Unicode.
 
 .. _a regular expression:
 
-A regular expression
-^^^^^^^^^^^^^^^^^^^^
+Uma expressão regular
+^^^^^^^^^^^^^^^^^^^^^
 
-If you pass in a regular expression object, Beautiful Soup will filter
-against that regular expression using its ``search()`` method. This code
-finds all the tags whose names start with the letter "b"; in this
-case, the <body> tag and the <b> tag::
+Se você passar uma expressão regular, Beautiful Soup vai filtrar
+em relação a expressão regular usando o método ``search()``. Esse trecho de código
+encontrar todas as tags em que o nome comece com "b"; nesse
+caso, as tags <body> e <b>::
 
  import re
  for tag in soup.find_all(re.compile("^b")):
@@ -1058,7 +1058,7 @@ case, the <body> tag and the <b> tag::
  # body
  # b
 
-This code finds all the tags whose names contain the letter 't'::
+Esse trecho de código encontra todas as tags em que o nome contém a letra 't'::
 
  for tag in soup.find_all(re.compile("t")):
      print(tag.name)
@@ -1067,12 +1067,12 @@ This code finds all the tags whose names contain the letter 't'::
 
 .. _a list:
 
-A list
-^^^^^^
+Uma Lista
+^^^^^^^^^
 
-If you pass in a list, Beautiful Soup will allow a string match
-against `any` item in that list. This code finds all the <a> tags
-`and` all the <b> tags::
+Se você passar uma lista, Beautiful Soup executará uma busca por uma string que corresponda
+a `qualquer` item da lista. Esse trecho de código, por exemplo, encontra todas as tags <a>
+`e` todas as tags <b>::
 
  soup.find_all(["a", "b"])
  # [<b>The Dormouse's story</b>,
@@ -1085,8 +1085,8 @@ against `any` item in that list. This code finds all the <a> tags
 ``True``
 ^^^^^^^^
 
-The value ``True`` matches everything it can. This code finds `all`
-the tags in the document, but none of the text strings::
+O valor ``True`` permite encontrar tudo que for possível. Esse trecho de código encontra `todas`
+as tags em um documento, com exceção das strings de texto::
 
  for tag in soup.find_all(True):
      print(tag.name)
@@ -1104,36 +1104,35 @@ the tags in the document, but none of the text strings::
 
 .. a function:
 
-A function
+Uma função
 ^^^^^^^^^^
 
-If none of the other matches work for you, define a function that
-takes an element as its only argument. The function should return
-``True`` if the argument matches, and ``False`` otherwise.
+Se nenhuma das opções anteriores funcionar pra você, é possível definir uma função que
+recebe um element como único argumento. A função deve retornar
+``True`` se o argumento correspondeer e ``False`` caso contrário.
 
-Here's a function that returns ``True`` if a tag defines the "class"
-attribute but doesn't define the "id" attribute::
+A função abaixo retorna ``True`` se uma tag possui o attributo "class"
+e não possui o atributo "id"::
 
  def has_class_but_no_id(tag):
      return tag.has_attr('class') and not tag.has_attr('id')
 
-Pass this function into ``find_all()`` and you'll pick up all the <p>
-tags::
+Ao executar essa função como argumento em ``find_all()`` você terá acesso a todas as tags <p>::
 
  soup.find_all(has_class_but_no_id)
  # [<p class="title"><b>The Dormouse's story</b></p>,
  #  <p class="story">Once upon a time there were...</p>,
  #  <p class="story">...</p>]
 
-This function only picks up the <p> tags. It doesn't pick up the <a>
-tags, because those tags define both "class" and "id". It doesn't pick
-up tags like <html> and <title>, because those tags don't define
-"class".
+Essa função retorna somente as tags <p>. Não retorna as tags <a>,
+porque elas possuem os atributos "class" e "id" na sua definição. Não retorna
+as tags <html> e <title>, porque essas não possuem o atributo "class"
+na sua definição.
 
-If you pass in a function to filter on a specific attribute like
-``href``, the argument passed into the function will be the attribute
-value, not the whole tag. Here's a function that finds all ``a`` tags
-whose ``href`` attribute *does not* match a regular expression::
+Se você passar um atributo específico para uma função em um filtro, como
+``href`` por exemplo, o argumento passado para a função se torna um atributo,
+e não uma tag. No exemplo a seguir, a função retorna todas as tags ``a``
+em que o atributo ``href`` *não* corresponde a uma expressão regular::
 
  def not_lacie(href):
      return href and not re.compile("lacie").search(href)
@@ -1141,9 +1140,8 @@ whose ``href`` attribute *does not* match a regular expression::
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
  #  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 
-The function can be as complicated as you need it to be. Here's a
-function that returns ``True`` if a tag is surrounded by string
-objects::
+A função pode ser tão complicada quanto você precisar. Nesse outro exemplo,
+a função retorna ``True`` se uma tag está cercada de objetos string::
 
  from bs4 import NavigableString
  def surrounded_by_strings(tag):
@@ -1158,7 +1156,7 @@ objects::
  # a
  # p
 
-Now we're ready to look at the search methods in detail.
+Agora estamos preparados para discutir os métodos de busca em detalhes.
 
 ``find_all()``
 --------------
@@ -1436,18 +1434,22 @@ and they mostly take the same arguments as ``find_all()``: ``name``,
 the only methods that support it. Passing ``recursive=False`` into a
 method like ``find_parents()`` wouldn't be very useful.
 
-Chamar uma tag é como chamar ``find_all()``
+Calling a tag is like calling ``find_all()``
 --------------------------------------------
 
-Devido ao ``find_all()`` ser o método mais popular na API de busca do Beautiful Soup, você pode utilizar um atalho pra ele. Se você tratar o objeto ``BeautifulSoup`` ou o objeto ``Tag`` como se fosse uma função, então seria como se você estivesse chamando ``find_all()`` nesse objeto. Essas duas linhas de código são equivalentes::
+Because ``find_all()`` is the most popular method in the Beautiful
+Soup search API, you can use a shortcut for it. If you treat the
+``BeautifulSoup`` object or a ``Tag`` object as though it were a
+function, then it's the same as calling ``find_all()`` on that
+object. These two lines of code are equivalent::
 
-  soup.find_all("a")
-  soup("a")
+ soup.find_all("a")
+ soup("a")
 
-Essas duas linhas também são equivalentes::
+These two lines are also equivalent::
 
-  soup.title.find_all(string=True)
-  soup.title(string=True)
+ soup.title.find_all(string=True)
+ soup.title(string=True)
 
 ``find()``
 ----------
@@ -1459,9 +1461,9 @@ O método ``find_all ()`` varre todo o documento procurando
 resultados, mas às vezes você quer encontrar apenas um deles. Se você sabe que um
 documento só tem uma tag <body>, seria perda de tempo varrer o
 documento inteiro procurando por mais. Em vez de passar em ``limit = 1``
-toda vez que você chama ``find_all``, você pode usar o método ``find ()``.
+toda vez que você chama ``find_all``, você pode usar o método ``find ()``. 
 Estas duas linhas de código são quase equivalentes::
-
+ 
  soup.find_all('title', limit=1)
  # [<title>A história do Arganaz</title>]
 
@@ -1532,7 +1534,7 @@ documento, mas não é nenhum dos pais da `string`, então não podemos encontr�
 com ``find_parents()``.
 
 Talvez você tenha feito a conexão entre ``find_parent()`` e
-``find_parents()``, e os atributos `.parent`_ e `.parents`_
+``find_parents()``, e os atributos `.parent`_ e `.parents`_ 
 mencionados anteriormente. A conexão é bastante forte. Esses métodos de busca
 atualmente usam ``.parents`` para iteragir sobre todos os pais, e checar
 cada um contra o filtro fornecido para verificar se combinam.
@@ -2099,7 +2101,7 @@ A função ``str()`` retorna uma string codificada em UTF-8. Veja
 Pode-se ainda executar ``encode()`` para obter uma bytestring, e ``decode()``
 para obter sua versão Unicode.
 
-.. _output_formatters:
+.. _formatadores_de_saida:
 
 Formatadores de saída
 -----------------
@@ -2111,7 +2113,7 @@ Se você der à Beautiful Soup um documento que contenha entidades HTML como
  unicode(soup)
  # u'<html><head></head><body>\u201cDammit!\u201d he said.</body></html>'
 
-Se você converter o documento em uma string, os caracteres Unicode
+Se você converter o documento em uma string, os caracteres Unicode 
 serão codificados como UTF-8. Você não terá as entidades HTML de volta:
 
  str(soup)
@@ -2130,7 +2132,7 @@ HTML ou XML inválidos::
  soup.a
  # <a href="http://example.com/?foo=val1&amp;bar=val2">A link</a>
 
-Você pode alterar esse comportamento fornecendo um valor para o
+Você pode alterar esse comportamento fornecendo um valor para o 
 argumento ``formatter`` para ``prettify()``, ``encode()``, ou
 ``decode()``. Beautiful Soup reconhece quatro valores possíveis para
 ``formatter``.
@@ -2179,7 +2181,7 @@ strings nas saídas. Esta é a opção mais rápida, porém isso pode levar
  # <a href="http://example.com/?foo=val1&bar=val2">A link</a>
 
 Finalmente, se você passar uma função para ``formatter``, Beautiful Soup
-irá chamar essa função uma vez para cada string e valor do atributo no
+irá chamar essa função uma vez para cada string e valor do atributo no 
 documento. Você pode fazer o que quiser nessa função. Aqui está um
 formatador que converte strings para maiúsculas e não faz absolutamente
 nada mais::
@@ -2204,7 +2206,7 @@ nada mais::
 Se você está escrevendo sua própria função, você deveria conhecer a
 classe ``EntitySubstitution`` do módulo ``bs4.dammit``. Esta classe
 implementa os formatadores padrões da Beautiful Soup como métodos de classe: o
-formatador "html" é ``EntitySubstitution.substitute_html`` e o
+formatador "html" é ``EntitySubstitution.substitute_html`` e o 
 formatador "minimal" é ``EntitySubstitution.substitute_xml``. Você pode
 utilizar estas funções para simular ``formatter=html`` ou
 ``formatter=minimal``, e então fazer algo a mais.
@@ -2275,14 +2277,14 @@ generator, e processar o texto você mesmo::
 Especificando o parser a ser utilizado
 ============================
 
-Se você só precisa parsear algum HTML, você pode jogar a marcação no
+Se você só precisa parsear algum HTML, você pode jogar a marcação no 
 construtor ``BeautifulSoup``, e provavelmente dará certo. BeautifulSoup
 irá escolher o parser para você e parseará os dados enviados. Mas tem alguns
 argumentos adicionais que você passar no construtor para mudar qual parser
 é utilizado.
 
-O primeiro argumento no construtor ``BeautifulSoup`` é uma string
-ou arquivos abertos--A marcação que você quer parsear. o segundo
+O primeiro argumento no construtor ``BeautifulSoup`` é uma string 
+ou arquivos abertos--A marcação que você quer parsear. o segundo 
 argumento é `como` você gostaria da marcação parseada.
 
 Se você não especificar nada, você vai obter o melhor parseador HTML
@@ -2877,7 +2879,7 @@ Outros problemas de analisadores
 
 Miscelânea
 -------------
-
+  
 * ``Codec UnicodeEncodeError: 'charmap' codec can't encode character
   u'\xfoo' in position bar`` (ou apenas sobre qualquer outra
   ``UnicodeEncodeError``) - Isto não é um problema com o Beautiful Soup.
@@ -2959,51 +2961,51 @@ Soup 3 by mistake. You need to run ``easy_install beautifulsoup4``.
 `The documentation for Beautiful Soup 3 is archived online
 <http://www.crummy.com/software/BeautifulSoup/bs3/documentation.html>`_.
 
-Porting code to BS4
--------------------
+Portando código para BS4
+------------------------
 
-Most code written against Beautiful Soup 3 will work against Beautiful
-Soup 4 with one simple change. All you should have to do is change the
-package name from ``BeautifulSoup`` to ``bs4``. So this::
+A maior parte do código escrito com Beautiful Soup 3 funcionará também com a 
+Beautiful Soup 4 com uma simples mudança. Tudo que você precisa fazer é mudar o
+nome do pacote de ``BeautifulSoup`` para ``bs4``. Então, isso::
 
   from BeautifulSoup import BeautifulSoup
 
-becomes this::
+fica assim::
 
   from bs4 import BeautifulSoup
 
-* If you get the ``ImportError`` "No module named BeautifulSoup", your
-  problem is that you're trying to run Beautiful Soup 3 code, but you
-  only have Beautiful Soup 4 installed.
+* Se você tiver um ``ImportError`` "No module named BeautifulSoup", seu
+  problema é que está tentando rodar código da Beautiful Soup 3, porém,
+  há somente a Beautiful Soup 4 instalada.
 
-* If you get the ``ImportError`` "No module named bs4", your problem
-  is that you're trying to run Beautiful Soup 4 code, but you only
-  have Beautiful Soup 3 installed.
+* Se você tiver um ``ImportError`` "No module named bs4", seu
+  problema é que está tentando rodar código da Beautiful Soup 4, porém,
+  há somente a Beautiful Soup 3 instalada.
 
-Although BS4 is mostly backwards-compatible with BS3, most of its
-methods have been deprecated and given new names for `PEP 8 compliance
-<http://www.python.org/dev/peps/pep-0008/>`_. There are numerous other
-renames and changes, and a few of them break backwards compatibility.
+Embora o BS4 seja na maior parte compatível com o BS3, a maioria de seus
+métodos foram descontinuados e receberam novos nomes de acordo com a `PEP 8
+<http://www.python.org/dev/peps/pep-0008/>`_. Existem inúmeras outras
+renomeações e mudanças, e algumas delas quebram a retrocompatibilidade.
 
-Here's what you'll need to know to convert your BS3 code and habits to BS4:
+Aqui está o que você precisa saber para converter seu código e hábitos BS3 para BS4:
 
-You need a parser
+Você precisa de um parser
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A Beautiful Soup 3 utilizava o ``SGMLParser`` do Python, um módulo que foi
+depreciado e removido no Python 3.0. Beautiful Soup 4 usa
+``html.parser`` por padrão, mas você pode usar lxml ou html5lib 
+ao invés. Veja `Instalando um parser`_ para comparação.
+
+Já que ``html.parser`` não é o mesmo ``SGMLParser``, podemos ver 
+que a Beautiful Soup 4 lhe dá uma árvore de parse diferente da 
+Beautiful Soup 3 para a mesma marcação. Se você trocar o ``html.parser``
+por lxml ou html5lib, pode-se ver que a árvore de parse muda
+novamente. Se isso acontecer, você precisará atualizar seu código de scraping para
+lidar com a nova árvore.
+
+Nomes dos métodos
 ^^^^^^^^^^^^^^^^^
-
-Beautiful Soup 3 used Python's ``SGMLParser``, a module that was
-deprecated and removed in Python 3.0. Beautiful Soup 4 uses
-``html.parser`` by default, but you can plug in lxml or html5lib and
-use that instead. See `Installing a parser`_ for a comparison.
-
-Since ``html.parser`` is not the same parser as ``SGMLParser``, you
-may find that Beautiful Soup 4 gives you a different parse tree than
-Beautiful Soup 3 for the same markup. If you swap out ``html.parser``
-for lxml or html5lib, you may find that the parse tree changes yet
-again. If this happens, you'll need to update your scraping code to
-deal with the new tree.
-
-Method names
-^^^^^^^^^^^^
 
 * ``renderContents`` -> ``encode_contents``
 * ``replaceWith`` -> ``replace_with``
@@ -3022,34 +3024,34 @@ Method names
 * ``nextSibling`` -> ``next_sibling``
 * ``previousSibling`` -> ``previous_sibling``
 
-Some arguments to the Beautiful Soup constructor were renamed for the
-same reasons:
+Alguns argumentos do construtor Beautiful Soup foram renomeados pelos
+mesmos motivos:
 
 * ``BeautifulSoup(parseOnlyThese=...)`` -> ``BeautifulSoup(parse_only=...)``
 * ``BeautifulSoup(fromEncoding=...)`` -> ``BeautifulSoup(from_encoding=...)``
 
-I renamed one method for compatibility with Python 3:
+Renomeei um método para compatibilidade com o Python 3:
 
 * ``Tag.has_key()`` -> ``Tag.has_attr()``
 
-I renamed one attribute to use more accurate terminology:
+Renomeei um atributo para usar uma terminologia mais precisa:
 
 * ``Tag.isSelfClosing`` -> ``Tag.is_empty_element``
 
-I renamed three attributes to avoid using words that have special
-meaning to Python. Unlike the others, these changes are *not backwards
-compatible.* If you used these attributes in BS3, your code will break
-on BS4 until you change them.
+Renomeei três atributos para evitar o uso de palavras reservadas
+no Python. Ao contrário das outras, essas mudanças não são *retrocompatíveis.* 
+Se você utilizou um desses atributos no BS3, seu código irá quebrar
+no BS4 até você alterá-los.
 
 * ``UnicodeDammit.unicode`` -> ``UnicodeDammit.unicode_markup``
 * ``Tag.next`` -> ``Tag.next_element``
 * ``Tag.previous`` -> ``Tag.previous_element``
 
-Generators
-^^^^^^^^^^
+Geradores
+^^^^^^^^^
 
-I gave the generators PEP 8-compliant names, and transformed them into
-properties:
+Eu dei aos geradores nomes compatíveis com a PEP 8 e os transformei em
+propriedades:
 
 * ``childGenerator()`` -> ``children``
 * ``nextGenerator()`` -> ``next_elements``
@@ -3059,87 +3061,86 @@ properties:
 * ``recursiveChildGenerator()`` -> ``descendants``
 * ``parentGenerator()`` -> ``parents``
 
-So instead of this::
+Então ao invés disso::
 
  for parent in tag.parentGenerator():
      ...
 
-You can write this::
+Você pode escrever isso::
 
  for parent in tag.parents:
      ...
 
-(But the old code will still work.)
+(Mas o código antigo ainda funciona.)
 
-Some of the generators used to yield ``None`` after they were done, and
-then stop. That was a bug. Now the generators just stop.
+Alguns dos geradores costumavam retornar ``None`` ao serem executados, e
+então paravam. Isso era um bug. Agora os geradores simplesmente param.
 
-There are two new generators, :ref:`.strings and
-.stripped_strings <string-generators>`. ``.strings`` yields
-NavigableString objects, and ``.stripped_strings`` yields Python
-strings that have had whitespace stripped.
+Existem dois novos geradores, :ref:`.strings and
+.stripped_strings <string-generators>`. ``.strings`` retorna
+objetos NavigableString e ``stripped_strings`` retornam strings
+Python que tiveram espaços em branco retirados.
 
 XML
 ^^^
 
-There is no longer a ``BeautifulStoneSoup`` class for parsing XML. To
-parse XML you pass in "xml" as the second argument to the
-``BeautifulSoup`` constructor. For the same reason, the
-``BeautifulSoup`` constructor no longer recognizes the ``isHTML``
-argument.
+Não existe mais a classe ``BeautifulStoneSoup`` para parsear XML. Para
+isso, é necessário que você passe "xml" como o segundo argumento do
+construtor ``BeautifulSoup``. Pela mesma razão, o construtor 
+``BeautifulSoup`` não reconhece mais o argumento ``isHTML``.
 
-Beautiful Soup's handling of empty-element XML tags has been
-improved. Previously when you parsed XML you had to explicitly say
-which tags were considered empty-element tags. The ``selfClosingTags``
-argument to the constructor is no longer recognized. Instead,
-Beautiful Soup considers any empty tag to be an empty-element tag. If
-you add a child to an empty-element tag, it stops being an
-empty-element tag.
+O tratamento da Beautiful Soup em tags de elementos XML vazios foi
+melhorado. Anteriormente, quando você parseava XML, tinha que dizer explicitamente
+quais tags eram consideradas tags de elementos vazios. O argumento ``selfClosingTags``
+não é mais reconhecido. Ao invés disso, a Beautiful Soup considera 
+que qualquer tag vazia é uma tag de elemento vazio. E se
+você adiciona um elemento filho a uma tag de elemento vazio, ele deixa de ser um
+tag de elemento vazio.
 
-Entities
-^^^^^^^^
+Entidades
+^^^^^^^^^
 
-An incoming HTML or XML entity is always converted into the
-corresponding Unicode character. Beautiful Soup 3 had a number of
-overlapping ways of dealing with entities, which have been
-removed. The ``BeautifulSoup`` constructor no longer recognizes the
-``smartQuotesTo`` or ``convertEntities`` arguments. (`Unicode,
-Dammit`_ still has ``smart_quotes_to``, but its default is now to turn
-smart quotes into Unicode.) The constants ``HTML_ENTITIES``,
-``XML_ENTITIES``, and ``XHTML_ENTITIES`` have been removed, since they
-configure a feature (transforming some but not all entities into
-Unicode characters) that no longer exists.
+Uma entidade HTML ou XML, em sua entrada, é sempre convertida no
+caractere unicode correspondente a ela. Beautiful Soup 3 teve um número de
+formas de lidar com entidades sobrepostas, que foram
+removidas. O construtor ``BeautifulSoup`` não reconhece mais os argumentos
+``smartQuotesTo`` ou ``convertEntities``. (`Unicode,
+Dammit`_ ainda tem ``smart_quotes_to``, mas seu padrão agora é transformar
+smart quotes em Unicode.) As constantes ``HTML_ENTITIES``,
+``XML_ENTITIES`` e ``XHTML_ENTITIES`` foram removidos, pois
+configuram um recurso (transformar algumas entidades, mas não todas em
+caracteres unicode) que não existe mais.
 
-If you want to turn Unicode characters back into HTML entities on
-output, rather than turning them into UTF-8 characters, you need to
-use an :ref:`output formatter <output_formatters>`.
+Se você quiser transformar caracteres Unicode novamente em entidades HTML
+na saída, ao invés de transformá-los em caracteres UTF-8, você precisa
+utilizar um formatador de saída :ref:`<formatadores_de_saida>`.
 
-Miscellaneous
-^^^^^^^^^^^^^
+Outras Informações
+^^^^^^^^^^^^^^^^^^
 
-:ref:`Tag.string <.string>` now operates recursively. If tag A
-contains a single tag B and nothing else, then A.string is the same as
-B.string. (Previously, it was None.)
+:ref:`Tag.string <.string>` agora opera recursivamente. Se a tag A
+contém uma única tag B e nada mais, então A.string é o mesmo que
+B.string. (Anteriormente, era None.)
 
-`Multi-valued attributes`_ like ``class`` have lists of strings as
-their values, not strings. This may affect the way you search by CSS
-class.
+`Atributos de valor múltiplo`_ como ``class`` possuem listas de strings como
+seus valores, não strings. Isso pode afetar a maneira como você pesquisa por classes 
+CSS.
 
-If you pass one of the ``find*`` methods both :ref:`string <string>` `and`
-a tag-specific argument like :ref:`name <name>`, Beautiful Soup will
-search for tags that match your tag-specific criteria and whose
-:ref:`Tag.string <.string>` matches your value for :ref:`string
-<string>`. It will `not` find the strings themselves. Previously,
-Beautiful Soup ignored the tag-specific arguments and looked for
-strings.
+Se você passar um dos métodos ``find*``, ambos :ref:`string <string>` e
+um atributo de tag como :ref:`name <name>`, Beautiful Soup vai
+buscar tags que correspondam aos seus critérios específicos e
+:ref:`Tag.string <.string>` correspondam ao seu valor para :ref:`string
+<string> `. Não "encontrará" as strings em si. Anteriormente,
+A Beautiful Soup ignorava os atributos da tag e procurava
+por strings.
 
-The ``BeautifulSoup`` constructor no longer recognizes the
-`markupMassage` argument. It's now the parser's responsibility to
-handle markup correctly.
+O construtor ``BeautifulSoup`` não reconhece mais o
+argumento `markupMassage`. Agora é responsabilidade do parser
+manipular a marcação corretamente.
 
-The rarely-used alternate parser classes like
-``ICantBelieveItsBeautifulSoup`` and ``BeautifulSOAP`` have been
-removed. It's now the parser's decision how to handle ambiguous
-markup.
+As classes de parsers alternativos raramente usadas, como
+``ICantBelieveItsBeautifulSoup`` e ``BeautifulSOAP`` foram
+removidas. Agora a decisão é do parser de como lidar com marcação 
+ambígua.
 
-The ``prettify()`` method now returns a Unicode string, not a bytestring.
+O método ``prettify()`` agora retorna uma string Unicode, e não mais uma bytestring.
