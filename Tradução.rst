@@ -746,20 +746,20 @@ remove by using the ``.stripped_strings`` generator instead::
 Here, strings consisting entirely of whitespace are ignored, and
 whitespace at the beginning and end of strings is removed.
 
-Going up
+Subindo
 --------
 
-Continuing the "family tree" analogy, every tag and every string has a
-`parent`: the tag that contains it.
+Continuando com a analogia da "árvore genealógica", toda tag e toda
+string tem um `pai`: a tag que a contém.
 
 .. _.parent:
 
 ``.parent``
 ^^^^^^^^^^^
 
-You can access an element's parent with the ``.parent`` attribute. In
-the example "three sisters" document, the <head> tag is the parent
-of the <title> tag::
+Você pode acessar o pai de um elemento com o atributo ``.parent``. Por
+Exemplo no documento "three sisters", a thag <head> é o pai da tag
+<title>::
 
  title_tag = soup.title
  title_tag
@@ -767,20 +767,20 @@ of the <title> tag::
  title_tag.parent
  # <head><title>The Dormouse's story</title></head>
 
-The title string itself has a parent: the <title> tag that contains
+A própria string título tem um pai: a tag <title> que a contem:
 it::
 
  title_tag.string.parent
  # <title>The Dormouse's story</title>
 
-The parent of a top-level tag like <html> is the ``BeautifulSoup`` object
-itself::
+O pai de uma tag de nível mais alto como <html> é o próprio objeto
+``BeautifulSoup``::
 
  html_tag = soup.html
  type(html_tag.parent)
  # <class 'bs4.BeautifulSoup'>
 
-And the ``.parent`` of a ``BeautifulSoup`` object is defined as None::
+E o ``.parent`` de um objeto ``BeautifulSoup`` é definido como None::
 
  print(soup.parent)
  # None
@@ -790,9 +790,9 @@ And the ``.parent`` of a ``BeautifulSoup`` object is defined as None::
 ``.parents``
 ^^^^^^^^^^^^
 
-You can iterate over all of an element's parents with
-``.parents``. This example uses ``.parents`` to travel from an <a> tag
-buried deep within the document, to the very top of the document::
+Você pode iterar por todos os elementos pais com 
+``.parents``. Este exemplo usa ``.parents`` para viajar de uma tag <a>
+enterrada no interior do documento, para o topo do documento::
 
  link = soup.a
  link
