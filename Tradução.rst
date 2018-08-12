@@ -35,29 +35,29 @@ seu problema envolve analisar um documento HTML, deixe claro mencionando
 :ref:`O que a função diagnose() diz <diagnose>` sobre
 esse documento.
 
-Quick Start
+Início Rápido
 ===========
 
-Here's an HTML document I'll be using as an example throughout this
-document. It's part of a story from `Alice in Wonderland`::
+Aqui está um documento HTML que vou usar como exemplo em todo este
+documento. Faz parte de uma história de `Alice no País das Maravilhas`::
 
  html_doc = """
- <html><head><title>The Dormouse's story</title></head>
+ <html><head><title>A história do Arganaz</title></head>
  <body>
- <p class="title"><b>The Dormouse's story</b></p>
+ <p class="title"><b>A história do Arganaz</b></p>
 
- <p class="story">Once upon a time there were three little sisters; and their names were
+ <p class="story">Era uma vez três irmãs pequenas; e seus nomes eram
  <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
- <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+ <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> e
  <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
- and they lived at the bottom of a well.</p>
+ e elas viviam no fundo de um poço.</p>
 
  <p class="story">...</p>
  """
 
-Running the "three sisters" document through Beautiful Soup gives us a
-``BeautifulSoup`` object, which represents the document as a nested
-data structure::
+Executar o documento "three sisters" através da Beautiful Soup nos retorna
+um objeto ``BeautifulSoup``, que representa o documento como uma estrutura
+de dados aninhada::
 
  from bs4 import BeautifulSoup
  soup = BeautifulSoup(html_doc, 'html.parser')
@@ -66,17 +66,17 @@ data structure::
  # <html>
  #  <head>
  #   <title>
- #    The Dormouse's story
+ #    A história do Arganaz
  #   </title>
  #  </head>
  #  <body>
  #   <p class="title">
  #    <b>
- #     The Dormouse's story
+ #     A história do Arganaz
  #    </b>
  #   </p>
  #   <p class="story">
- #    Once upon a time there were three little sisters; and their names were
+ #    Era uma vez havia três irmãzinhas; e seus nomes eram
  #    <a class="sister" href="http://example.com/elsie" id="link1">
  #     Elsie
  #    </a>
@@ -84,11 +84,11 @@ data structure::
  #    <a class="sister" href="http://example.com/lacie" id="link2">
  #     Lacie
  #    </a>
- #    and
+ #    e
  #    <a class="sister" href="http://example.com/tillie" id="link2">
  #     Tillie
  #    </a>
- #    ; and they lived at the bottom of a well.
+ #    ; e elas viviam no fundo de um poço.
  #   </p>
  #   <p class="story">
  #    ...
@@ -96,22 +96,22 @@ data structure::
  #  </body>
  # </html>
 
-Here are some simple ways to navigate that data structure::
+Aqui estão algumas maneiras simples de navegar por essa estrutura de dados::
 
  soup.title
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
 
  soup.title.name
  # u'title'
 
  soup.title.string
- # u'The Dormouse's story'
+ # u'A história do Arganaz'
 
  soup.title.parent.name
  # u'head'
 
  soup.p
- # <p class="title"><b>The Dormouse's story</b></p>
+ # <p class="title"><b>A história do Arganaz</b></p>
 
  soup.p['class']
  # u'title'
@@ -127,7 +127,7 @@ Here are some simple ways to navigate that data structure::
  soup.find(id="link3")
  # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>
 
-One common task is extracting all the URLs found within a page's <a> tags::
+Uma tarefa comum é extrair todos os URLs encontrados nas tags <a> de uma página::
 
  for link in soup.find_all('a'):
      print(link.get('href'))
@@ -135,22 +135,22 @@ One common task is extracting all the URLs found within a page's <a> tags::
  # http://example.com/lacie
  # http://example.com/tillie
 
-Another common task is extracting all the text from a page::
+Outra tarefa comum é extrair todo o texto de uma página::
 
  print(soup.get_text())
- # The Dormouse's story
+ # A história do Arganaz
  #
- # The Dormouse's story
+ # A história do Arganaz
  #
- # Once upon a time there were three little sisters; and their names were
+ # Era uma vez havia três irmãzinhas; e seus nomes eram
  # Elsie,
- # Lacie and
+ # Lacie e
  # Tillie;
- # and they lived at the bottom of a well.
+ # e eles viviam no fundo de um poço.
  #
  # ...
 
-Does this look like what you need? If so, read on.
+Isso parece com o que você precisa? Se assim for, continue a ler.
 
 Installing Beautiful Soup
 =========================
