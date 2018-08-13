@@ -146,52 +146,52 @@ Outra tarefa comum é extrair todo o texto de uma página::
  # Elsie,
  # Lacie e
  # Tillie;
- # e eles viviam no fundo de um poço.
+ # e elas viviam no fundo de um poço.
  #
  # ...
 
 Isso parece com o que você precisa? Se assim for, continue a ler.
 
-Installing Beautiful Soup
+Instalando o Beautiful Soup
 =========================
 
-If you're using a recent version of Debian or Ubuntu Linux, you can
-install Beautiful Soup with the system package manager:
+Se você está usando uma versão recente do Debian ou Ubuntu Linux, você pode
+instalar o Beautiful Soup com o gerenciador de pacotes do sistema:
 
-:kbd:`$ apt-get install python-bs4` (for Python 2)
+:kbd:`$ apt-get install python-bs4` (para o Python 2)
 
-:kbd:`$ apt-get install python3-bs4` (for Python 3)
+:kbd:`$ apt-get install python3-bs4` (para o Python 3)
 
-Beautiful Soup 4 is published through PyPi, so if you can't install it
-with the system packager, you can install it with ``easy_install`` or
-``pip``. The package name is ``beautifulsoup4``, and the same package
-works on Python 2 and Python 3. Make sure you use the right version of
-``pip`` or ``easy_install`` for your Python version (these may be named
-``pip3`` and ``easy_install3`` respectively if you're using Python 3).
+Beautiful Soup 4 é publicado através do PyPi, então se você não puder instalá-lo
+com o empacotador do sistema, você pode instalá-lo com ``easy_install`` ou
+``pip``. O nome do pacote é ``beautifulsoup4`` e o mesmo pacote
+funciona em Python 2 e Python 3. Certifique-se de usar a versão correta do
+``pip`` ou ``easy_install`` para sua versão em Python (estes podem ser nomeados
+``pip3`` e ``easy_install3`` respectivamente se você estiver usando o Python 3).
 
 :kbd:`$ easy_install beautifulsoup4`
 
 :kbd:`$ pip install beautifulsoup4`
 
-(The ``BeautifulSoup`` package is probably `not` what you want. That's
-the previous major release, `Beautiful Soup 3`_. Lots of software uses
-BS3, so it's still available, but if you're writing new code you
-should install ``beautifulsoup4``.)
+(O pacote ``BeautifulSoup`` provavelmente `não` é o que você quer. Este é
+o lançamento principal anterior, `Beautiful Soup 3`_. Muitos softwares usam
+BS3, então ainda está disponível, mas se você está escrevendo um novo código você
+deve instalar o ``beautifulsoup4``.)
 
-If you don't have ``easy_install`` or ``pip`` installed, you can
-`download the Beautiful Soup 4 source tarball
-<http://www.crummy.com/software/BeautifulSoup/download/4.x/>`_ and
-install it with ``setup.py``.
+Se você não tem ``easy_install`` ou ``pip`` instalados, você pode
+`baixar o tarball fonte do Beautiful Soup 4
+<http://www.crummy.com/software/BeautifulSoup/download/4.x/>`_ e
+o instalar com o ``setup.py``.
 
 :kbd:`$ python setup.py install`
 
-If all else fails, the license for Beautiful Soup allows you to
-package the entire library with your application. You can download the
-tarball, copy its ``bs4`` directory into your application's codebase,
-and use Beautiful Soup without installing it at all.
+Se tudo mais falhar, a licença para Beautiful Soup permite que você
+empacote toda a biblioteca com o seu aplicativo. Você pode baixar o
+tarball, copiar seu diretório ``bs4`` na base de código do seu aplicativo,
+e usar o Beautiful Soup sem precisar instalá-lo.
 
-I use Python 2.7 and Python 3.2 to develop Beautiful Soup, but it
-should work with other recent versions.
+Eu uso Python 2.7 e Python 3.2 para desenvolver o Beautiful Soup, mas
+deve funcionar com outras versões recentes.
 
 Problems after installation
 ---------------------------
