@@ -318,7 +318,7 @@ e ``Comment``.
 
 .. _Tag:
 
-`` Tag``
+``Tag``
 -------
 
 Um objeto ``Tag`` corresponde a uma tag XML ou HTML no documento original::
@@ -538,68 +538,71 @@ block::
  # </b>
 
 
-Navigating the tree
+Navegando pela árvore
 ===================
 
-Here's the "Three sisters" HTML document again::
+Aqui está o documento HTML "Three sisters" mais uma vez::
 
  html_doc = """
- <html><head><title>The Dormouse's story</title></head>
+ <html><head><title>A história do Arganaz</title></head>
  <body>
- <p class="title"><b>The Dormouse's story</b></p>
+ <p class="title"><b>A história do Arganaz</b></p>
 
- <p class="story">Once upon a time there were three little sisters; and their names were
+ <p class="story">Era uma vez três irmãzinhas; e seus nomes eram
  <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
- <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+ <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> e
  <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
- and they lived at the bottom of a well.</p>
+ e elas viviam no fundo de um poço.</p>
 
  <p class="story">...</p>
  """
 
  from bs4 import BeautifulSoup
  soup = BeautifulSoup(html_doc, 'html.parser')
+ 
+Vou usar isso como um exemplo para mostrar a você como se mover de uma parte
+de um documento para outro.
 
-I'll use this as an example to show you how to move from one part of
-a document to another.
-
-Going down
+Descendo
 ----------
 
-Tags may contain strings and other tags. These elements are the tag's
-`children`. Beautiful Soup provides a lot of different attributes for
-navigating and iterating over a tag's children.
+Tags podem conter strings e outras tags. Esses elementos são
+`filhos` da tag. Beautiful Soup fornece muitos atributos diferentes para
+navegar e iterar sobre os filhos de uma tag.
 
-Note that Beautiful Soup strings don't support any of these
-attributes, because a string can't have children.
+Observe que as strings do Beautiful Soup não suportam nenhum dessas
+atributos, porque uma string não pode ter filhos.
 
-Navigating using tag names
+Navegando usando nomes de tags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The simplest way to navigate the parse tree is to say the name of the
-tag you want. If you want the <head> tag, just say ``soup.head``::
+A maneira mais simples de navegar pela árvore é dizer o nome da
+tag que você quer. Se você quiser a tag <head>, apenas diga ``soup.head``::
 
  soup.head
- # <head><title>The Dormouse's story</title></head>
+ # <head><title>A história do Arganaz</title></head>
 
  soup.title
- # <title>The Dormouse's story</title>
-
-You can do use this trick again and again to zoom in on a certain part
-of the parse tree. This code gets the first <b> tag beneath the <body> tag::
+ # <title>A história do Arganaz</title>
+ 
+Você pode usar esse truque de novo e de novo para ampliar uma determinada parte
+da árvore. Este código obtém a primeira tag <b> abaixo da tag <body>::
 
  soup.body.b
- # <b>The Dormouse's story</b>
+ # <b>A história do Arganaz</b>
 
 Using a tag name as an attribute will give you only the `first` tag by that
 name::
 
+Usar um nome de tag como um atributo lhe dará apenas `primeira` tag por esse
+nome::
+
  soup.a
  # <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>
 
-If you need to get `all` the <a> tags, or anything more complicated
-than the first tag with a certain name, you'll need to use one of the
-methods described in `Searching the tree`_, such as `find_all()`::
+Se você precisa pegar 'todas' as tags <a>, ou qualquer coisa mais complicada
+que a primeira tag com um certo nome, você precisará usar um dos
+métodos descritos em `Procurando na árvore`_, como `find_all ()`::
 
  soup.find_all('a')
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
@@ -609,31 +612,31 @@ methods described in `Searching the tree`_, such as `find_all()`::
 ``.contents`` and ``.children``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A tag's children are available in a list called ``.contents``::
+Os filhos de uma tag estão disponíveis em uma lista chamada ``.contents``::
 
  head_tag = soup.head
  head_tag
- # <head><title>The Dormouse's story</title></head>
+ # <head><title>A história do Arganaz</title></head>
 
  head_tag.contents
- [<title>The Dormouse's story</title>]
+ [<title>A história do Arganaz</title>]
 
  title_tag = head_tag.contents[0]
  title_tag
- # <title>The Dormouse's story</title>
+ # <title>A história do Arganaz</title>
  title_tag.contents
- # [u'The Dormouse's story']
+ # [u'A história do Arganaz']
 
-The ``BeautifulSoup`` object itself has children. In this case, the
-<html> tag is the child of the ``BeautifulSoup`` object.::
+O objeto ``BeautifulSoup`` em si tem filhos. Neste caso, a
+tag <html> é o filho do objeto ``BeautifulSoup``.::
 
  len(soup.contents)
  # 1
  soup.contents[0].name
  # u'html'
 
-A string does not have ``.contents``, because it can't contain
-anything::
+Uma string não tem ``.contents``, porque não pode conter
+qualquer coisa::
 
  text = title_tag.contents[0]
  text.contents
@@ -642,35 +645,37 @@ anything::
 Instead of getting them as a list, you can iterate over a tag's
 children using the ``.children`` generator::
 
+Em vez de obtê-los como uma lista, você pode iterar sobre os filhos
+de uma tag usando o gerador ``.children``::
+
  for child in title_tag.children:
      print(child)
- # The Dormouse's story
-
+ # A história do Arganaz
 ``.descendants``
 ^^^^^^^^^^^^^^^^
 
-The ``.contents`` and ``.children`` attributes only consider a tag's
-`direct` children. For instance, the <head> tag has a single direct
-child--the <title> tag::
+Os atributos ``.contents`` e ``.children`` só consideram os filhos
+"diretos" de uma tag. Por exemplo, a tag <head> tem uma única criança
+direta--a tag <title>::
 
  head_tag.contents
- # [<title>The Dormouse's story</title>]
+ # [<title>A história do Arganaz</title>]
 
-But the <title> tag itself has a child: the string "The Dormouse's
-story". There's a sense in which that string is also a child of the
-<head> tag. The ``.descendants`` attribute lets you iterate over `all`
-of a tag's children, recursively: its direct children, the children of
-its direct children, and so on::
+Mas a tag <title> tem um filho: a string "A história do Arganaz".
+Há um sentido em que essa cadeia também é um filho da
+tag <head>. O atributo ``.descendants`` permite iterar sobre `todos`
+os filhos de uma tag, recursivamente: seus filhos diretos, os filhos de
+seus filhos diretos e assim por diante::
 
  for child in head_tag.descendants:
      print(child)
- # <title>The Dormouse's story</title>
- # The Dormouse's story
-
-The <head> tag has only one child, but it has two descendants: the
-<title> tag and the <title> tag's child. The ``BeautifulSoup`` object
-only has one direct child (the <html> tag), but it has a whole lot of
-descendants::
+ # <title>A história do Arganaz</title>
+ # A história do Arganaz
+ 
+A tag <head> tem apenas um filho, mas tem dois descendentes: o
+tag <title> e o filho da tag <title>. O objeto ``BeautifulSoup``
+só tem um filho direto (a tag <html>), mas tem um monte de
+descendentes::
 
  len(list(soup.children))
  # 1
@@ -682,24 +687,24 @@ descendants::
 ``.string``
 ^^^^^^^^^^^
 
-If a tag has only one child, and that child is a ``NavigableString``,
-the child is made available as ``.string``::
+Se uma tag tiver apenas um filho e esse filho for um ``NavigableString``,
+a criança é disponibilizada como ``.string``::
 
  title_tag.string
- # u'The Dormouse's story'
-
-If a tag's only child is another tag, and `that` tag has a
-``.string``, then the parent tag is considered to have the same
-``.string`` as its child::
+ # u'A história do Arganaz'
+ 
+Se o único filho de uma tag é outra tag, e `essa` tag tem uma
+``.string``, então a tag pai é considerada como tendo a mesma
+``.string`` como filha::
 
  head_tag.contents
- # [<title>The Dormouse's story</title>]
+ # [<title>A história do Arganaz</title>]
 
  head_tag.string
- # u'The Dormouse's story'
+ # u'A história do Arganaz'
 
-If a tag contains more than one thing, then it's not clear what
-``.string`` should refer to, so ``.string`` is defined to be
+Se uma tag contém mais de uma coisa, então não está claro a que
+``.string`` deve se referir, então ``.string`` é definido para ser
 ``None``::
 
  print(soup.html.string)
@@ -707,47 +712,47 @@ If a tag contains more than one thing, then it's not clear what
 
 .. _string-generators:
 
-``.strings`` and ``stripped_strings``
+``.strings`` e ``stripped_strings``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If there's more than one thing inside a tag, you can still look at
-just the strings. Use the ``.strings`` generator::
+Se há mais de uma coisa dentro de uma tag, você ainda pode ver
+apenas as strings. Use o gerador ``.strings``::
 
  for string in soup.strings:
      print(repr(string))
- # u"The Dormouse's story"
+ # u"A história do Arganaz"
  # u'\n\n'
- # u"The Dormouse's story"
+ # u"A história do Arganaz"
  # u'\n\n'
- # u'Once upon a time there were three little sisters; and their names were\n'
+ # u'Era uma vez três irmãzinhas; e seus nomes eram\n'
  # u'Elsie'
  # u',\n'
  # u'Lacie'
- # u' and\n'
+ # u' e\n'
  # u'Tillie'
- # u';\nand they lived at the bottom of a well.'
+ # u';\ne elas viviam no fundo de um poço.'
  # u'\n\n'
  # u'...'
  # u'\n'
-
-These strings tend to have a lot of extra whitespace, which you can
-remove by using the ``.stripped_strings`` generator instead::
+ 
+Essas strings tendem a ter muitos espaços em branco extras, o que você pode
+remover usando o gerador ``.stripped_strings`` em vez disso::
 
  for string in soup.stripped_strings:
      print(repr(string))
- # u"The Dormouse's story"
- # u"The Dormouse's story"
- # u'Once upon a time there were three little sisters; and their names were'
+ # u"A história do Arganaz"
+ # u"A história do Arganaz"
+ # u'Era uma vez três irmãzinhas; e seus nomes eram'
  # u'Elsie'
  # u','
  # u'Lacie'
  # u'and'
  # u'Tillie'
- # u';\nand they lived at the bottom of a well.'
+ # u';\ne elas viviam no fundo de um poço.'
  # u'...'
 
-Here, strings consisting entirely of whitespace are ignored, and
-whitespace at the beginning and end of strings is removed.
+Aqui, strings consistindo inteiramente de espaço em branco são ignoradas, e
+espaços em branco no início e no final das strings são removidos.
 
 Going up
 --------
