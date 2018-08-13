@@ -46,7 +46,7 @@ documento. Faz parte de uma história de `Alice no País das Maravilhas`::
  <body>
  <p class="title"><b>A história do Arganaz</b></p>
 
- <p class="story">Era uma vez três irmãs pequenas; e seus nomes eram
+ <p class="story">Era uma vez três irmãzinhas; e seus nomes eram
  <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
  <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> e
  <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
@@ -76,7 +76,7 @@ de dados aninhada::
  #    </b>
  #   </p>
  #   <p class="story">
- #    Era uma vez havia três irmãzinhas; e seus nomes eram
+ #    Era uma vez três irmãzinhas; e seus nomes eram
  #    <a class="sister" href="http://example.com/elsie" id="link1">
  #     Elsie
  #    </a>
@@ -142,7 +142,7 @@ Outra tarefa comum é extrair todo o texto de uma página::
  #
  # A história do Arganaz
  #
- # Era uma vez havia três irmãzinhas; e seus nomes eram
+ # Era uma vez três irmãzinhas; e seus nomes eram
  # Elsie,
  # Lacie e
  # Tillie;
@@ -193,48 +193,48 @@ e usar o Beautiful Soup sem precisar instalá-lo.
 Eu uso Python 2.7 e Python 3.2 para desenvolver o Beautiful Soup, mas
 deve funcionar com outras versões recentes.
 
-Problems after installation
+Problemas depois da instalação
 ---------------------------
 
-Beautiful Soup is packaged as Python 2 code. When you install it for
-use with Python 3, it's automatically converted to Python 3 code. If
-you don't install the package, the code won't be converted. There have
-also been reports on Windows machines of the wrong version being
-installed.
+Beautiful Soup é empacotado como código Python 2. Quando você instala para
+usar com o Python 3, ele é automaticamente convertido para o código do Python 3. E se
+você não instala o pacote, o código não será convertido. Há
+também relatórios em máquinas Windows da versão errada sendo
+instalada.
 
-If you get the ``ImportError`` "No module named HTMLParser", your
-problem is that you're running the Python 2 version of the code under
+Se você obtiver o erro ``ImportError`` "No module named HTMLParser", o seu
+problema é que você está executando a versão Python 2 do código em
 Python 3.
 
-If you get the ``ImportError`` "No module named html.parser", your
-problem is that you're running the Python 3 version of the code under
+Se você obtiver o erro ``ImportError`` "No module named html.parser", o seu
+problema é que você está executando a versão Python 3 do código em
 Python 2.
 
-In both cases, your best bet is to completely remove the Beautiful
-Soup installation from your system (including any directory created
-when you unzipped the tarball) and try the installation again.
+Em ambos os casos, sua melhor aposta é remover completamente a instalação
+do Beautiful Soup do seu sistema (incluindo qualquer diretório criado
+quando você descompactou o tarball) e tentar a instalação novamente.
 
-If you get the ``SyntaxError`` "Invalid syntax" on the line
-``ROOT_TAG_NAME = u'[document]'``, you need to convert the Python 2
-code to Python 3. You can do this either by installing the package:
+Se você obtiver o erro ``SyntaxError`` "Invalid syntax" na linha
+``ROOT_TAG_NAME = u'[document]'``, você precisa converter o código
+Python 2 para Python 3. Você pode fazer isso instalando o pacote:
 
 :kbd:`$ python3 setup.py install`
 
-or by manually running Python's ``2to3`` conversion script on the
-``bs4`` directory:
+ou executando manualmente o script de conversão ``2to3`` do Python no
+diretório ``bs4``:
 
 :kbd:`$ 2to3-3.2 -w bs4`
 
-.. _parser-installation:
+.. _instalacao-de-parser:
 
 
-Installing a parser
+Instalando um parser
 -------------------
 
-Beautiful Soup supports the HTML parser included in Python's standard
-library, but it also supports a number of third-party Python parsers.
-One is the `lxml parser <http://lxml.de/>`_. Depending on your setup,
-you might install lxml with one of these commands:
+Beautiful Soup suporta o parser HTML incluído na biblioteca padrão do
+Python, mas também suporta certos parsers Python de terceiros.
+Um é o parser `lxml<http://lxml.de/>`_. Dependendo da sua configuração,
+você pode instalar o lxml com um destes comandos:
 
 :kbd:`$ apt-get install python-lxml`
 
@@ -242,10 +242,10 @@ you might install lxml with one of these commands:
 
 :kbd:`$ pip install lxml`
 
-Another alternative is the pure-Python `html5lib parser
-<http://code.google.com/p/html5lib/>`_, which parses HTML the way a
-web browser does. Depending on your setup, you might install html5lib
-with one of these commands:
+Outra alternativa é o parser `html5lib <http://code.google.com/p/html5lib/>`_, 
+que faz o parsing do HTML do jeito que o web browser faz. Dependendo
+da sua configuração, você pode instalar o html5lib
+com um desses comandos:
 
 :kbd:`$ apt-get install python-html5lib`
 
@@ -253,38 +253,37 @@ with one of these commands:
 
 :kbd:`$ pip install html5lib`
 
-This table summarizes the advantages and disadvantages of each parser library:
+Essa tabela sumariza as vantagens e as desvantagens de cada biblioteca de parsing:
 
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| Parser               | Typical usage                              | Advantages                     | Disadvantages            |
+| Parser               | Uso comum                                  | Vantagens                      | Desvantagens             |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| Python's html.parser | ``BeautifulSoup(markup, "html.parser")``   | * Batteries included           | * Not very lenient       |
-|                      |                                            | * Decent speed                 |   (before Python 2.7.3   |
-|                      |                                            | * Lenient (as of Python 2.7.3  |   or 3.2.2)              |
-|                      |                                            |   and 3.2.)                    |                          |
+|html.parser do Python | ``BeautifulSoup(markup, "html.parser")``   | * Pilhas incluídas             | * Não muito leniente     |
+|                      |                                            | * Velocidade razoável          |   (antes do Python 2.7.3 |
+|                      |                                            | * Leniente(como no Python 2.7.3|   ou 3.2.2)              |
+|                      |                                            |   e 3.2.)                      |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| lxml's HTML parser   | ``BeautifulSoup(markup, "lxml")``          | * Very fast                    | * External C dependency  |
-|                      |                                            | * Lenient                      |                          |
+| parser HTML do lxml  | ``BeautifulSoup(markup, "lxml")``          | * Muito Rápido                 | *Dependência externa do C|
+|                      |                                            | * Leniente                     |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| lxml's XML parser    | ``BeautifulSoup(markup, "lxml-xml")``      | * Very fast                    | * External C dependency  |
-|                      | ``BeautifulSoup(markup, "xml")``           | * The only currently supported |                          |
-|                      |                                            |   XML parser                   |                          |
+| parser XML do lxml   | ``BeautifulSoup(markup, "lxml-xml")``      | * Muito Rápido                 | *Dependência externa do C|
+|                      | ``BeautifulSoup(markup, "xml")``           | * Atualmente o único parser XML|                          |
+|                      |                                            |   suportado                    |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
-| html5lib             | ``BeautifulSoup(markup, "html5lib")``      | * Extremely lenient            | * Very slow              |
-|                      |                                            | * Parses pages the same way a  | * External Python        |
-|                      |                                            |   web browser does             |   dependency             |
-|                      |                                            | * Creates valid HTML5          |                          |
+|      html5lib        | ``BeautifulSoup(markup, "html5lib")``      | * Extremamente leniente        | * Muito lento            |
+|                      |                                            | * Parsing de páginas da mesma  | * Dependência externa    |
+|                      |                                            |   forma que um web browser     |   do Python              |
+|                      |                                            | * Cria um HTML5 válido         |                          |
 +----------------------+--------------------------------------------+--------------------------------+--------------------------+
 
-If you can, I recommend you install and use lxml for speed. If you're
-using a version of Python 2 earlier than 2.7.3, or a version of Python
-3 earlier than 3.2.2, it's `essential` that you install lxml or
-html5lib--Python's built-in HTML parser is just not very good in older
-versions.
+Se você puder, eu recomendo que você instale e use lxml pela velocidade. Se você
+está usando uma versão do Python 2 anterior à 2.7.3, ou uma versão do Python
+3 anterior à 3.2.2, é `essencial` que você instale lxml ou
+html5lib--O parser HTML do Python não é muito bom em versões mais antigas.
 
-Note that if a document is invalid, different parsers will generate
-different Beautiful Soup trees for it. See `Differences
-between parsers`_ for details.
+Observe que, se um documento for inválido, diferentes parsers gerarão
+diferentes árvores do Beautiful Soup para isso. Veja `Diferenças
+entre parsers`_ para detalhes.
 
 Fazendo o soup
 ==============
