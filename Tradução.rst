@@ -972,11 +972,11 @@ imediatamente antes dele próprio.
  last_a_tag.previous_element.next_element
  # <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>
 
-``.next_elements`` e ``.previous_elements``
+``.next_elements`` and ``.previous_elements``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Você deve ter a ideia agora. Você pode usar esses iteradores para mover
-para frente ou para trás no documento como foi analisado ::
+You should get the idea by now. You can use these iterators to move
+forward or backward in the document as it was parsed::
 
  for element in last_a_tag.next_elements:
      print(repr(element))
