@@ -1571,7 +1571,7 @@ e ``find_next_sibling()`` somente retorna o primeiro::
  first_story_paragraph.find_next_sibling("p")
  # <p class="story">...</p>
 
-``find_previous_siblings()`` and ``find_previous_sibling()``
+``find_previous_siblings()`` e ``find_previous_sibling()``
 ------------------------------------------------------------
 
 Assinatura: find_previous_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
