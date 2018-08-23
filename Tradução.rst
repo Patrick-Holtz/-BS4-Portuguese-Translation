@@ -1169,12 +1169,12 @@ Agora estamos preparados para discutir os métodos de busca em detalhes.
 ``find_all()``
 --------------
 
-Signature: find_all(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
+Assinatura: find_all(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
 <recursive>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-The ``find_all()`` method looks through a tag's descendants and
-retrieves `all` descendants that match your filters. I gave several
-examples in `Kinds of filters`_, but here are a few more::
+O método ``find_all()`` busca através dos descendentes de uma tag
+e retorna `todos` os descendentes que correspondem aos filtros. Diversos
+exemplos estão descritos em `Tipos de Filtros`_, mas outros estão descritos a seguir::
 
  soup.find_all("title")
  # [<title>The Dormouse's story</title>]
@@ -1194,10 +1194,10 @@ examples in `Kinds of filters`_, but here are a few more::
  soup.find(string=re.compile("sisters"))
  # u'Once upon a time there were three little sisters; and their names were\n'
 
-Some of these should look familiar, but others are new. What does it
-mean to pass in a value for ``string``, or ``id``? Why does
-``find_all("p", "title")`` find a <p> tag with the CSS class "title"?
-Let's look at the arguments to ``find_all()``.
+Alguns destes podem parecer familiares, mas outros são novos. O que significa
+passar uma ``string``, ou um ``id``? Por que ``find_all("p", "title")``
+encontra uma tag <p> com a classe CSS "title"?
+Vamos discutir os argumentos de ``find_all()``.
 
 .. _name:
 
@@ -1547,17 +1547,17 @@ mencionados anteriormente. A conexão é bastante forte. Esses métodos de busca
 atualmente usam ``.parents`` para iteragir sobre todos os pais, e checar
 cada um contra o filtro fornecido para verificar se combinam.
 
-``find_next_siblings()`` and ``find_next_sibling()``
+``find_next_siblings()`` e ``find_next_sibling()``
 ----------------------------------------------------
 
-Signature: find_next_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_next_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_next_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinature: find_next_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-These methods use :ref:`.next_siblings <sibling-generators>` to
-iterate over the rest of an element's siblings in the tree. The
-``find_next_siblings()`` method returns all the siblings that match,
-and ``find_next_sibling()`` only returns the first one::
+Esses métodos usam :ref:`.next_siblings <sibling-generators>` para
+varrer os demais irmãos de um elemento na árvore. O método
+``find_next_siblings()`` retorna todos os irmãos correspondentes,
+e ``find_next_sibling()`` somente retorna o primeiro::
 
  first_link = soup.a
  first_link
@@ -1571,17 +1571,17 @@ and ``find_next_sibling()`` only returns the first one::
  first_story_paragraph.find_next_sibling("p")
  # <p class="story">...</p>
 
-``find_previous_siblings()`` and ``find_previous_sibling()``
+``find_previous_siblings()`` e ``find_previous_sibling()``
 ------------------------------------------------------------
 
-Signature: find_previous_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_previous_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_previous_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_previous_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-These methods use :ref:`.previous_siblings <sibling-generators>` to iterate over an element's
-siblings that precede it in the tree. The ``find_previous_siblings()``
-method returns all the siblings that match, and
-``find_previous_sibling()`` only returns the first one::
+Esses métodos usam :ref:`.previous_siblings <sibling-generators>` para varrer os irmãos
+que procedem um elemento na árvore. O método ``find_previous_siblings()``
+retorna todos os irmãos correspondentes, e
+``find_previous_sibling()`` somente retorna o primeiro::
 
  last_link = soup.find("a", id="link3")
  last_link
@@ -1596,17 +1596,17 @@ method returns all the siblings that match, and
  # <p class="title"><b>The Dormouse's story</b></p>
 
 
-``find_all_next()`` and ``find_next()``
+``find_all_next()`` e ``find_next()``
 ---------------------------------------
 
-Signature: find_all_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_all_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-These methods use :ref:`.next_elements <element-generators>` to
-iterate over whatever tags and strings that come after it in the
-document. The ``find_all_next()`` method returns all matches, and
-``find_next()`` only returns the first match::
+Esses métodos usam :ref:`.next_elements <element-generators>` para
+varrer qualquer tag e string que esteja depois de um elemento
+em um documento. O método ``find_all_next()`` retorna todos os elementos correspondentes, e
+``find_next()`` somente retorna o primeiro elemento correspondente::
 
  first_link = soup.a
  first_link
@@ -1619,12 +1619,12 @@ document. The ``find_all_next()`` method returns all matches, and
  first_link.find_next("p")
  # <p class="story">...</p>
 
-In the first example, the string "Elsie" showed up, even though it was
-contained within the <a> tag we started from. In the second example,
-the last <p> tag in the document showed up, even though it's not in
-the same part of the tree as the <a> tag we started from. For these
-methods, all that matters is that an element match the filter, and
-show up later in the document than the starting element.
+No primeiro exemplo, a string "Elsie" é retornada, mesmo estando contida
+em uma tag <a> a partir de onde a busca se inicia. No segundo exemplo,
+a última tag <p> no documento é retornada, mesmo não estando na
+mesma parte da árvore como a tag <a> de onde a busca se inicia. Para estes
+métodos, o que importa é que um elemento corresponda ao filtro, e
+apareça depois que o elemento no documento onde a busca se inicia.
 
 ``find_all_previous()`` and ``find_previous()``
 -----------------------------------------------
