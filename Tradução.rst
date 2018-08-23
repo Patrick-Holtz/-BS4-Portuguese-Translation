@@ -1574,14 +1574,14 @@ e ``find_next_sibling()`` somente retorna o primeiro::
 ``find_previous_siblings()`` and ``find_previous_sibling()``
 ------------------------------------------------------------
 
-Signature: find_previous_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_previous_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_previous_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_previous_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-These methods use :ref:`.previous_siblings <sibling-generators>` to iterate over an element's
-siblings that precede it in the tree. The ``find_previous_siblings()``
-method returns all the siblings that match, and
-``find_previous_sibling()`` only returns the first one::
+Esses métodos usam :ref:`.previous_siblings <sibling-generators>` para varrer os irmãos
+que procedem um elemento na árvore. O método ``find_previous_siblings()``
+retorna todos os irmãos correspondentes, e
+``find_previous_sibling()`` somente retorna o primeiro::
 
  last_link = soup.find("a", id="link3")
  last_link
