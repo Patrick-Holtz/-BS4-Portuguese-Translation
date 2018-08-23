@@ -922,32 +922,33 @@ You can iterate over a tag's siblings with ``.next_siblings`` or
  # u'Once upon a time there were three little sisters; and their names were\n'
  # None
 
-Going back and forth
---------------------
+Avançando e Retrocendendo
+-------------------------
 
-Take a look at the beginning of the "three sisters" document::
+De uma olhada no início do documento "three sisters"::
+
 
  <html><head><title>The Dormouse's story</title></head>
  <p class="title"><b>The Dormouse's story</b></p>
 
-An HTML parser takes this string of characters and turns it into a
-series of events: "open an <html> tag", "open a <head> tag", "open a
-<title> tag", "add a string", "close the <title> tag", "open a <p>
-tag", and so on. Beautiful Soup offers tools for reconstructing the
-initial parse of the document.
+Um analisador HTML toma esta string de caracteres e a transforma em uma
+série de eventos: "abertura de uma tag <html>", "abertura de uma tag <head>", "abertura de uma
+tag <title>", "adição de uma string", "fechamento de uma tag <title>", "abertura de uma tag <p>",
+e assim por diante. Beautiful Soup oferece ferramentas para reconstruir a
+análise inicial de um documento.
 
 .. _element-generators:
 
-``.next_element`` and ``.previous_element``
+``.next_element`` e ``.previous_element``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``.next_element`` attribute of a string or tag points to whatever
-was parsed immediately afterwards. It might be the same as
-``.next_sibling``, but it's usually drastically different.
+O atributo ``.next_element`` de uma tag ou string aponta para qualquer coisa
+que foi analisada imediatamente depois. Pode ser a mesma coisa que
+``.next_sibling``, mas geralmente é drasticamente diferente.
 
-Here's the final <a> tag in the "three sisters" document. Its
-``.next_sibling`` is a string: the conclusion of the sentence that was
-interrupted by the start of the <a> tag.::
+Eis aqui a tag final <a> no documento "three sisters". Seu
+``.next_sibling`` é uma string: a conclusão da sentença que foi
+interrompida pelo inicio da tag <a>.::
 
  last_a_tag = soup.find("a", id="link3")
  last_a_tag
@@ -956,22 +957,23 @@ interrupted by the start of the <a> tag.::
  last_a_tag.next_sibling
  # '; and they lived at the bottom of a well.'
 
-But the ``.next_element`` of that <a> tag, the thing that was parsed
-immediately after the <a> tag, is `not` the rest of that sentence:
-it's the word "Tillie"::
+
+Mas o ``.next_element`` dessa tag <a>, a coisa que foi analisada
+imediatamente depois da tag <a>, `não` é o resto da sentença:
+é a palavra "Tillie"::
 
  last_a_tag.next_element
  # u'Tillie'
 
-That's because in the original markup, the word "Tillie" appeared
-before that semicolon. The parser encountered an <a> tag, then the
-word "Tillie", then the closing </a> tag, then the semicolon and rest of
-the sentence. The semicolon is on the same level as the <a> tag, but the
-word "Tillie" was encountered first.
+Isto porque no documento original, a palavra "Tillie" apareceu
+antes do ponto-e-virgula. O analisador encontrou uma tag <a>, então a 
+palavra "Tillie", então a tag de fechamento </a> , então o ponto-e-virgula e o resto
+da sentença. O ponto-e-virgula está no mesmo nível que a tag <a>, mas a
+palavra "Tillie" foi encontrada primeiro.
 
-The ``.previous_element`` attribute is the exact opposite of
-``.next_element``. It points to whatever element was parsed
-immediately before this one::
+O atributo ``.previous_element`` é o exato oposto de
+``.next_element``. Aponta para qualquer elemento analisado
+imediatamente antes dele próprio.
 
  last_a_tag.previous_element
  # u' and\n'
