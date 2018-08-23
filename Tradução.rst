@@ -1547,7 +1547,7 @@ mencionados anteriormente. A conexão é bastante forte. Esses métodos de busca
 atualmente usam ``.parents`` para iteragir sobre todos os pais, e checar
 cada um contra o filtro fornecido para verificar se combinam.
 
-``find_next_siblings()`` and ``find_next_sibling()``
+``find_next_siblings()`` e ``find_next_sibling()``
 ----------------------------------------------------
 
 Assinatura: find_next_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
