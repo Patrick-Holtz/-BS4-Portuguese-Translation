@@ -1596,17 +1596,17 @@ retorna todos os irmãos correspondentes, e
  # <p class="title"><b>The Dormouse's story</b></p>
 
 
-``find_all_next()`` and ``find_next()``
+``find_all_next()`` e ``find_next()``
 ---------------------------------------
 
-Signature: find_all_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_all_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_next(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-These methods use :ref:`.next_elements <element-generators>` to
-iterate over whatever tags and strings that come after it in the
-document. The ``find_all_next()`` method returns all matches, and
-``find_next()`` only returns the first match::
+Esses métodos usam :ref:`.next_elements <element-generators>` para
+varrer qualquer tag e string que esteja depois de um elemento
+em um documento. O método ``find_all_next()`` retorna todos os elementos correspondentes, e
+``find_next()`` somente retorna o primeiro elemento correspondente::
 
  first_link = soup.a
  first_link
@@ -1619,12 +1619,12 @@ document. The ``find_all_next()`` method returns all matches, and
  first_link.find_next("p")
  # <p class="story">...</p>
 
-In the first example, the string "Elsie" showed up, even though it was
-contained within the <a> tag we started from. In the second example,
-the last <p> tag in the document showed up, even though it's not in
-the same part of the tree as the <a> tag we started from. For these
-methods, all that matters is that an element match the filter, and
-show up later in the document than the starting element.
+No primeiro exemplo, a string "Elsie" é retornada, mesmo estando contida
+em uma tag <a> a partir de onde a busca se inicia. No segundo exemplo,
+a última tag <p> no documento é retornada, mesmo não estando na
+mesma parte da árvore como a tag <a> de onde a busca se inicia. Para estes
+métodos, o que importa é que um elemento corresponda ao filtro, e
+apareça depois que o elemento no documento onde a busca se inicia.
 
 ``find_all_previous()`` and ``find_previous()``
 -----------------------------------------------
