@@ -1550,14 +1550,14 @@ cada um contra o filtro fornecido para verificar se combinam.
 ``find_next_siblings()`` and ``find_next_sibling()``
 ----------------------------------------------------
 
-Signature: find_next_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
+Assinatura: find_next_siblings(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-Signature: find_next_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
+Assinature: find_next_sibling(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`string <string>`, :ref:`**kwargs <kwargs>`)
 
-These methods use :ref:`.next_siblings <sibling-generators>` to
-iterate over the rest of an element's siblings in the tree. The
-``find_next_siblings()`` method returns all the siblings that match,
-and ``find_next_sibling()`` only returns the first one::
+Esses métodos usam :ref:`.next_siblings <sibling-generators>` para
+varrer os demais irmãos de um elemento na árvore. O método
+``find_next_siblings()`` retorna todos os irmãos correspondentes,
+e ``find_next_sibling()`` somente retorna o primeiro::
 
  first_link = soup.a
  first_link
