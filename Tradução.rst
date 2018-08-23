@@ -1169,12 +1169,12 @@ Agora estamos preparados para discutir os métodos de busca em detalhes.
 ``find_all()``
 --------------
 
-Signature: find_all(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
+Assinatura: find_all(:ref:`name <name>`, :ref:`attrs <attrs>`, :ref:`recursive
 <recursive>`, :ref:`string <string>`, :ref:`limit <limit>`, :ref:`**kwargs <kwargs>`)
 
-The ``find_all()`` method looks through a tag's descendants and
-retrieves `all` descendants that match your filters. I gave several
-examples in `Kinds of filters`_, but here are a few more::
+O método ``find_all()`` busca através dos descendentes de uma tag
+e retorna `todos` os descendentes que correspondem aos filtros. Diversos
+exemplos estão descritos em `Tipos de Filtros`_, mas outros estão descritos a seguir::
 
  soup.find_all("title")
  # [<title>The Dormouse's story</title>]
@@ -1194,10 +1194,10 @@ examples in `Kinds of filters`_, but here are a few more::
  soup.find(string=re.compile("sisters"))
  # u'Once upon a time there were three little sisters; and their names were\n'
 
-Some of these should look familiar, but others are new. What does it
-mean to pass in a value for ``string``, or ``id``? Why does
-``find_all("p", "title")`` find a <p> tag with the CSS class "title"?
-Let's look at the arguments to ``find_all()``.
+Alguns destes podem parecer familiares, mas outros são novos. O que significa
+passar uma ``string``, ou um ``id``? Por que ``find_all("p", "title")``
+encontra uma tag <p> com a classe CSS "title"?
+Vamos discutir os argumentos de ``find_all()``.
 
 .. _name:
 
