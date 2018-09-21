@@ -329,7 +329,7 @@ Um objeto ``Tag`` corresponde a uma tag XML ou HTML no documento original::
   # <class 'bs4.element.Tag'>
 
 Tags tem muitos atributos e métodos, e eu cobrirei a maioria deles
-em `Navegando a árvore`_ e `Procurando na árvore`_. Por enquanto, as mais
+em `Navegando a árvore`_ e `Percorrendo a árvore`_. Por enquanto, as mais
 importantes características de uma tag são seu nome e atributos.
 
 Nome
@@ -445,7 +445,7 @@ usa a classe ``NavigableString`` para conter esses bits de texto::
  
 Um ``NavigableString`` é como uma string Unicode do Python, exceto
 que também suporta algumas das características descritas em `Navegando pela árvore`_ e
-`Procurando na árvore`_. Você pode converter um ``NavigableString`` 
+`Percorrendo a árvore`_. Você pode converter um ``NavigableString`` 
 para uma string Unicode com ``unicode ()``::
 
  unicode_string = unicode(tag.string)
@@ -462,7 +462,7 @@ outra, usando :ref:`replace_with`::
  # <blockquote>No longer bold</blockquote>
 
 O ``NavigableString`` suporta a maioria dos recursos descritos em
-`Navegando pela árvore`_ e `Procurando na árvore`_, mas não em todos
+`Navegando pela árvore`_ e `Percorrendo a árvore`_, mas não em todos
 eles. Em particular, uma vez que uma string não pode conter nada (da mesma maneira 
 que uma tag pode conter uma string ou outra tag), strings não suportam
 atributos ``.contents`` ou ``.string``, ou o método ``find ()``.
@@ -484,7 +484,7 @@ useful to look at its ``.name``, so it's been given the special
 O objeto ``BeautifulSoup`` em si representa o documento como um
 todo. Para a maioria dos propósitos, você pode tratá-lo como um objeto
 :ref:`Tag`. Isso significa que ele suporta a maioria dos métodos descritos em
-`Navegando na árvore`_ e `Procurando na árvore`_.
+`Navegando na árvore`_ e `Percorrendo a árvore`_.
 
 Já que o objeto ``BeautifulSoup`` não corresponde a um
 HTML ou Tag XML, ele não tem nome nem atributos. Mas às vezes é
@@ -602,7 +602,7 @@ nome::
 
 Se você precisa pegar 'todas' as tags <a>, ou qualquer coisa mais complicada
 que a primeira tag com um certo nome, você precisará usar um dos
-métodos descritos em `Procurando na árvore`_, como `find_all ()`::
+métodos descritos em `Percorrendo a árvore`_, como `find_all ()`::
 
  soup.find_all('a')
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
