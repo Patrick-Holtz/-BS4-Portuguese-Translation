@@ -1096,6 +1096,9 @@ entre `qualquer` item nessa lista. Este código encontra todas as tags <a>
 The value ``True`` matches everything it can. This code finds `all`
 the tags in the document, but none of the text strings::
 
+O valor ``True`` encontra correspondência entre tudo que ele pode. Este código encontra `todas`
+as tags no documento, mas nenhuma das strings de texto:
+
  for tag in soup.find_all(True):
      print(tag.name)
  # html
@@ -1112,36 +1115,35 @@ the tags in the document, but none of the text strings::
 
 .. a function:
 
-A function
+Uma função
 ^^^^^^^^^^
 
-If none of the other matches work for you, define a function that
-takes an element as its only argument. The function should return
-``True`` if the argument matches, and ``False`` otherwise.
+Se nenhuma das outras correspondências funcionar para você, defina uma função que
+toma um elemento como seu único argumento. A função deve retornar
+``True`` se o argumento corresponder e ``False`` caso contrário.
 
-Here's a function that returns ``True`` if a tag defines the "class"
-attribute but doesn't define the "id" attribute::
+Aqui está uma função que retorna ``True`` se uma tag define a "classe"
+atributo mas não define o atributo "id" ::
 
  def has_class_but_no_id(tag):
      return tag.has_attr('class') and not tag.has_attr('id')
 
-Pass this function into ``find_all()`` and you'll pick up all the <p>
-tags::
+Passe essa função para ``find_all()`` e você ira pegar todas as tags <p>::
 
  soup.find_all(has_class_but_no_id)
- # [<p class="title"><b>The Dormouse's story</b></p>,
- #  <p class="story">Once upon a time there were...</p>,
+ # [<p class="title"><b>A história do Arganaz</b></p>,
+ #  <p class="story">Era uma vez...</p>,
  #  <p class="story">...</p>]
-
-This function only picks up the <p> tags. It doesn't pick up the <a>
-tags, because those tags define both "class" and "id". It doesn't pick
-up tags like <html> and <title>, because those tags don't define
+ 
+Esta função apenas pega as tags <p>. Não pega as tags <a>, 
+porque ambas essas tags definem "class" e "id". Não escolhe
+até tags como <html> e <title>, porque essas tags não definem
 "class".
 
-If you pass in a function to filter on a specific attribute like
-``href``, the argument passed into the function will be the attribute
-value, not the whole tag. Here's a function that finds all ``a`` tags
-whose ``href`` attribute *does not* match a regular expression::
+Se você passar uma função para filtrar um atributo específico como
+``href``, o argumento passado para a função será o valor do atributo, 
+não a tag inteira. Aqui está uma função que encontra todas as tags ``a``
+cujo atributo ``href`` *não* corresponde a uma expressão regular::
 
  def not_lacie(href):
      return href and not re.compile("lacie").search(href)
@@ -1152,6 +1154,9 @@ whose ``href`` attribute *does not* match a regular expression::
 The function can be as complicated as you need it to be. Here's a
 function that returns ``True`` if a tag is surrounded by string
 objects::
+
+A função pode ser tão complicada quanto você precisar. Aqui está uma
+função que retorna ``True`` se uma tag estiver rodeada por objetos de string::
 
  from bs4 import NavigableString
  def surrounded_by_strings(tag):
@@ -1166,7 +1171,7 @@ objects::
  # a
  # p
 
-Now we're ready to look at the search methods in detail.
+Agora estamos prontos para examinar os métodos de pesquisa em detalhes.
 
 ``find_all()``
 --------------
