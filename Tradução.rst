@@ -994,36 +994,36 @@ forward or backward in the document as it was parsed::
  # u'\n'
  # None
 
-Searching the tree
+Percorrendo a árvore
 ==================
 
-Beautiful Soup defines a lot of methods for searching the parse tree,
-but they're all very similar. I'm going to spend a lot of time explaining
-the two most popular methods: ``find()`` and ``find_all()``. The other
-methods take almost exactly the same arguments, so I'll just cover
-them briefly.
+Beautiful Soup define muitos métodos para percorrer a árvore de análise,
+mas são todos muito parecidos. Eu vou gastar muito tempo explicando
+os dois métodos mais populares: ``find ()`` e ``find_all ()``. Os outros
+métodos tomam quase exatamente os mesmos argumentos, então eu vou apenas cobrir
+eles brevemente.
 
-Once again, I'll be using the "three sisters" document as an example::
+Mais uma vez, estarei usando o documento "three sisters" como examplo::
 
  html_doc = """
- <html><head><title>The Dormouse's story</title></head>
+ <html><head><title>A história do Arganaz</title></head>
  <body>
- <p class="title"><b>The Dormouse's story</b></p>
+ <p class="title"><b>A história do Arganaz</b></p>
 
- <p class="story">Once upon a time there were three little sisters; and their names were
+ <p class="story">Era uma vez três irmãzinhas; e seus nomes eram
  <a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
  <a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
  <a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
- and they lived at the bottom of a well.</p>
+ e elas viviam no fundo de um poço.</p>
 
  <p class="story">...</p>
  """
 
  from bs4 import BeautifulSoup
  soup = BeautifulSoup(html_doc, 'html.parser')
-
-By passing in a filter to an argument like ``find_all()``, you can
-zoom in on the parts of the document you're interested in.
+ 
+Ao passar um filtro para um argumento como ``find_all ()``, você pode
+ampliar as partes do documento em que você está interessado.
 
 Kinds of filters
 ----------------
@@ -1037,28 +1037,28 @@ these.
 
 .. _a string:
 
-A string
+Uma string
 ^^^^^^^^
 
-The simplest filter is a string. Pass a string to a search method and
-Beautiful Soup will perform a match against that exact string. This
-code finds all the <b> tags in the document::
+O filtro mais simples é uma string. Passe uma string para um método de pesquisa e
+Beautiful Soup irá realizar uma correspondência com essa exata string. Este
+código encontra todas as tags <b> no documento::
 
  soup.find_all('b')
- # [<b>The Dormouse's story</b>]
+ # [<b>A história do Arganaz</b>]
 
-If you pass in a byte string, Beautiful Soup will assume the string is
-encoded as UTF-8. You can avoid this by passing in a Unicode string instead.
+Se você passar uma string de byte, Beautiful Soup assumirá que a string é
+codificada como UTF-8. Você pode evitar isso passando uma string Unicode.
 
 .. _a regular expression:
 
-A regular expression
+Uma expressão regular
 ^^^^^^^^^^^^^^^^^^^^
 
-If you pass in a regular expression object, Beautiful Soup will filter
-against that regular expression using its ``search()`` method. This code
-finds all the tags whose names start with the letter "b"; in this
-case, the <body> tag and the <b> tag::
+Se você passar um objeto de expressão regular, Beautiful Soup filtrará
+essa expressão regular usando seu método ``search ()``. Este código
+encontra todas as tags cujos nomes começam com a letra "b"; nesse
+caso, a tag <body> e a tag <b>::
 
  import re
  for tag in soup.find_all(re.compile("^b")):
@@ -1075,15 +1075,15 @@ This code finds all the tags whose names contain the letter 't'::
 
 .. _a list:
 
-A list
+Uma lista
 ^^^^^^
 
-If you pass in a list, Beautiful Soup will allow a string match
-against `any` item in that list. This code finds all the <a> tags
-`and` all the <b> tags::
+Se você passar uma lista, Beautiful Soup permitirá uma correspondência de string
+entre `qualquer` item nessa lista. Este código encontra todas as tags <a>
+`e` todas as tags <b>::
 
  soup.find_all(["a", "b"])
- # [<b>The Dormouse's story</b>,
+ # [<b>A história do Arganaz</b>,
  #  <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
  #  <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
  #  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
