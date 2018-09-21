@@ -1151,10 +1151,6 @@ cujo atributo ``href`` *não* corresponde a uma expressão regular::
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
  #  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 
-The function can be as complicated as you need it to be. Here's a
-function that returns ``True`` if a tag is surrounded by string
-objects::
-
 A função pode ser tão complicada quanto você precisar. Aqui está uma
 função que retorna ``True`` se uma tag estiver rodeada por objetos de string::
 
@@ -1208,21 +1204,20 @@ Let's look at the arguments to ``find_all()``.
 
 .. _name:
 
-The ``name`` argument
+O argumento ``name``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Pass in a value for ``name`` and you'll tell Beautiful Soup to only
-consider tags with certain names. Text strings will be ignored, as
-will tags whose names that don't match.
+Passe um valor para ``name`` e você dirá a Beautiful Soup para apenas
+Considerar tags com determinados nomes. Sequências de texto serão ignoradas, como
+tags cujos nomes não correspondem.
 
-This is the simplest usage::
+Este é o uso mais simples::
 
  soup.find_all("title")
- # [<title>The Dormouse's story</title>]
+ # [<title>A história do Arganaz</title>]
 
-Recall from `Kinds of filters`_ that the value to ``name`` can be `a
-string`_, `a regular expression`_, `a list`_, `a function`_, or `the value
-True`_.
+Lembre de `Tipos de filtros`_ que o valor para ``name`` pode ser `uma
+string`_, `uma expressão regular`_, `uma lista`_, `uma função`_, ou `o valor True`_.
 
 .. _kwargs:
 
@@ -1295,16 +1290,25 @@ Python. Using ``class`` as a keyword argument will give you a syntax
 error. As of Beautiful Soup 4.1.2, you can search by CSS class using
 the keyword argument ``class_``::
 
+Procurando por classe CSS
+^^^^^^^^^^^^^^^^^^^^^^
+
+É muito útil procurar por uma tag que tenha uma certa classe CSS, mas
+o nome do atributo CSS, "class", é uma palavra reservada em
+Python. Usar ``class`` como um argumento de palavra-chave lhe dará um erro de sintaxe.
+A partir do Beautiful Soup 4.1.2, você pode pesquisar pela classe CSS usando
+o argumento da palavra-chave ``class_``::
+
  soup.find_all("a", class_="sister")
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
  #  <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
  #  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
 
-As with any keyword argument, you can pass ``class_`` a string, a regular
-expression, a function, or ``True``::
+Como com qualquer argumento de palavra-chave, você pode passar uma string para ``class_``, uma
+expressão regular, uma função ou ``True``::
 
  soup.find_all(class_=re.compile("itl"))
- # [<p class="title"><b>The Dormouse's story</b></p>]
+ # [<p class="title"><b>A história do Arganaz</b></p>]
 
  def has_six_characters(css_class):
      return css_class is not None and len(css_class) == 6
@@ -1318,6 +1322,9 @@ expression, a function, or ``True``::
 values for its "class" attribute. When you search for a tag that
 matches a certain CSS class, you're matching against `any` of its CSS
 classes::
+: ref: `Lembre-se de <multivalue>` em que uma única tag pode ter múltiplos
+valores para seu atributo "class". Quando você procura por uma tag que
+corresponde a uma determinada classe CSS, você está combinando com `qualquer` uma das suas classes CSS::
 
  css_soup = BeautifulSoup('<p class="body strikeout"></p>')
  css_soup.find_all("p", class_="strikeout")
@@ -1328,24 +1335,26 @@ classes::
 
 You can also search for the exact string value of the ``class`` attribute::
 
+Você também pode procurar o valor exato da string do atributo ``class``::
+
  css_soup.find_all("p", class_="body strikeout")
  # [<p class="body strikeout"></p>]
 
-But searching for variants of the string value won't work::
+Mas procurar variantes do valor da string não funcionará::
 
  css_soup.find_all("p", class_="strikeout body")
  # []
 
-If you want to search for tags that match two or more CSS classes, you
-should use a CSS selector::
+Se você quiser procurar por tags que correspondam a duas ou mais classes CSS,
+deve usar um seletor CSS::
 
  css_soup.select("p.strikeout.body")
  # [<p class="body strikeout"></p>]
 
-In older versions of Beautiful Soup, which don't have the ``class_``
-shortcut, you can use the ``attrs`` trick mentioned above. Create a
-dictionary whose value for "class" is the string (or regular
-expression, or whatever) you want to search for::
+Em versões mais antigas do Beautiful Soup, que não possuem o atalho `` class_``,
+você pode usar o truque ``attrs`` mencionado acima. Crie um
+dicionário cujo valor para "class" é a string (expressão regular), 
+ou qualquer outra coisa que você queira procurar::
 
  soup.find_all("a", attrs={"class": "sister"})
  # [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
